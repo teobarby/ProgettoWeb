@@ -1,0 +1,33 @@
+/* Stile per rendere il testo opaco */
+.Orari {
+  padding-top: 10px;
+  opacity: 0.5; /* Valore compreso tra 0 (trasparente) e 1 (opaco) */
+}
+
+.restaurant-info {
+  padding: 50px;
+  text-align: center;
+}
+
+.restaurant-info h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.restaurant-info p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.restaurant-info .opening-hours {
+  font-weight: bold;
+}
+
+.pasq {
+  margin-bottom: 5px !important;
+}
+
+.spziosotto {
+  margin-bottom: 15px; !important
+}

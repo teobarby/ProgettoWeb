@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="Home.html">GustoInRete</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="Home.html">Preferiti</a></li>
+                            <!-- Categoria dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Categorie
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#!">Pizzerie</a></li>
+                                    <li><a class="dropdown-item" href="#!">Ristoranti</a></li>
+                                    <li><a class="dropdown-item" href="#!">Cucina Orientale</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profilo</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="Profilo.html">Il tuo Profilo</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="IscrizioneGestore.html">Iscriviti come Gestore</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container px-4 px-lg-5">
+                            <!-- Modifica il contenuto a destra per includere la barra di ricerca -->
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <!-- Spazio per la barra di ricerca -->
+                                <form class="d-flex ms-auto">
+                                    <!-- Input per la barra di ricerca -->
+                                    <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search">
+                                    <!-- Bottone per avviare la ricerca (opzionale) -->
+                                    <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+                                </form>
+                                <a class="btn btn-outline-dark ms-5 access-button" href="Accesso.html">Accedi</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">GustoInRete</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Esplora, Prenota e Gusta: Scopri i Sapori dei Tuoi Ristoranti Preferiti Online</p>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Immagine ristorante-->
+                            <img class="card-img-top" src="/Users/matteobarbieri/Documents/Uni/Web/ProgettoWeb/startbootstrap-shop-homepage-gh-pages/Images/Eq_it-na_pizza-margherita_sep2005_sml.jpg" alt="..." />
+                            <!-- Dettagli-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Nome ristorante-->
+                                    <h5 class="fw-bolder">Da Pasquale</h5>
+                                    <!-- Valutazioni Clienti-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Parole chiave -->
+                                    Pizzeria, Ristorante<br>
+                                    <!-- Orari-->
+                                    <h6 class="Orari">12:00 - 14:00, 18:30 - 23:30</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="PaginaRistorante.html">Dettagli</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Promo</div>
+                            <!-- Immagine ristorante-->
+                            <img class="card-img-top" src="/Users/matteobarbieri/Documents/Uni/Web/ProgettoWeb/startbootstrap-shop-homepage-gh-pages/Images/iStock-469246470.webp" alt="..." />
+                            <!-- Dettagli-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">La Pianura</h5>
+                                    <!-- Valutazioni Clienti-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Parole chiave-->
+                                    <h8 class="Parole chiave">Trattoria, Ristorante</h8>
+                                    <!-- Orari-->
+                                    <h6 class="Orari">12:30 - 15:00, 19:00 - 23:30</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Dettagli</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Promo</div>
+                            <!-- Immagine ristorante-->
+                            <img class="card-img-top" src="/Users/matteobarbieri/Documents/Uni/Web/ProgettoWeb/startbootstrap-shop-homepage-gh-pages/Images/calzone-napoletano-640x480.jpg" alt="..." />
+                            <!-- Dettaglio prodotto-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Nome ristorante-->
+                                    <h5 class="fw-bolder">Impizzire</h5>
+                                     <!-- Valutazioni Clienti-->
+                                     <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Parole chiave-->
+                                    Pizzeria tradizionale napoletana
+                                    <!-- Orario-->
+                                    <h6 class="Orari">12:00 - 15:00, 19:00 - 00:00</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Dettagli</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/Users/matteobarbieri/Documents/Uni/Web/ProgettoWeb/startbootstrap-shop-homepage-gh-pages/Images/download.jpeg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Nome ristorante-->
+                                    <h5 class="fw-bolder">SushiLife</h5>
+                                    <!-- Recensioni-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!--Parole chiave-->
+                                    Giapponese, Sushi, Cucina orientale
+                                    <!-- Orari-->
+                                    <h6 class="Orari">11:30 - 15:00, 19:00 - 00:00</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Dettagli</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Promo</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/Users/matteobarbieri/Documents/Uni/Web/ProgettoWeb/startbootstrap-shop-homepage-gh-pages/Images/cucina-indiana-da-nord-a-sud-8-piatti-tradizionali-header.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Nome ristorante-->
+                                    <h5 class="fw-bolder">Maharaja's Delight</h5>
+                                    <!-- Recensioni-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!--Parole chiave-->
+                                    Indiano, Spezie, Vegetariano
+                                    <!-- Orari-->
+                                    <h6 class="Orari">12:30 - 15:30, 19:30 - 01:00</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Dettagli</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/Users/matteobarbieri/Documents/Uni/Web/ProgettoWeb/startbootstrap-shop-homepage-gh-pages/Images/hd1200x800.avif" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Nome ristorante-->
+                                    <h5 class="fw-bolder">Casa Nostra</h5>
+                                    <!-- Recensioni-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!--Parole chiave-->
+                                    Ristorante, Gestione familiare
+                                    <!-- Orari-->
+                                    <h6 class="Orari">11:00 - 15:00, 18:00 - 23:00</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Dettagli</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Promo</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/Users/matteobarbieri/Documents/Uni/Web/ProgettoWeb/startbootstrap-shop-homepage-gh-pages/Images/download (1).jpeg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Nome ristorante-->
+                                    <h5 class="fw-bolder">More Sushi</h5>
+                                    <!-- Recensioni-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!--Parole chiave-->
+                                    Giapponese, Sushi, AllYouCanEat
+                                    <!-- Orari-->
+                                    <h6 class="Orari">11:30 - 15:00, 18:30 - 23:30</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Dettagli</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/Users/matteobarbieri/Documents/Uni/Web/ProgettoWeb/startbootstrap-shop-homepage-gh-pages/Images/Pizza-fritta0204.webp" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                   <!-- Nome ristorante-->
+                                   <h5 class="fw-bolder">'O Compare tuo</h5>
+                                   <!-- Recensioni-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!--Parole chiave-->
+                                    Pizzeria, Pizza Fritta, Calzone Napoletano
+                                    <!-- Orari-->
+                                    <h6 class="Orari">11:30 - 15:30, 19:00 - 22:30</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Dettagli</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Promo</div>
+                            <!-- Immagine ristorante-->
+                            <img class="card-img-top" src="/Users/matteobarbieri/Documents/Uni/Web/ProgettoWeb/startbootstrap-shop-homepage-gh-pages/Images/street-food-romano.jpg" alt="..." />
+                            <!-- Dettagli-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Da Vince</h5>
+                                    <!-- Valutazioni Clienti-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Parole chiave-->
+                                    <h8 class="Parole chiave">Panineria, Salumeria</h8>
+                                    <!-- Orari-->
+                                    <h6 class="Orari">18:00 - 03:00</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Dettagli</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="/Users/matteobarbieri/Documents/Uni/Web/ProgettoWeb/startbootstrap-shop-homepage-gh-pages/Images/brossen-steakhouse.jpg" />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Nome ristorante-->
+                                    <h5 class="fw-bolder">Da Frecce</h5>
+                                    <!-- Recensioni-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!--Parole chiave-->
+                                    Steak House, Birreria, Messicano
+                                    <!-- Orari-->
+                                    <h6 class="Orari">18:00 - 02:00</h6>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Dettagli</a></div>
+                            </div>
+                        </div>
+                    </div
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; GustoInRete 2024 ™. Tutti i diritti riservati.
+            </p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
