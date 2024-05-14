@@ -1,7 +1,7 @@
-/* Stile per rendere il testo opaco */
 .Orari {
   padding-top: 10px;
-  opacity: 0.5; /* Valore compreso tra 0 (trasparente) e 1 (opaco) */
+  opacity: 0.6;
+  font-weight:400;
 }
 
 .restaurant-info {
@@ -30,4 +30,27 @@
 
 .spziosotto {
   margin-bottom: 15px; !important
+}
+
+.foot {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.navbar-brand {
+  font-size: 1.5rem !important;
+}
+
+.navbar-nav .nav-item a.nav-link {
+  font-weight: 500;
+}
+
+.nav-link-bold {
+  font-weight: bold;
+}
+
+.more {
+  margin-right: 15px !important;
 }

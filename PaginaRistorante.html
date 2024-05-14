@@ -23,12 +23,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="Home.html">Preferiti</a></li>
+                            <li class="nav-item more"><a class="nav-link active" aria-current="page" href="Home.html">Preferiti</a></li>
                             <!-- Categoria dropdown -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Categorie
-                                </a>
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorie</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="#!">Pizzerie</a></li>
                                     <li><a class="dropdown-item" href="#!">Ristoranti</a></li>
@@ -93,6 +91,39 @@
             </div>
         </div>
 
+        <div class="modal fade" id="prenotaModal" tabindex="-1" aria-labelledby="prenotaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="prenotaModalLabel">Effettua una prenotazione</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="nomeInput" class="form-label">Nominativo</label>
+                                <input type="text" class="form-control" id="nomeInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="personeInput" class="form-label">Numero di persone</label>
+                                <input type="number" class="form-control" id="personeInput" min="1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dataInput" class="form-label">Data</label>
+                                <input type="date" class="form-control" id="dataInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="orarioInput" class="form-label">Orario</label>
+                                <input type="time" class="form-control" id="orarioInput" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Conferma prenotazione</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+         </div>
+
+
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container">
@@ -106,5 +137,18 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+
+
+        <script>
+            // Ottieni il riferimento al pulsante "Prenota"
+            var prenotaButton = document.querySelector('.btn.btn-primary');
+        
+            // Aggiungi un evento di click al pulsante
+            prenotaButton.addEventListener('click', function() {
+                // Mostra la modal
+                var myModal = new bootstrap.Modal(document.getElementById('prenotaModal'));
+                myModal.show();
+            });
+        </script>
     </body>
 </html>
