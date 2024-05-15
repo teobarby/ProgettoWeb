@@ -31,6 +31,9 @@
                                     <li><a class="dropdown-item" href="#!">Pizzerie</a></li>
                                     <li><a class="dropdown-item" href="#!">Ristoranti</a></li>
                                     <li><a class="dropdown-item" href="#!">Cucina Orientale</a></li>
+                                    <li><a class="dropdown-item" href="#!">Bar</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="#!">Altro</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -67,27 +70,32 @@
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <div class="restaurant-info">
+                        <!-- Nome del ristorante -->
                         <h2 class="pasq">Da Pasquale</h2>
-                        <div class="d-flex justify-content-center text-warning mb-4">
-                            <!-- Collegamento alle recensioni -->
+                        <!-- Altre informazioni sul ristorante -->
+                        <div class="d-flex justify-content-center text-warning mb-3">
                             <a href="Recensioni.html" class="star-link"><i class="bi bi-star-fill"></i></a>
                             <a href="Recensioni.html" class="star-link"><i class="bi bi-star-fill"></i></a>
                             <a href="Recensioni.html" class="star-link"><i class="bi bi-star-fill"></i></a>
                             <a href="Recensioni.html" class="star-link"><i class="bi bi-star-fill"></i></a>
                             <a href="Recensioni.html" class="star-link"><i class="bi bi-star-fill"></i></a>
                         </div>
+                        <a href="#" class="btn btn-outline-dark ms-1 mb-4"><i class="bi bi-heart"></i> Aggiungi ai Preferiti</a>
+                        <!-- Descrizione del ristorante -->
                         <p class="lead">Da Pasquale è un'accogliente pizzeria situata nel cuore della città, nota per offrire le migliori pizze classiche italiane. Il ristorante è un'oasi per gli amanti della cucina tradizionale napoletana, dove ogni pizza è preparata con cura utilizzando ingredienti freschi e genuini.
                             L'atmosfera di "Da Pasquale" è familiare e accogliente, perfetta per trascorrere piacevoli serate in compagnia di amici e familiari. Il menù offre una varietà di pizze classiche, dalle tradizionali Margherita e Marinara alle più gourmet con ingredienti come prosciutto crudo, funghi porcini e mozzarella di bufala.
-                            Le pizze di "Da Pasquale" si distinguono per la crosta croccante e leggermente bruciata, tipica della vera pizza napoletana, e per il gusto autentico che trasporta i clienti direttamente in Italia con ogni morso. Oltre alle pizze, il ristorante propone anche antipasti, insalate fresche e deliziosi dolci fatti in casa.
+                            Le pizze di "Da Pasquale" si distinguono per la crosta croccante e leggermente bruciata, tipica della vera pizza napoletana, e per il gusto autentico che trasporta i clienti direttamente in Italia con ogni morso. Oltre alle pizze, il ristorante propone anche antipasti, insalate fresche e deliziosi dolci fatti in casa.</p>
                         <hr>
+                        <!-- Orari di apertura -->
                         <p class="opening-hours">Orari di apertura:</p>
                         <p>12:00 - 14:00, 18:30 - 23:30</p>
+                        <!-- Pulsanti per "Scopri il Menu" e "Prenota" -->
                         <a href="#" class="btn btn-outline-dark me-3">Scopri il Menu</a>
-                        <a href="#" class="btn btn-primary">Prenota</a>
-                        
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prenotaModal">Prenota</a>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
         <div class="modal fade" id="prenotaModal" tabindex="-1" aria-labelledby="prenotaModalLabel" aria-hidden="true">
@@ -125,6 +133,9 @@
             </div>
          </div>
 
+
+         
+
          <div class="modal fade" id="recensioniModal" tabindex="-1" aria-labelledby="recensioniModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -142,6 +153,7 @@
                                     <span class="text-muted">4.0 su 5</span>
                                 </div>
                                 <p class="card-text">Una delle migliori pizzerie che abbia mai provato! La pizza è deliziosa e autentica, con un impasto perfetto e ingredienti di qualità. L'atmosfera è accogliente e il servizio è ottimo.</p>
+                                <button type="button" class="btn btn-outline-dark me-3" data-bs-toggle="modal" data-bs-target="#aggiungiRispostaModal">Rispondi</button>
                             </div>
                         </div>
         
@@ -154,6 +166,7 @@
                                     <span class="text-muted">5.0 su 5</span>
                                 </div>
                                 <p class="card-text">Sono rimasta impressionata dalla qualità delle pizze e dall'ospitalità dello staff. Consiglio vivamente di provare la pizza Margherita, è semplicemente eccezionale.</p>
+                                <button type="button" class="btn btn-outline-dark me-3" data-bs-toggle="modal" data-bs-target="#aggiungiRispostaModal">Rispondi</button>
                             </div>
                         </div>
         
@@ -166,6 +179,7 @@
                                     <span class="text-muted">3.0 su 5</span>
                                 </div>
                                 <p class="card-text">Un posto carino per una serata informale. Le pizze sono buone, ma ho trovato il servizio un po' lento durante la mia visita.</p>
+                                <button type="button" class="btn btn-outline-dark me-3" data-bs-toggle="modal" data-bs-target="#aggiungiRispostaModal">Rispondi</button>
                             </div>
                         </div>
         
@@ -203,6 +217,35 @@
                             <!-- Utilizza text-center per centrare il pulsante "Invia Recensione" -->
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Invia Recensione</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="aggiungiRispostaModal" tabindex="-1" aria-labelledby="aggiungiRecensioneModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="aggiungiRecensioneModalLabel">Aggiungi Recensione</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="titoloInput" class="form-label">Titolo</label>
+                                <input type="text" class="form-control" id="titoloInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="descrizioneInput" class="form-label">Descrizione</label>
+                                <textarea class="form-control" id="descrizioneInput" rows="3" required></textarea>
+                            </div>
+                            <!-- Utilizza text-center per centrare il pulsante "Invia Recensione" -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Invia Rispostae</button>
                             </div>
                         </form>
                     </div>
