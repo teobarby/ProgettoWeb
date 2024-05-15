@@ -54,3 +54,45 @@
 .more {
   margin-right: 15px !important;
 }
+
+/* Stile per i link delle stelline */
+.star-link {
+  text-decoration: none; /* Rimuove il sottolineato dei link */
+  color: inherit; /* Utilizza il colore di default del testo */
+}
+
+/* Stile per il passaggio del mouse sul link delle stelline */
+.star-link:hover {
+  color: gold; /* Cambia il colore in oro quando il mouse è sopra */
+}
+
+.review-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center; /* Centra il contenuto delle recensioni */
+}
+.review-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.review-content {
+  margin-bottom: 20px;
+}
+.stars {
+  color: #FFD700; /* Colore delle stelle (giallo oro) */
+}
+.add-review-button {
+  margin-top: 20px;
+  margin-bottom: 40px; /* Aumenta lo spazio sotto il pulsante */
+  background-color: #ff8c00; /* Colore arancione */
+  border-color: #ff8c00; /* Colore arancione */
+  text-align: center;
+}
+.add-review-button:hover {
+  background-color: #ff6b00; /* Cambia colore al passaggio del mouse */
+  border-color: #ff6b00; /* Cambia colore al passaggio del mouse */
+}
