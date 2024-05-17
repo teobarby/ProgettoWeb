@@ -9,6 +9,15 @@
   text-align: center;
 }
 
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Aggiunge una transizione fluida per la trasformazione e l'ombra */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Sposta leggermente verso l'alto quando passi sopra */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Aggiorna l'ombra quando passi sopra */
+}
+
 .restaurant-info h2 {
   font-size: 32px;
   margin-bottom: 20px;
