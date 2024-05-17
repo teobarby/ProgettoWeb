@@ -60,11 +60,12 @@
             </div>
         </nav>
 
-        <header class="bg-dark py-5">
+        <header class="bg-dark py-2">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Il Tuo Profilo</h1>
                     <p class="lead fw-normal text-white-50 mb-0">Visualizza e gestisci le informazioni del tuo profilo.</p>
+                    <button class="btn btn-outline-light topmarg" id="modificaButton" data-bs-toggle="modal" data-bs-target="#modificaModal">Modifica</button>
                 </div>
             </div>
         </header>
@@ -95,7 +96,7 @@
                     </div>
                     <div class="col-lg-6">
                         <!-- Altri dettagli del profilo -->
-                        <h2 class="section-heading mb-4">Preferenze e Impostazioni</h2>
+                        <h2 class="section-heading mb-4">Preferenze e Statistiche</h2>
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Preferenze Alimentari</h5>
@@ -104,8 +105,8 @@
                         </div>
                         <div class="card mt-4">
                             <div class="card-body">
-                                <h5 class="card-title">Notifiche</h5>
-                                <p class="card-text">Gestisci le impostazioni delle notifiche.</p>
+                                <h5 class="card-title">Recensioni</h5>
+                                <p class="card-text">Fino ad oggi hai scritto 3 recensioni</p>
                             </div>
                         </div>
                     </div>
@@ -188,6 +189,67 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="modificaModal" tabindex="-1" aria-labelledby="modificaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modificaModalLabel">Modifica Profilo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="modificaForm">
+                            <div class="mb-3">
+                                <label for="nomeInput" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nomeModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cognomeInput" class="form-label">Cognome</label>
+                                <input type="text" class="form-control" id="cognomeModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="emailModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefonoInput" class="form-label">Telefono</label>
+                                <input type="tel" class="form-control" id="telefonoModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="preferenzeInput" class="form-label">Preferenze Alimentari</label>
+                                <input type="text" class="form-control" id="preferenzeModalInput" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary topmarg">Modifica</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <script>
+            // Ottieni i riferimenti ai campi originali
+            const nomeRistoranteInput = document.getElementById('nomeRistoranteInput');
+            const menuPDFInput = document.getElementById('menuPDFInput');
+            // Ottieni i riferimenti ai campi nel modal
+            const nomeRistoranteModalInput = document.getElementById('nomeRistoranteModalInput');
+            const menuPDFModalInput = document.getElementById('menuPDFModalInput');
+            // Ottieni il riferimento al form del modal
+            const modificaForm = document.getElementById('modificaForm');
+            // Ottieni il riferimento al modal
+            const modificaModal = new bootstrap.Modal(document.getElementById('modificaModal'));
+        
+            // Aggiungi un evento al pulsante "Modifica"
+            document.getElementById('modificaButton').addEventListener('click', function() {
+                // Popola i campi nel modal con i valori attuali
+                nomeRistoranteModalInput.value = nomeRistoranteInput.value;
+                // Popola altri campi se necessario
+                // Apri il modal
+                modificaModal.show();
+            });
+        </script>
 
 
         <footer class="py-5 bg-dark">

@@ -22,6 +22,7 @@
 
 .restaurant-info .opening-hours {
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .pasq {
@@ -99,4 +100,24 @@
 
 .cerca-destra {
   margin-right: 15%;
+}
+
+#googleMap {
+  border: 2px solid #ddd; /* Aggiungi un bordo sottile */
+  border-radius: 10px; /* Arrotonda gli angoli */
+  overflow: hidden; /* Assicurati che i contorni siano tagliati correttamente */
+}
+
+.topmarg {
+  margin-top: 25px;
+}
+
+.borderleft {
+  margin-left: 10px;
+}
+
+.OrariRist {
+  opacity: 0.8;
+  font-weight:500;
+  margin-top:10px;
 }
