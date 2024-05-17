@@ -69,18 +69,14 @@
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <div class="restaurant-info text-center">
-                        <!-- Nome del ristorante -->
-                        <h1 class="pasq">Da Pasquale</h1>
-                        <!-- Altre informazioni sul ristorante -->
-                        <div class="d-flex justify-content-center text-warning mb-3">
-                            <a class="star-link"><i class="bi bi-star-fill"></i></a>
-                            <a class="star-link"><i class="bi bi-star-fill"></i></a>
-                            <a class="star-link"><i class="bi bi-star-fill"></i></a>
-                            <a class="star-link"><i class="bi bi-star-fill"></i></a>
-                            <a class="star-link"><i class="bi bi-star-fill"></i></a>
-                        </div>
-                        <button class="btn btn-outline-dark btn-lg" style="border-radius: 25px;"><i class="bi bi-heart me-2"></i> Aggiungi ai Preferiti</button>
-
+                        <!-- Titolo al centro -->
+                        <h1 class="pasq d-inline-block ms-5" style="font-size: 3rem; color: #333; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Da Pasquale</h1>
+                
+                        <!-- Tasto cuoricino sulla destra del titolo -->
+                        <button class="btn btn-outline-danger float-end d-inline-block rounded-circle" aria-label="Aggiungi ai Preferiti" style="width: 50px; height: 50px; border-width: 2px; box-shadow: 0px 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                            <i class="bi bi-heart" style="font-size: 24px;"></i>
+                        </button>
+                
                         <div id="carouselExampleIndicators" class="carousel slide mt-3 border border-dark rounded shadow-lg p-3 mb-5 bg-body rounded" data-bs-ride="carousel">
                             <div class="carousel-indicators">
                                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -92,10 +88,10 @@
                                     <img src="Images/iStock-469246470.webp" class="d-block w-100" alt="Ristorante">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="" class="d-block w-100" alt="Altre immagini">
+                                    <img src="Images\cucina-indiana-da-nord-a-sud-8-piatti-tradizionali-header.jpg" class="d-block w-100" alt="Altre immagini">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="" class="d-block w-100" alt="Pizza 2">
+                                    <img src="Images\Pizza-fritta0204.webp" class="d-block w-100" alt="Pizza 2">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -107,7 +103,6 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-
                         
                         <!-- Descrizione del ristorante -->
                         <p class="lead">Da Pasquale è un'accogliente pizzeria situata nel cuore della città, nota per offrire le migliori pizze classiche italiane. Il ristorante è un'oasi per gli amanti della cucina tradizionale napoletana, dove ogni pizza è preparata con cura utilizzando ingredienti freschi e genuini.
@@ -124,15 +119,27 @@
                     </div>
 
 
+                    <hr class="my-2">
+
+                    <div class="promotions mt-5 bg-light p-4 rounded">
+                        <h3 class="mb-3">Promozioni:</h3>
+                        <div class="alert alert-info" role="alert">
+                            Al momento non ci sono promozioni disponibili. Controlla nuovamente in futuro!
+                        </div>
+                    </div>
+                    
+
+
                     <!-- Divider -->
                     <hr class="my-5">
 
-                    <!-- Sezione Recensioni -->
-                    <div class="reviews mt-5">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h3>Recensioni</h3>
-                            <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#recensioneModal">Scrivi una Recensione</a>
-                        </div>
+                    <div class="container mt-5 mb-5">
+                        <!-- Sezione Recensioni -->
+                        <div class="reviews" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h3>Recensioni</h3>
+                                <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#recensioneModal">Scrivi una Recensione</a>
+                            </div>
                     
                         <!-- Recensione 1 -->
                         <div class="card mb-3">
@@ -159,7 +166,7 @@
                         </div>
 
                         <!-- Recensione 3 -->
-                        <div class="card mb-5">
+                        <div class="card mb-1">
                             <div class="card-body">
                                 <h5 class="card-title">Recensione di GiovanniRossi - Servizio eccellente!</h5>
                                 <div class="d-flex align-items-center mb-2">

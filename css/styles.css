@@ -33,6 +33,12 @@
   margin-bottom: 15px; !important
 }
 
+.btn-danger:hover {
+  background-color: #FF4343; /* Cambia il colore di sfondo al passaggio del mouse */
+  transform: scale(1.1); /* Ingrandisce leggermente il bottone al passaggio del mouse */
+  box-shadow: 0px 8px 12px rgba(0,0,0,0.2); /* Aggiunge un'ombra più evidente al passaggio del mouse */
+}
+
 .foot {
   position: fixed;
   left: 0;
