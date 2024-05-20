@@ -18,7 +18,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="Home.html">GustoInRete</a>
+                <a class="navbar-brand" href="Index.html">GustoInRete</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -103,7 +103,7 @@
                         </button>
                         <p class="lead mt-3">Da Pasquale è un'accogliente pizzeria situata nel cuore della città, nota per offrire le migliori pizze classiche italiane. Il ristorante è un'oasi per gli amanti della cucina tradizionale napoletana, dove ogni pizza è preparata con cura utilizzando ingredienti freschi e genuini. L'atmosfera di "Da Pasquale" è familiare e accogliente, perfetta per trascorrere piacevoli serate in compagnia di amici e familiari. Il menù offre una varietà di pizze classiche, dalle tradizionali Margherita e Marinara alle più gourmet con ingredienti come prosciutto crudo, funghi porcini e mozzarella di bufala. Le pizze di "Da Pasquale" si distinguono per la crosta croccante e leggermente bruciata, tipica della vera pizza napoletana, e per il gusto autentico che trasporta i clienti direttamente in Italia con ogni morso. Oltre alle pizze, il ristorante propone anche antipasti, insalate fresche e deliziosi dolci fatti in casa.</p>
                         <hr>
-                        <p><i class="bi bi-geo-alt"></i> Via Napoli, 123 - 70122 Barletta (BT)</p>
+                        <p> <a href="https://maps.app.goo.gl/rHfjhyeY8BDSyzKu6"><i class="bi bi-geo-alt"></i> Via Napoli, 123 - 70122 Barletta (BT)</a></p>
                         <p class="opening-hours">Orari di apertura:</p>
                         <p>12:00 - 14:00, 18:30 - 23:30</p>
                         <a href="#" class="btn btn-outline-dark me-3">Scopri il Menu</a>
@@ -118,18 +118,17 @@
                     
 
 
-                    <!-- Divider -->
-                    <hr class="my-5">
+                <hr class="my-5">
 
-                    <div class="container mt-5 mb-5">
-                        <!-- Sezione Recensioni -->
-                        <div class="reviews" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
-                            <div class="d-flex justify-content-between align-items-center mb-4 ms-1">
-                                <h3>Recensioni:</h3> <!-- aggoiungi la media delle valutazioni-->
-                                <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#recensioneModal">Scrivi una Recensione</a>
-                            </div>
-                    
-                        <div class="card mb-3">
+                <div class="container mt-5 mb-5">
+                    <!-- Sezione Recensioni -->
+                    <div class="reviews" style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
+                        <div class="d-flex justify-content-between align-items-center mb-4 ms-1">
+                            <h3>Recensioni: <span class="text-muted">Media: 4.6 su 5</span></h3>
+                            <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#recensioneModal">Scrivi una Recensione</a>
+                        </div>
+
+                        <div class="card mb-3" data-bs-toggle="modal" data-bs-target="#replyModal" style="cursor: pointer;">
                             <div class="card-body">
                                 <h5 class="card-title">Recensione di Mario96 - Ottima pizza!</h5>
                                 <div class="d-flex align-items-center mb-2">
@@ -139,8 +138,8 @@
                                 <p class="card-text">Una delle migliori pizzerie che abbia mai provato! La pizza è deliziosa e autentica, con un impasto perfetto e ingredienti di qualità. L'atmosfera è accogliente e il servizio è ottimo.</p>
                             </div>
                         </div>
-                    
-                        <div class="card mb-3">
+
+                        <div class="card mb-3" data-bs-toggle="modal" data-bs-target="#replyModal" style="cursor: pointer;">
                             <div class="card-body">
                                 <h5 class="card-title">Recensione di LauraBianchi - Esperienza fantastica!</h5>
                                 <div class="d-flex align-items-center mb-2">
@@ -151,19 +150,18 @@
                             </div>
                         </div>
 
-                        <div class="card mb-3">
+                        <div class="card mb-3" data-bs-toggle="modal" data-bs-target="#replyModal" style="cursor: pointer;">
                             <div class="card-body">
                                 <h5 class="card-title">Recensione di GiovanniRossi - Servizio eccellente!</h5>
                                 <div class="d-flex align-items-center mb-2">
                                     <span class="text-warning me-2">★★★★★</span>
                                     <span class="text-muted">5.0 su 5</span>
                                 </div>
-                                <p class="
-                                card-text">Il personale è estremamente gentile e disponibile. La pizza è incredibile, con una crosta perfetta e ingredienti freschi. Un'esperienza culinaria fantastica!</p>
+                                <p class="card-text">Il personale è estremamente gentile e disponibile. La pizza è incredibile, con una crosta perfetta e ingredienti freschi. Un'esperienza culinaria fantastica!</p>
                             </div>
                         </div>
 
-                        <div class="card mb-3">
+                        <div class="card mb-3" data-bs-toggle="modal" data-bs-target="#replyModal" style="cursor: pointer;">
                             <div class="card-body">
                                 <h5 class="card-title">Recensione di VioletViolet - Pizza favolosa</h5>
                                 <div class="d-flex align-items-center mb-2">
@@ -222,6 +220,29 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Prenota</button>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal per Rispondere -->
+        <div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="replyModalLabel">Rispondi alla Recensione</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="replyMessage" class="form-label">Messaggio</label>
+                                <textarea class="form-control" id="replyMessage" rows="4" placeholder="Scrivi il tuo messaggio qui..."></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary me-auto">Invia Risposta</button>
                     </div>
                 </div>
             </div>
