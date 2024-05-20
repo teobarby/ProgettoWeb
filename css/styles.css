@@ -88,8 +88,8 @@
 
 .btn-danger:hover {
   background-color: #FF4343; /* Cambia il colore di sfondo al passaggio del mouse */
-  transform: scale(1.1); /* Ingrandisce leggermente il bottone al passaggio del mouse */
-  box-shadow: 0px 8px 12px rgba(0,0,0,0.2); /* Aggiunge un'ombra più evidente al passaggio del mouse */
+  transform: scale(1.1); 
+  box-shadow: 0px 8px 12px rgba(0,0,0,0.2);
 }
 
 .foot {
@@ -115,7 +115,6 @@
   margin-right: 15px !important;
 }
 
-/* Stile per i link delle stelline */
 .star-link {
   text-decoration: none; /* Rimuove il sottolineato dei link */
   color: inherit; /* Utilizza il colore di default del testo */
@@ -123,7 +122,7 @@
 
 /* Stile per il passaggio del mouse sul link delle stelline */
 .star-link:hover {
-  color: gold; /* Cambia il colore in oro quando il mouse è sopra */
+  color: gold; 
 }
 
 .review-card {
@@ -132,7 +131,7 @@
   padding: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
-  text-align: center; /* Centra il contenuto delle recensioni */
+  text-align: center; 
 }
 .review-title {
   font-size: 24px;
@@ -143,18 +142,18 @@
   margin-bottom: 20px;
 }
 .stars {
-  color: #FFD700; /* Colore delle stelle (giallo oro) */
+  color: #FFD700; 
 }
 .add-review-button {
   margin-top: 20px;
-  margin-bottom: 40px; /* Aumenta lo spazio sotto il pulsante */
-  background-color: #ff8c00; /* Colore arancione */
-  border-color: #ff8c00; /* Colore arancione */
+  margin-bottom: 40px;
+  background-color: #ff8c00; 
+  border-color: #ff8c00;
   text-align: center;
 }
 .add-review-button:hover {
-  background-color: #ff6b00; /* Cambia colore al passaggio del mouse */
-  border-color: #ff6b00; /* Cambia colore al passaggio del mouse */
+  background-color: #ff6b00; 
+  border-color: #ff6b00;
 }
 
 .cerca-destra {
@@ -162,9 +161,9 @@
 }
 
 #googleMap {
-  border: 2px solid #ddd; /* Aggiungi un bordo sottile */
-  border-radius: 10px; /* Arrotonda gli angoli */
-  overflow: hidden; /* Assicurati che i contorni siano tagliati correttamente */
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .topmarg {
