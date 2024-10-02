@@ -1,0 +1,83 @@
+<!DOCTYPE ejs>
+<html lang="it">
+    <%- include('partials/head'); %>
+    
+    <body>
+        <%- include('partials/navbar'); %>
+        <!-- Header-->
+        <header class="bg-dark pt-5 pb-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">GustoInRete</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Esplora, Prenota e Gusta: Scopri i Sapori dei Tuoi Ristoranti Preferiti Online</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Section -->
+<!-- Section -->
+<section class="py-5">
+    <div class="container px-4 px-lg-4 mt-5">
+        <div class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <% ristoranti.forEach(function(Ristoranti) { %> <!-- Inizio ciclo per i ristoranti -->
+                <div class="col-9 col-sm-6 col-md-4 col-lg-3 mb-5">
+                    <div class="card h-100 d-flex flex-column" onclick="location.href='/PaginaRistorante'" style="cursor: pointer;">
+                        <div class="badge bg-light text-dark position-absolute" style="top: 0.5rem; left: 0.5rem">
+                            <i class="bi bi-geo-alt"></i> <%= Ristoranti.città %> <!-- Usa i dati dal database -->
+                        </div>
+                        <!-- Immagine Ristoranti-->
+                        <img class="card-img-top" src="<%= Ristoranti.copertina %>" alt="..." height="160"/> <!-- Assicurati che ci sia un campo 'copertina' -->
+                        <!-- Dettagli-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Nome Ristoranti-->
+                                <h5 class="fw-bolder"><%= Ristoranti.nome %></h5> <!-- Nome Ristoranti -->
+                                <!-- Valutazioni Clienti-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <% for (let i = 0; i < Math.round(Ristoranti.valutazione_media); i++) { %>
+                                        <a href="" class="star-link"><i class="bi bi-star-fill"></i></a>
+                                    <% } %>
+                                    <% for (let i = 0; i < 5 - Math.round(Ristoranti.valutazione_media); i++) { %>
+                                        <a href="" class="star-link"><i class="bi bi-star"></i></a>
+                                    <% } %>
+                                </div>
+                                <!-- Parole chiave -->
+                                <h8 class="Parolechiave"><%= Ristoranti.paroleChiave %></h8> <!-- Parole chiave -->
+                                <!-- Orari-->
+                                <h6 class="Orari"><%= Ristoranti.orari %></h6> <!-- Orari -->
+                                <hr>
+                                <h7 class="Telefono">Tel: <%= Ristoranti.telefono %></h7> <!-- Telefono -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %> <!-- Fine ciclo per i ristoranti -->
+        </div>
+    </div>
+</section>
+  
+        <%- include('partials/footer') %>
+
+
+        <style>
+          .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+          .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+          }
+          .card:not(:hover) {
+            transform: scale(1);
+            box-shadow: none;
+          }
+        </style>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+        <!-- Core theme JS-->
+    </body>
+</html>

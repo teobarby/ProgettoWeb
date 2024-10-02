@@ -1,0 +1,184 @@
+.Orari {
+  padding-top: 10px;
+  opacity: 0.7;
+  font-weight:450;
+  font-size: 14px;
+}
+
+.restaurant-info {
+  padding: 50px;
+  text-align: center;
+}
+
+ .restaurant-info p {
+  color: #333; /* Colore del testo per renderlo più leggibile */
+  font-size: 18px; /* Dimensione del testo */
+  line-height: 1.6; /* Spaziatura tra le righe */
+  padding: 10px; /* Aggiunge spazio intorno al testo */
+  background-color: rgba(255, 255, 255, 0.8); /* Sfondo leggermente trasparente per evidenziare il testo */
+  border-radius: 10px; /* Arrotonda gli angoli */
+}
+
+.stretto {
+  width: 200px; /* o un valore più piccolo */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay .text {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.carousel-item img {
+  max-height: 500px;
+  object-fit: cover;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.carousel {
+  max-width: 1200px;
+  margin: 0 auto;
+  
+}
+
+.restaurant-info h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.restaurant-info p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  
+}
+
+.restaurant-info .opening-hours {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+
+.pasq {
+  margin-bottom: 5px !important;
+}
+
+.spziosotto {
+  margin-bottom: 15px !important;
+}
+
+.btn-danger:hover {
+  background-color: #FF4343; /* Cambia il colore di sfondo al passaggio del mouse */
+  transform: scale(1.1); 
+  box-shadow: 0px 8px 12px rgba(0,0,0,0.2);
+}
+
+.foot {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.navbar-brand {
+  font-size: 1.5rem !important;
+}
+
+.navbar-nav .nav-item a.nav-link {
+  font-weight: 500;
+}
+
+.nav-link-bold {
+  font-weight: bold;
+}
+
+.more {
+  margin-right: 15px !important;
+}
+
+.star-link {
+  text-decoration: none; /* Rimuove il sottolineato dei link */
+  color: inherit; /* Utilizza il colore di default del testo */
+}
+
+/* Stile per il passaggio del mouse sul link delle stelline */
+.star-link:hover {
+  color: gold; 
+}
+
+.review-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center; 
+}
+.review-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.review-content {
+  margin-bottom: 20px;
+}
+.stars {
+  color: #FFD700; 
+}
+.add-review-button {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  background-color: #ff8c00; 
+  border-color: #ff8c00;
+  text-align: center;
+}
+.add-review-button:hover {
+  background-color: #ff6b00; 
+  border-color: #ff6b00;
+}
+
+.cerca-destra {
+  margin-right: 15%;
+}
+
+#googleMap {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.topmarg {
+  margin-top: 25px;
+}
+
+.borderleft {
+  margin-left: 10px;
+}
+
+body {
+  background-image: url("/images/photo-1506968430777-bf7784a87f23.jpeg"); /* Percorso dell'immagine */
+  background-size: cover; /* L'immagine copre l'intera pagina */
+  background-position: center; /* Centra l'immagine */
+  background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+  background-attachment: fixed;
+}

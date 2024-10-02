@@ -1,0 +1,291 @@
+<!DOCTYPE ejs>
+<html lang="it">
+    <%- include('partials/head') %>
+    <body>
+        <%- include('partials/navbar') %>
+
+        
+        <div class="container">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="Images/iStock-469246470.webp" class="d-block w-100" alt="Ristorante">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Images/cucina-indiana-da-nord-a-sud-8-piatti-tradizionali-header.jpg" class="d-block w-100" alt="Cucina Indiana">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Images/Pizza-fritta0204.webp" class="d-block w-100" alt="Pizza">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+            <div class="container mt-5 ">
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="restaurant-info text-center bg-white p-4 rounded">
+                            <h1 class="pasq d-inline-block ms-5">Da Pasquale</h1>
+                            <button class="btn btn-outline-danger float-end d-inline-block rounded-circle" aria-label="Aggiungi ai Preferiti">
+                                <i class="bi bi-heart" style="font-size: 24px;"></i>
+                            </button>
+                            <p class="lead mt-3">Da Pasquale è un'accogliente pizzeria situata nel cuore della città, nota per offrire le migliori pizze classiche italiane. Il ristorante è un'oasi per gli amanti della cucina tradizionale napoletana, dove ogni pizza è preparata con cura utilizzando ingredienti freschi e genuini. L'atmosfera di "Da Pasquale" è familiare e accogliente, perfetta per trascorrere piacevoli serate in compagnia di amici e familiari. Il menù offre una varietà di pizze classiche, dalle tradizionali Margherita e Marinara alle più gourmet con ingredienti come prosciutto crudo, funghi porcini e mozzarella di bufala. Le pizze di "Da Pasquale" si distinguono per la crosta croccante e leggermente bruciata, tipica della vera pizza napoletana, e per il gusto autentico che trasporta i clienti direttamente in Italia con ogni morso. Oltre alle pizze, il ristorante propone anche antipasti, insalate fresche e deliziosi dolci fatti in casa.</p>
+                            <hr>
+                            <p><a href="https://maps.app.goo.gl/rHfjhyeY8BDSyzKu6"><i class="bi bi-geo-alt"></i> Via Napoli, 123 - 70122 Barletta (BT)</a></p>
+                            <p class="opening-hours">Orari di apertura:</p>
+                            <p>12:00 - 14:00, 18:30 - 23:30</p>
+                            <a href="#" class="btn btn-outline-dark me-3">Scopri il Menu</a>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prenotaModal">Prenota</a>
+                        </div>
+                        <div class="promotions mt-3 bg-white p-4 rounded shadow">
+                            <h3 class="mb-3">Promozioni:</h3>
+                            <div class="alert alert-info" role="alert">
+                                Al momento non ci sono promozioni disponibili. Controlla nuovamente in futuro!
+                            </div>
+                        </div>
+            
+                    
+
+
+                <div class="container mt-5 mb-5">
+                    <div class="row">
+                    <!-- Sezione Recensioni -->
+                    <div class="card bg-white p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4 ms-1">
+                            <h3>Recensioni: <span class="text-muted">4.6 su 5</span></h3>
+                            <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#recensioneModal">Scrivi una Recensione</a>
+                        </div>
+                
+                        <div id="reviewsContainer">
+                            <!-- Recensioni esistenti -->
+                            <div class="card mb-3" data-bs-toggle="modal" data-bs-target="#replyModal" style="cursor: pointer;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Recensione di Mario96 - Ottima pizza!</h5>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="text-warning me-2">★★★★☆</span>
+                                        <span class="text-muted">4.0 su 5</span>
+                                    </div>
+                                    <p class="card-text">Una delle migliori pizzerie che abbia mai provato! La pizza è deliziosa e autentica, con un impasto perfetto e ingredienti di qualità. L'atmosfera è accogliente e il servizio è ottimo.</p>
+                                </div>
+                            </div>
+                
+                            <div class="card mb-3" data-bs-toggle="modal" data-bs-target="#replyModal" style="cursor: pointer;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Recensione di GiovanniRossi - Servizio eccellente!</h5>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="text-warning me-2">★★★★★</span>
+                                        <span class="text-muted">5.0 su 5</span>
+                                    </div>
+                                    <p class="card-text">Il personale è estremamente gentile e disponibile. La pizza è incredibile, con una crosta perfetta e ingredienti freschi. Un'esperienza culinaria fantastica!</p>
+                                </div>
+                            </div>
+
+
+                            <div class="card mb-3" data-bs-toggle="modal" data-bs-target="#replyModal" style="cursor: pointer;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Recensione di AngelaBianchi - Atmosfera accogliente!</h5>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="text-warning me-2">★★★★☆</span>
+                                        <span class="text-muted">4.5 su 5</span>
+                                    </div>
+                                    <p class="card-text">Un ambiente molto accogliente e rilassante. La pizza era deliziosa, con ingredienti freschi e ben bilanciati. Il servizio è stato veloce e cortese. Sicuramente un posto dove tornerò spesso!</p>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Bottone per visualizzare altre recensioni -->
+                        <div class="text-center mt-4">
+                            <button id="loadMoreReviews" class="btn btn-outline-dark">Visualizza altre recensioni</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>
+
+        <!-- Modal Prenota -->
+        <div class="modal fade" id="prenotaModal" tabindex="-1" aria-labelledby="prenotaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="prenotaModalLabel">Prenota un tavolo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="dataPrenotazione" class="form-label">Data</label>
+                                <input type="date" class="form-control" id="dataPrenotazione" required min="2024-05-17">
+                            </div>
+                            <div class="mb-3">
+                                <label for="oraPrenotazione" class="form-label">Ora</label>
+                                <input type="time" class="form-control" id="oraPrenotazione" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="numeroPersone" class="form-label">Numero di persone</label>
+                                <input type="number" class="form-control" id="numeroPersone" required min="1">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Prenota</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal per Rispondere -->
+        <div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="replyModalLabel">Rispondi alla Recensione</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="replyMessage" class="form-label">Messaggio</label>
+                                <textarea class="form-control" id="replyMessage" rows="4" placeholder="Scrivi il tuo messaggio qui..."></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary me-auto">Invia Risposta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal per recensioni-->
+        <div class="modal fade" id="recensioneModal" tabindex="-1" aria-labelledby="recensioneModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="recensioneModalLabel">Lascia una recensione</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="valutazioneRecensione" class="form-label">Valutazione</label>
+                                <select class="form-select" id="valutazioneRecensione" required>
+                                    <option value="5">★★★★★</option>
+                                    <option value="4">★★★★☆</option>
+                                    <option value="3">★★★☆☆</option>
+                                    <option value="2">★★☆☆☆</option>
+                                    <option value="1">★☆☆☆☆</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nomeUtente" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nomeUtente" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="titoloRecensione" class="form-label">Titolo</label>
+                                <input type="text" class="form-control" id="titoloRecensione" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="testoRecensione" class="form-label">Recensione</label>
+                                <textarea class="form-control" id="testoRecensione" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Invia Recensione</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="informazioniRistoranteModal" tabindex="-1" aria-labelledby="informazioniRistoranteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="informazioniRistoranteModalLabel">Informazioni sul ristorante</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="nomeRistoranteInput" class="form-label">Nome del ristorante</label>
+                                <input type="text" class="form-control" id="nomeRistoranteInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="menuPDFInput" class="form-label">Immagine di copertina (JPEG, JPJ)</label>
+                                <input type="file" class="form-control" id="menuPDFInput">
+                                <small class="text-muted">Inserisci l'Immagine di copertina del tuo ristorante</small>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Categoria</label>
+                                <select class="form-select" aria-label="Seleziona categoria" required>
+                                    <option selected disabled>Seleziona categoria...</option>
+                                    <!-- Opzioni per le categorie -->
+                                    <option value="Pizzerie">Pizzeria</option>
+                                    <option value="Ristoranti">Ristorante</option>
+                                    <option value="Cucina Orientale">Cucina orientale</option>
+                                    <option value="Bar">Bar</option>
+                                    <option value="Paninoteche">Paninoteca</option>
+                                    <option value="Gelaterie">Gelateria</option>
+                                    <option value="Rosticcerie">Rosticceria</option>
+                                    <option value="Caffetterie">Caffetteria</option>
+                                    <option value="Fast Food">Fast food</option>
+                                    <option value="Trattorie">Trattoria</option>
+                                    <option value="Trattorie">Altro</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="indirizzoInput" class="form-label">Indirizzo</label>
+                                <input type="text" class="form-control" id="indirizzoInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="paroleChiaveInput" class="form-label">Parole chiave</label>
+                                <input type="text" class="form-control" id="paroleChiaveInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="descrizioneRistoranteInput" class="form-label">Descrizione</label>
+                                <textarea class="form-control" id="descrizioneRistoranteInput" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="orariAperturaInput" class="form-label">Orari di apertura</label>
+                                <input type="text" class="form-control" id="orariAperturaInput">
+                            </div>
+                            <div class="mb-3">
+                                <label for="menuPDFInput" class="form-label">Menu (PDF)</label>
+                                <input type="file" class="form-control" id="menuPDFInput">
+                                <small class="text-muted">Carica il menu in formato PDF</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="promoAttiveInput" class="form-label">Promo attive</label>
+                                <textarea class="form-control" id="promoAttiveInput" required></textarea>
+                            </div>
+                            <!-- Utilizza text-center per centrare il pulsante "Invia Informazioni" -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Aggiungi ristorante</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        
+    </body>
+    
+</html>
+
+

@@ -1,0 +1,185 @@
+<!DOCTYPE ejs>
+<html lang="it">
+    <%- include('partials/head'); %>
+        <body>
+
+        <%- include('partials/navbar'); %>
+
+        <header class="bg-dark py-3">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Il Tuo Profilo</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Visualizza e gestisci le informazioni del tuo profilo.</p>
+                    <button class="btn btn-outline-light topmarg" id="modificaButton" data-bs-toggle="modal" data-bs-target="#modificaModal">Modifica</button>
+                </div>
+            </div>
+        </header>
+
+        <section class="py-5">
+            <div class="container card px-4 px-lg-5 mt-5 mb-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-lg-6 mb-3 mt-4">
+                        <h2 class="section-heading mb-4">Informazioni Personali</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Nome Utente</h5>
+                                <p class="card-text">Matteo</p>
+                            </div>
+                        </div>
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Email</h5>
+                                <p class="card-text">Indirizzo Email</p>
+                            </div>
+                        </div>
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Numero di telefono</h5>
+                                <p class="card-text">Cellulare</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-3 mt-4">
+                        <!-- Altri dettagli del profilo -->
+                        <h2 class="section-heading mb-4">Preferenze e Statistiche</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Preferenze Alimentari</h5>
+                                <p class="card-text">Indica le tue preferenze alimentari.</p>
+                            </div>
+                        </div>
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Recensioni</h5>
+                                <p class="card-text">Fino ad oggi hai scritto 3 recensioni</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <button type="button" class="btn btn-outline-dark mb-4" data-bs-toggle="modal" data-bs-target="#informazioniRistoranteModal">Aggiungi o Modifica il tuo Ristorante</button>
+                    </div>
+                </div>
+            </div>
+
+            
+        </section>
+
+
+        <div class="modal fade" id="informazioniRistoranteModal" tabindex="-1" aria-labelledby="informazioniRistoranteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="informazioniRistoranteModalLabel">Informazioni sul ristorante</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="nomeRistoranteInput" class="form-label">Nome del ristorante</label>
+                                <input type="text" class="form-control" id="nomeRistoranteInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="menuPDFInput" class="form-label">Immagine di copertina (JPEG, JPJ)</label>
+                                <input type="file" class="form-control" id="menuPDFInput">
+                                <small class="text-muted">Inserisci l'Immagine di copertina del tuo ristorante</small>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Categoria</label>
+                                <select class="form-select" aria-label="Seleziona categoria" required>
+                                    <option selected disabled>Seleziona categoria...</option>
+                                    <!-- Opzioni per le categorie -->
+                                    <option value="Pizzerie">Pizzeria</option>
+                                    <option value="Ristoranti">Ristorante</option>
+                                    <option value="Cucina Orientale">Cucina orientale</option>
+                                    <option value="Bar">Bar</option>
+                                    <option value="Paninoteche">Paninoteca</option>
+                                    <option value="Gelaterie">Gelateria</option>
+                                    <option value="Rosticcerie">Rosticceria</option>
+                                    <option value="Caffetterie">Caffetteria</option>
+                                    <option value="Fast Food">Fast food</option>
+                                    <option value="Trattorie">Trattoria</option>
+                                    <option value="Trattorie">Altro</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="indirizzoInput" class="form-label">Indirizzo</label>
+                                <input type="text" class="form-control" id="indirizzoInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="paroleChiaveInput" class="form-label">Parole chiave</label>
+                                <input type="text" class="form-control" id="paroleChiaveInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="descrizioneRistoranteInput" class="form-label">Descrizione</label>
+                                <textarea class="form-control" id="descrizioneRistoranteInput" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="orariAperturaInput" class="form-label">Orari di apertura</label>
+                                <input type="text" class="form-control" id="orariAperturaInput">
+                            </div>
+                            <div class="mb-3">
+                                <label for="menuPDFInput" class="form-label">Menu (PDF)</label>
+                                <input type="file" class="form-control" id="menuPDFInput">
+                                <small class="text-muted">Carica il menu in formato PDF</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="promoAttiveInput" class="form-label">Promo attive</label>
+                                <textarea class="form-control" id="promoAttiveInput" required></textarea>
+                            </div>
+                            <!-- Utilizza text-center per centrare il pulsante "Invia Informazioni" -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Aggiungi ristorante</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modificaModal" tabindex="-1" aria-labelledby="modificaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modificaModalLabel">Modifica profilo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="modificaForm">
+                            <div class="mb-3">
+                                <label for="nomeInput" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nomeModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cognomeInput" class="form-label">Cognome</label>
+                                <input type="text" class="form-control" id="cognomeModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="emailModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefonoInput" class="form-label">Telefono</label>
+                                <input type="tel" class="form-control" id="telefonoModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="preferenzeInput" class="form-label">Preferenze Alimentari</label>
+                                <input type="text" class="form-control" id="preferenzeModalInput" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary topmarg">Modifica</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <%- include('partials/footer') %>
+
+        <!-- Script Bootstrap e custom JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxy"></script>
+    </body>
+</html>
