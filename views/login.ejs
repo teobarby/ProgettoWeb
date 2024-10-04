@@ -10,13 +10,13 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Accedi con il tuo Profilo</h3></div>
                     <div class="card-body">
-                        <form class="mb-0">
+                        <form action="/login/password" method="post" class="mb-0">
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="inputName" type="text" placeholder="Name" />
-                                <label for="inputName">Email</label>
+                                <input class="form-control" id="username" name="username" type="text" autocomplete="username" placeholder="Name" required autofocus/>
+                                <label for="username">Username</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                <input class="form-control" id="current-password" name="password" type="password" autocomplete="current-password" placeholder="Name" required>
                                 <label for="inputPassword">Password</label>
                             </div>
                             <div class="d-grid gap-2 center-container">

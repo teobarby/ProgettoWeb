@@ -1,15 +1,6 @@
 // Assicurati che il documento sia pronto prima di eseguire script
 document.addEventListener("DOMContentLoaded", function() {
 
-    // Abilita il comportamento del carosello Bootstrap
-    var carouselElement = document.querySelector('#carouselExampleIndicators');
-    if (carouselElement) {
-        var carousel = new bootstrap.Carousel(carouselElement, {
-            interval: 5000, // Cambia slide ogni 5 secondi
-            pause: 'hover' // Pausa quando il mouse è sopra il carosello
-        });
-    }
-
     // Prenotazione - Modal
     var prenotaModal = document.getElementById('prenotaModal');
     if (prenotaModal) {

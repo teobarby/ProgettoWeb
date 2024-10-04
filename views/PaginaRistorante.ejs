@@ -8,9 +8,11 @@
         <div class="container">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
+                    <% let validImageIndex = 0; %> <!-- Variabile per tenere traccia degli indici validi -->
                     <% ristorante.forEach((recensione, index) => { %>
                         <% if (recensione.immagine) { %>  <!-- Controlla se immagine non è NULL -->
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %>" class="<%= index === 0 ? 'active' : '' %>" aria-label="Slide <%= index + 1 %>"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= validImageIndex %>" class="<%= validImageIndex === 0 ? 'active' : '' %>" aria-label="Slide <%= validImageIndex + 1 %>"></button>
+                            <% validImageIndex++; %>  <!-- Incrementa solo per immagini valide -->
                         <% } %>
                     <% }); %>
                 </div>
@@ -35,33 +37,31 @@
                 </button>
             </div>
         </div>
-        <div class="container mt-5 ">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1">
-                    <div class="restaurant-info text-center bg-white p-4 rounded">
+
+        
+        <div class="container-fluid mt-3"></div>>
+            <div class="row" style="margin-right: 40px; margin-left: 40px;" >
+                <div class="col-lg-10 offset-lg-1" >
+                    <div class="restaurant-info text-center bg-white p-4 rounded" >
                         <!-- Titolo del ristorante -->
-                        <h1 class="pasq d-inline-block ms-5"><%= ristorante[0].nome_ristorante %></h1>
+                        <h1 class="pasq d-inline-block ms-5 mt-1" ><%= ristorante[0].nome_ristorante %></h1>
         
                         <!-- Bottone per i preferiti -->
-                        <button class="btn btn-outline-danger float-end d-inline-block rounded-circle" aria-label="Aggiungi ai Preferiti">
-                            <i class="bi bi-heart" style="font-size: 24px;"></i>
+                        <button id="favoriteButton" class=" mb-4 btn btn-outline-danger float-end rounded-circle position-relative" aria-label="Aggiungi ai Preferiti" style="width: 50px; height: 50px; border: none; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: background-color 0.3s, transform 0.2s;">
+                            <i class="bi bi-heart" style="font-size: 24px; color: red;"></i>
                         </button>
         
                         <!-- Descrizione dinamica -->
-                        <p class="lead mt-3"><%= ristorante[0].descrizione %></p>
-        
+                        <p class="lead mt-3"   style="background-color: #edede9"><%= ristorante[0].descrizione %></p>
                         <hr>
-        
-                        <!-- Indirizzo dinamico -->
-                        <p>
+
                             <a href="https://maps.google.com/?q=<%= ristorante[0].indirizzo %>">
                                 <i class="bi bi-geo-alt"></i> <%= ristorante[0].indirizzo %>
                             </a>
-                        </p>
         
                         <!-- Orari dinamici -->
-                        <p class="opening-hours">Orari di apertura:</p>
-                        <p><%= ristorante[0].orari %></p>
+                        <div class="opening-hours mt-5">Orari di apertura:</div>
+                        <div class="mb-4 mt-2"> <%= ristorante[0].orari %></div>
         
                         <!-- Pulsanti Menu e Prenota -->
                         <a href="#" class="btn btn-outline-dark me-3">Scopri il Menu</a>
@@ -69,11 +69,11 @@
                     </div>
         
                     <!-- Sezione promozioni -->
-                    <div class="promotions mt-3 bg-white p-4 rounded shadow">
-                        <h3 class="mb-3">Promozioni:</h3>
+                    <div class="promotions mt-3 bg-white p-4 rounded shadow giallino">
+                        <h4 class="mb-3">Promozioni:</h4>
                         <% if (ristorante[0].promo) { %>
                             <div class="alert alert-info" role="alert">
-                                <%= ristorante[0].promo %>
+                                <h8 class="mb-0" style="font-size: 1rem"><%= ristorante[0].promo %></h8>
                             </div>
                         <% } else { %>
                             <div class="alert alert-info" role="alert">
@@ -90,11 +90,11 @@
                                 <!-- Sezione Recensioni -->
                                 <div class="card bg-white p-4">
                                     <div class="d-flex justify-content-between align-items-center mb-4 ms-1">
-                                        <h3 class="mb-0">Valutazione Media: 
+                                        <h4 class="mb-0">Valutazione Media: 
                                             <span class="text-muted">
                                                 <%= (ristorante[0] && ristorante[0].valutazione_media) || 'N/A' %> su 5
                                             </span>
-                                        </h3>
+                                        </h4>
                                         <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#recensioneModal">
                                             Scrivi una Recensione
                                         </a>
@@ -106,24 +106,26 @@
                                             <% ristorante.forEach(function(recensione, index) { %>
                                                 <div class="card mb-3 recensione-item <%= index >= 4 ? 'd-none' : '' %>" data-bs-toggle="modal" data-bs-target="#replyModal" style="cursor: pointer;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title">Recensione di <%= recensione.scrittore %> - <%= recensione.titolo || "Recensione" %></h5>
+                                                        <h5 class="card-title small-text">Recensione di <%= recensione.scrittore %> - <%= recensione.titolo || "Recensione" %></h5>
                                                         <div class="d-flex align-items-center mb-2">
                                                             <span class="text-warning me-2">
-                                                                <% for (let i = 0; i < Math.floor(recensione.valutazione); i++) { %>
-                                                                    ★
-                                                                <% } %>
-                                                                <% if (recensione.valutazione % 1 !== 0) { %>
-                                                                    ☆
-                                                                <% } %>
+                                                                <div class="d-flex justify-content-center small text-warning" style="font-size:14px">
+                                                                    <% for (let i = 0; i < Math.round(recensione.valutazione); i++) { %>
+                                                                        <a href="" class="star-link"><i class="bi bi-star-fill"></i></a>
+                                                                    <% } %>
+                                                                    <% for (let i = 0; i < 5 - Math.round(recensione.valutazione); i++) { %>
+                                                                        <a href="" class="star-link"><i class="bi bi-star"></i></a>
+                                                                    <% } %>
+                                                                </div>
                                                             </span>
-                                                            <span class="text-muted"><%= recensione.valutazione %> su 5</span>
+                                                            <span class="text-muted "  style="font-size:14px"><%= recensione.valutazione %>.0 su 5</span>
                                                         </div>
-                                                        <p class="card-text"><%= recensione.testo %></p>
+                                                        <p class="card-text" style="font-size:14px"><%= recensione.testo %></p>
                                                     </div>
                                                 </div>
                                             <% }); %>
                                         <% } else { %>
-                                            <div class="alert alert-info">
+                                            <div class="alert alert-info small-text">
                                                 Nessuna recensione disponibile. Sii il primo a scrivere una recensione!
                                             </div>
                                         <% } %>
@@ -141,6 +143,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
     <%- include('partials/footer') %>
 
@@ -334,4 +337,23 @@
             }
         });
     });
+
+
+        // Seleziona il bottone
+    const favoriteButton = document.getElementById('favoriteButton');
+
+    // Aggiungi un evento di clic
+    favoriteButton.addEventListener('click', function() {
+        // Controlla se il bottone ha già il colore di sfondo rosso
+        if (favoriteButton.classList.contains('btn-outline-danger')) {
+            // Cambia il colore di sfondo e il tipo di bottone
+            favoriteButton.classList.remove('btn-outline-danger');
+            favoriteButton.classList.add('btn-danger');
+        } else {
+            // Torna allo stato iniziale
+            favoriteButton.classList.remove('btn-danger');
+            favoriteButton.classList.add('btn-outline-danger');
+        }
+    });
+
 </script>

@@ -6,7 +6,7 @@
         <%- include('partials/navbar'); %>
         <!-- Header-->
         <header class="bg-dark pt-5 pb-5">
-            <div class="container px-4 px-lg-5 my-5">
+            <div class="container px-4 px-lg-5 my-2">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">GustoInRete</h1>
                     <p class="lead fw-normal text-white-50 mb-0">Esplora, Prenota e Gusta: Scopri i Sapori dei Tuoi Ristoranti Preferiti Online</p>
@@ -15,16 +15,18 @@
         </header>
 
         <!-- Section -->
-        <!-- Section -->
         <section class="py-5">
-            <div class="container px-4 px-lg-4 mt-5">
+            <div class="container px-4 px-lg-4 mt-0">
                 <div class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <% ristoranti.forEach(function(Ristoranti) { %> <!-- Inizio ciclo per i ristoranti -->
                         <div class="col-9 col-sm-6 col-md-4 col-lg-3 mb-5">
-                            <div class="card h-100 d-flex flex-column" onclick="location.href='/ristorante/<%= Ristoranti.id %>'" style="cursor: pointer;">
+                            <div class="card giallino h-100 d-flex flex-column" onclick="location.href='/ristorante/<%= Ristoranti.id %>'" style="cursor: pointer;">
                                 <div class="badge bg-light text-dark position-absolute" style="top: 0.5rem; left: 0.5rem">
                                     <i class="bi bi-geo-alt"></i> <%= Ristoranti.città %> <!-- Usa i dati dal database -->
                                 </div>
+                                <% if (Ristoranti.promo) { %>
+                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Promo</div>
+                                <% } %> 
                                 <!-- Immagine Ristoranti-->
                                 <img class="card-img-top" src="<%= Ristoranti.copertina %>" alt="..." height="160"/> <!-- Assicurati che ci sia un campo 'copertina' -->
                                 <!-- Dettagli-->

@@ -1,24 +1,21 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const DataBase = require("../db"); // db.js
+const db = new DataBase();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  // Query per ottenere i ristoranti e calcolare la valutazione media
-  const query = `
-    SELECT Ristoranti.*, AVG(Recensioni.valutazione) AS valutazione_media
-    FROM Ristoranti
-    LEFT JOIN Recensioni ON Ristoranti.id = Recensioni.ristorante
-    GROUP BY Ristoranti.id
-  `;
+router.get('/', async function(req, res, next) {
 
-  req.db.all(query, [], (err, rows) => {
-    if (err) {
-      console.error(err.message); // Log degli errori di query
-      return res.status(500).send('Errore durante il recupero dei ristoranti');
-    }
-    // Passa i ristoranti alla vista 'index'
-    res.render('index', { title: 'Index', ristoranti: rows });
-  });
+  try {
+
+    const rows = await db.getHomePage();
+
+    return res.render('index', { title: 'Index', ristoranti: rows });
+
+
+  } catch (err) {
+    console.log("Errore nel caricamento dei ristoranti:", err)
+  }
 });
 
 
