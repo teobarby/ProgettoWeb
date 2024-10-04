@@ -15,47 +15,47 @@
         </header>
 
         <!-- Section -->
-<!-- Section -->
-<section class="py-5">
-    <div class="container px-4 px-lg-4 mt-5">
-        <div class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <% ristoranti.forEach(function(Ristoranti) { %> <!-- Inizio ciclo per i ristoranti -->
-                <div class="col-9 col-sm-6 col-md-4 col-lg-3 mb-5">
-                    <div class="card h-100 d-flex flex-column" onclick="location.href='/PaginaRistorante'" style="cursor: pointer;">
-                        <div class="badge bg-light text-dark position-absolute" style="top: 0.5rem; left: 0.5rem">
-                            <i class="bi bi-geo-alt"></i> <%= Ristoranti.città %> <!-- Usa i dati dal database -->
-                        </div>
-                        <!-- Immagine Ristoranti-->
-                        <img class="card-img-top" src="<%= Ristoranti.copertina %>" alt="..." height="160"/> <!-- Assicurati che ci sia un campo 'copertina' -->
-                        <!-- Dettagli-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Nome Ristoranti-->
-                                <h5 class="fw-bolder"><%= Ristoranti.nome %></h5> <!-- Nome Ristoranti -->
-                                <!-- Valutazioni Clienti-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <% for (let i = 0; i < Math.round(Ristoranti.valutazione_media); i++) { %>
-                                        <a href="" class="star-link"><i class="bi bi-star-fill"></i></a>
-                                    <% } %>
-                                    <% for (let i = 0; i < 5 - Math.round(Ristoranti.valutazione_media); i++) { %>
-                                        <a href="" class="star-link"><i class="bi bi-star"></i></a>
-                                    <% } %>
+        <!-- Section -->
+        <section class="py-5">
+            <div class="container px-4 px-lg-4 mt-5">
+                <div class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <% ristoranti.forEach(function(Ristoranti) { %> <!-- Inizio ciclo per i ristoranti -->
+                        <div class="col-9 col-sm-6 col-md-4 col-lg-3 mb-5">
+                            <div class="card h-100 d-flex flex-column" onclick="location.href='/ristorante/<%= Ristoranti.id %>'" style="cursor: pointer;">
+                                <div class="badge bg-light text-dark position-absolute" style="top: 0.5rem; left: 0.5rem">
+                                    <i class="bi bi-geo-alt"></i> <%= Ristoranti.città %> <!-- Usa i dati dal database -->
                                 </div>
-                                <!-- Parole chiave -->
-                                <h8 class="Parolechiave"><%= Ristoranti.paroleChiave %></h8> <!-- Parole chiave -->
-                                <!-- Orari-->
-                                <h6 class="Orari"><%= Ristoranti.orari %></h6> <!-- Orari -->
-                                <hr>
-                                <h7 class="Telefono">Tel: <%= Ristoranti.telefono %></h7> <!-- Telefono -->
+                                <!-- Immagine Ristoranti-->
+                                <img class="card-img-top" src="<%= Ristoranti.copertina %>" alt="..." height="160"/> <!-- Assicurati che ci sia un campo 'copertina' -->
+                                <!-- Dettagli-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Nome Ristoranti-->
+                                        <h5 class="fw-bolder"><%= Ristoranti.nome %></h5> <!-- Nome Ristoranti -->
+                                        <!-- Valutazioni Clienti-->
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <% for (let i = 0; i < Math.round(Ristoranti.valutazione_media); i++) { %>
+                                                <a href="" class="star-link"><i class="bi bi-star-fill"></i></a>
+                                            <% } %>
+                                            <% for (let i = 0; i < 5 - Math.round(Ristoranti.valutazione_media); i++) { %>
+                                                <a href="" class="star-link"><i class="bi bi-star"></i></a>
+                                            <% } %>
+                                        </div>
+                                        <!-- Parole chiave -->
+                                        <h8 class="Parolechiave"><%= Ristoranti.paroleChiave %></h8> <!-- Parole chiave -->
+                                        <!-- Orari-->
+                                        <h6 class="Orari"><%= Ristoranti.orari %></h6> <!-- Orari -->
+                                        <hr>
+                                        <h7 class="Telefono">Tel: <%= Ristoranti.telefono %></h7> <!-- Telefono -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <% }); %> <!-- Fine ciclo per i ristoranti -->
                 </div>
-            <% }); %> <!-- Fine ciclo per i ristoranti -->
-        </div>
-    </div>
-</section>
-  
+            </div>
+        </section>
+    
         <%- include('partials/footer') %>
 
 

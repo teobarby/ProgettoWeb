@@ -1,62 +1,77 @@
-document.getElementById('loadMoreReviews').addEventListener('click', function () {
-    const reviewsContainer = document.getElementById('reviewsContainer');
+// Assicurati che il documento sia pronto prima di eseguire script
+document.addEventListener("DOMContentLoaded", function() {
 
-    // Array di nuove recensioni (esempio)
-    const newReviews = [
-        {
-            title: "Recensione di Carla22 - Pizza deliziosa!",
-            rating: "★★★★★",
-            content: "L'impasto era croccante e leggero, il condimento fresco e gustoso. Servizio impeccabile!"
-        },
-        {
-            title: "Recensione di Luca89 - Buona esperienza",
-            rating: "★★★★☆",
-            content: "Ottima pizza, ma il servizio può essere migliorato. Comunque soddisfatto!"
-        }
-    ];
+    // Abilita il comportamento del carosello Bootstrap
+    var carouselElement = document.querySelector('#carouselExampleIndicators');
+    if (carouselElement) {
+        var carousel = new bootstrap.Carousel(carouselElement, {
+            interval: 5000, // Cambia slide ogni 5 secondi
+            pause: 'hover' // Pausa quando il mouse è sopra il carosello
+        });
+    }
 
-    // Ciclo per creare le nuove recensioni
-    newReviews.forEach(review => {
-        const reviewCard = document.createElement('div');
-        reviewCard.classList.add('card', 'mb-3');
-        reviewCard.style.cursor = 'pointer';
-        reviewCard.setAttribute('data-bs-toggle', 'modal');
-        reviewCard.setAttribute('data-bs-target', '#replyModal');
-        
-        reviewCard.innerHTML = `
-            <div class="card-body">
-                <h5 class="card-title">${review.title}</h5>
-                <div class="d-flex align-items-center mb-2">
-                    <span class="text-warning me-2">${review.rating}</span>
-                    <span class="text-muted">5.0 su 5</span>
-                </div>
-                <p class="card-text">${review.content}</p>
-            </div>
-        `;
-        
-        reviewsContainer.appendChild(reviewCard);
-    });
+    // Prenotazione - Modal
+    var prenotaModal = document.getElementById('prenotaModal');
+    if (prenotaModal) {
+        prenotaModal.addEventListener('show.bs.modal', function (event) {
+            // Puoi aggiungere qualsiasi logica qui per pre-popolare i campi del modal se necessario
+        });
+    }
 
+    // Risposta alla recensione - Modal
+    var replyModal = document.getElementById('replyModal');
+    if (replyModal) {
+        replyModal.addEventListener('show.bs.modal', function (event) {
+            // Aggiungi logica per pre-popolare il modal con i dettagli della recensione
+        });
+    }
+
+    // Modal per aggiungere una recensione
+    var recensioneModal = document.getElementById('recensioneModal');
+    if (recensioneModal) {
+        recensioneModal.addEventListener('show.bs.modal', function (event) {
+            // Reset dei campi quando si apre il modal
+            document.getElementById('nomeUtente').value = '';
+            document.getElementById('titoloRecensione').value = '';
+            document.getElementById('testoRecensione').value = '';
+        });
+    }
+
+    // Funzione per caricare più recensioni (puoi implementare una chiamata Ajax qui)
+    var loadMoreReviewsButton = document.getElementById('loadMoreReviews');
+    if (loadMoreReviewsButton) {
+        loadMoreReviewsButton.addEventListener('click', function() {
+            // Esempio: carica altre recensioni tramite Ajax o mostra altre recensioni già caricate
+            alert('Altre recensioni caricate!');
+        });
+    }
+
+    // Formato minimo per la data di prenotazione (imposta la data odierna come minimo)
+    var dataPrenotazioneInput = document.getElementById('dataPrenotazione');
+    if (dataPrenotazioneInput) {
+        var today = new Date().toISOString().split('T')[0];
+        dataPrenotazioneInput.setAttribute('min', today);
+    }
+
+    // Gestione del form di prenotazione
+    var formPrenotazione = document.querySelector('#prenotaModal form');
+    if (formPrenotazione) {
+        formPrenotazione.addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Logica di invio della prenotazione
+            alert('Prenotazione inviata!');
+        });
+    }
+
+    // Gestione del form per inviare recensioni
+    var formRecensione = document.querySelector('#recensioneModal form');
+    if (formRecensione) {
+        formRecensione.addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Logica di invio della recensione
+            alert('Recensione inviata!');
+        });
+    }
 });
 
-    // Ottieni i riferimenti ai campi originali
-    const nomeRistoranteInput = document.getElementById('nomeRistoranteInput');
-    const menuPDFInput = document.getElementById('menuPDFInput');
-    // Ottieni i riferimenti ai campi nel modal
-    const nomeRistoranteModalInput = document.getElementById('nomeRistoranteModalInput');
-    const menuPDFModalInput = document.getElementById('menuPDFModalInput');
-    // Ottieni il riferimento al form del modal
-    const modificaForm = document.getElementById('modificaForm');
-    // Ottieni il riferimento al modal
-    const modificaModal = new bootstrap.Modal(document.getElementById('modificaModal'));
 
-    // Aggiungi un evento al pulsante "Modifica"
-    document.getElementById('modificaButton').addEventListener('click', function() {
-        // Popola i campi nel modal con i valori attuali
-        nomeRistoranteModalInput.value = nomeRistoranteInput.value;
-        // Popola altri campi se necessario
-        // Apri il modal
-        modificaModal.show();
-    });
-
-    
