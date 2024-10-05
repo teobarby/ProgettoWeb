@@ -21,6 +21,11 @@
                             </div>
                             <div class="d-grid gap-2 center-container">
                                 <button class="btn btn-primary" type="submit">Accedi</button>
+                                <% if (message) { %>
+                                    <div class="alert alert-danger mb-0 mt-2">
+                                      <%= message %>
+                                    </div>
+                                  <% } %>
                             </div>
                         </form>
                     </div>

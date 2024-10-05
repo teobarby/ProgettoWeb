@@ -1,3 +1,4 @@
 {
-    "secret": "la_tua_chiave_segreta"
-}
+    "secret": "il_tuo_segreto",
+    "jwtSecret": "il_tuo_segreto_jwt"
+  }

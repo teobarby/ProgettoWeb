@@ -16,7 +16,6 @@ const profiloRouter = require('./routes/profilo');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-// const db = require('./db');
 const DataBase = require("./db"); // db.js
 const db = new DataBase();
 const session = require('express-session');
@@ -37,6 +36,58 @@ app.use(session({
     resave: true,
     saveUninitialized: false
 }));
+
+app.use(passport.session());
+
+passport.use(new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password'
+}, async function (username, password, done) {
+    try {
+        // Trova l'utente nel database
+        const user = await db.trovaUtenteUsername(username);
+
+        // Se l'utente non esiste
+        if (!user) {
+            console.log("Utente non trovato:", username);
+            return done(null, false, { message: 'Username o password errati' });
+        }
+
+        // Confronta la password inserita con quella hashata
+        bcrypt.compare(password, user.password, function (err, result) {
+            if (err) {
+                console.error("Errore durante il confronto delle password:", err);
+                return done(err);
+            }
+
+            // Se la password coincide
+            if (result) {
+                console.log("Login riuscito per utente:", username);
+                return done(null, user);
+            } else {
+                console.log("Password errata per utente:", username);
+                return done(null, false, { message: 'Username o password errati' });
+            }
+        });
+    } catch (err) {
+        // Log errore nel trovare l'utente
+        console.error("Errore nel trovare l'utente:", err);
+        return done(err);
+    }
+}));
+
+
+passport.serializeUser(function(user, cb) {
+    process.nextTick(function() {
+      cb(null, { id: user.id, username: user.username });
+    });
+  });
+  
+  passport.deserializeUser(function(user, cb) {
+    process.nextTick(function() {
+      return cb(null, user);
+    });
+  });
 
 
 app.use('/', indexRouter);

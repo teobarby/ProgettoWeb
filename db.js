@@ -22,6 +22,21 @@ class DataBase {
         });
     }
 
+    trovaUtenteUsername(username) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT *
+                         FROM Registrati
+                         WHERE username = ?`;
+
+            this.open();
+            db.get(sql, [username], (err, row) => {
+                if (err) throw reject(err);
+                resolve(row);
+            });
+            this.close();
+        });
+    }
+
 
     getHomePage() {
         return new Promise((resolve, reject) => {

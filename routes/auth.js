@@ -6,41 +6,48 @@ var router = express.Router();
 const DataBase = require("../db"); // db.js
 const db = new DataBase();
 
-passport.use(new LocalStrategy(function verify(username, password, cb) {
-  db.get('SELECT * FROM Registrati WHERE username = ?', [ username ], function(err, row) {
-    if (err) { return cb(err); }
-    if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
-    
-    crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
-      if (err) { return cb(err); }
-      if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
-        return cb(null, false, { message: 'Incorrect username or password.' });
-      }
-      return cb(null, row);
-    });
-  });
-}));
+const { generateToken } = require('../public/javascripts/tokenGenerator');
 
-passport.serializeUser(function(user, cb) {
-  process.nextTick(function() {
-    cb(null, { id: user.id, username: user.username });
-  });
-});
-
-passport.deserializeUser(function(user, cb) {
-  process.nextTick(function() {
-    return cb(null, user);
-  });
-});
 
 /* GET home page. */
 router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Auth' });
+  const errorMessage = req.session.errorMessage;
+  
+  // Cancella il messaggio di errore dopo averlo usato
+  req.session.errorMessage = null;
+  
+  // Passa il messaggio alla view
+  res.render('login', { title: 'Auth', message: errorMessage });
 });
 
-router.post('/login/password', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login'
-}));
+router.post('/login/password', function (req, res, next) {
+  passport.authenticate('local', function (err, user, info) {
+    if (err) {
+      console.error("Error during authentication:", err);
+      return next(err);
+    }
+
+    if (!user) {
+      console.log("User not found:", info ? info.message : 'No additional info available');
+      req.session.errorMessage = 'Username o Password errati.';
+      return res.redirect('/login');
+    }
+
+    req.login(user, async function (err) {
+
+      try {
+        if (err) {
+          console.error("Error during login:", err);
+          return next(err);
+        }
+
+        await db.addTokenToUser(user.id, generateToken(user.id));
+        return res.redirect('/');
+      } catch (err) {
+        console.error("Error while adding token to user:", err);
+      }
+    });
+  })(req, res, next);
+});
 
 module.exports = router;
