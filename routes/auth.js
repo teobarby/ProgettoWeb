@@ -6,8 +6,6 @@ var router = express.Router();
 const DataBase = require("../db"); // db.js
 const db = new DataBase();
 
-const { generateToken } = require('../public/javascripts/tokenGenerator');
-
 
 /* GET home page. */
 router.get('/login', function(req, res, next) {
@@ -17,7 +15,7 @@ router.get('/login', function(req, res, next) {
   req.session.errorMessage = null;
   
   // Passa il messaggio alla view
-  res.render('login', { title: 'Auth', message: errorMessage });
+  res.render('login', { title: 'Auth', message: errorMessage, username: req.session.username });
 });
 
 router.post('/login/password', function (req, res, next) {
@@ -34,20 +32,25 @@ router.post('/login/password', function (req, res, next) {
     }
 
     req.login(user, async function (err) {
-
-      try {
-        if (err) {
-          console.error("Error during login:", err);
-          return next(err);
-        }
-
-        await db.addTokenToUser(user.id, generateToken(user.id));
-        return res.redirect('/');
-      } catch (err) {
-        console.error("Error while adding token to user:", err);
+      if (err) {
+        console.error("Error during login:", err);
+        return next(err);
       }
+
+      // Imposta il nome dell'utente nella sessione
+      req.session.username = user.username; // Assicurati che 'username' sia il campo corretto
+
+      return res.redirect('/');
     });
   })(req, res, next);
+});
+
+
+router.post('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
 });
 
 module.exports = router;

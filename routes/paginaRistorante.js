@@ -15,7 +15,7 @@ router.get('/ristorante/:id', async function(req, res, next) {
       return res.status(404).send('Ristorante non trovato'); // Se non esiste, ritorna un 404
     }
 
-    return res.render('paginaRistorante', { title: 'Ristorante', ristorante });
+    return res.render('paginaRistorante', { title: 'Ristorante', ristorante, username: req.session.username });
 
   } catch (err) {
     console.log("Errore nel caricamento del ristorante:", err);
