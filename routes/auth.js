@@ -45,12 +45,15 @@ router.post('/login/password', function (req, res, next) {
   })(req, res, next);
 });
 
-
 router.post('/logout', function(req, res, next) {
   req.logout(function(err) {
     if (err) { return next(err); }
     res.redirect('/');
   });
+});
+
+router.get('/signup', function(req, res, next) {
+  res.render('signup');
 });
 
 module.exports = router;

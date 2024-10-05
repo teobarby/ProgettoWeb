@@ -38,7 +38,12 @@
                         <li><a class="dropdown-item" href="/Profilo">Profilo</a></li>
                         <li><a class="dropdown-item" href="/Impostazioni">Impostazioni</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/Logout">Logout</a></li>
+                        <li>
+                            <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                              <input type="hidden" name="_csrf" value="{{csrfToken}}"> <!-- Aggiungi questo se usi CSRF token -->
+                            </form>
+                            <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                          </li>
                     </ul>
                 <% } else { %>
                     <a class="btn btn-outline-dark ms-4"  href="/login">Accedi</a>

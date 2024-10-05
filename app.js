@@ -89,6 +89,13 @@ passport.serializeUser(function(user, cb) {
     });
   });
 
+  app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '-1');
+    next();
+  });
+  
 
 app.use('/', indexRouter);
 app.use('/', authRouter);
