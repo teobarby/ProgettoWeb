@@ -1,15 +1,18 @@
-
-const {text} = require("express");
 const sqlite3 = require('sqlite3').verbose();
-let db;
 
 class DataBase {
+    constructor() {
+        this.db = null; // Inizializza db come null
+    }
+
     /**
      * Open connection to database.
      */
     open() {
-        db = new sqlite3.Database('./database/GustoInRete.db', sqlite3.OPEN_READWRITE, (err) => {
-            if (err) console.error('Error during database opening:', err.message);
+        this.db = new sqlite3.Database('./database/GustoInRete.db', sqlite3.OPEN_READWRITE, (err) => {
+            if (err) {
+                console.error('Error during database opening:', err.message);
+            }
         });
     }
 
@@ -17,8 +20,28 @@ class DataBase {
      * Close connection to database.
      */
     close() {
-        db.close((err) => {
-            if (err) throw console.error(err.message);
+        if (this.db) {
+            this.db.close((err) => {
+                if (err) {
+                    console.error(err.message);
+                }
+            });
+        }
+    }
+
+    run(sql, params = []) {
+        return new Promise((resolve, reject) => {
+            this.open(); // Apri la connessione al database
+            this.db.run(sql, params, function(err) {
+                const lastID = this.lastID; // Ottieni l'ID dell'ultima riga inserita
+                // Chiudi la connessione dopo l'operazione
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(lastID); // Risolvi la promessa con l'ID dell'ultima riga inserita
+                }
+                this.close(); // Chiudi la connessione
+            }.bind(this)); // Usa bind per mantenere il contesto di this
         });
     }
 
@@ -29,14 +52,13 @@ class DataBase {
                          WHERE username = ?`;
 
             this.open();
-            db.get(sql, [username], (err, row) => {
-                if (err) throw reject(err);
+            this.db.get(sql, [username], (err, row) => {
+                if (err) return reject(err);
                 resolve(row);
             });
             this.close();
         });
     }
-
 
     getHomePage() {
         return new Promise((resolve, reject) => {
@@ -45,14 +67,13 @@ class DataBase {
                         LEFT JOIN Recensioni ON Ristoranti.id = Recensioni.ristorante 
                         GROUP BY Ristoranti.id`;
             this.open();
-            db.all(sql, (err, row) => {
-                if (err) reject(err);
-                else resolve(row);
+            this.db.all(sql, (err, row) => {
+                if (err) return reject(err);
+                resolve(row);
             });
             this.close();
         });
-    };
-
+    }
 
     getInfoRistorante(id) {
         return new Promise((resolve, reject) => {
@@ -82,11 +103,9 @@ class DataBase {
                 Ristoranti.id = ?
             ORDER BY 
                 Recensioni.dataora DESC;`;
-    
+
             this.open();
-    
-            // Passa l'ID come parametro per la query
-            db.all(sql, [id], (err, rows) => {
+            this.db.all(sql, [id], (err, rows) => {
                 if (err) {
                     console.log("Errore nella query:", err);
                     reject(err);
@@ -95,16 +114,14 @@ class DataBase {
                     resolve(rows);
                 }
             });
-    
             this.close();
         });
     }
 
-
     get(sql, params = []) {
         return new Promise((resolve, reject) => {
             this.open();
-            db.get(sql, params, (err, row) => {
+            this.db.get(sql, params, (err, row) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -114,7 +131,6 @@ class DataBase {
             });
         });
     }
-
 }
 
 module.exports = DataBase;

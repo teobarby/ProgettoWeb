@@ -83,12 +83,15 @@ passport.serializeUser(function(user, cb) {
     });
   });
   
-  passport.deserializeUser(function(user, cb) {
-    process.nextTick(function() {
-      return cb(null, user);
-    });
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await db.get('SELECT * FROM Registrati WHERE id = ?', [id]);
+      done(null, user);
+    } catch (err) {
+      done(err);
+    }
   });
-
+  
   app.use((req, res, next) => {
     res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     res.set('Pragma', 'no-cache');
