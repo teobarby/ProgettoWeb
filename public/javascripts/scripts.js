@@ -17,6 +17,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    var eliminaModal = document.getElementById('eliminaModal');
+    if (eliminaModal) {
+        eliminaModal.addEventListener('show.bs.modal', function (event) {
+            // Aggiungi logica per pre-popolare il modal con i dettagli della recensione
+        });
+    }
+
     // Modal per aggiungere una recensione
     var recensioneModal = document.getElementById('recensioneModal');
     if (recensioneModal) {
@@ -64,5 +71,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
 
 

@@ -10,6 +10,18 @@
   text-align: center;
 }
 
+#eliminaButton:hover {
+  background-color: red;
+  border-color: red;
+  color: white;
+}
+
+#eliminaConfermaButton:hover {
+  background-color: red;
+  border-color: red;
+  color: white;
+}
+
  .restaurant-info p {
   color: #333; /* Colore del testo per renderlo più leggibile */
   font-size: 18px; /* Dimensione del testo */

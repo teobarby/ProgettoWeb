@@ -39,6 +39,10 @@ router.post('/login/password', function (req, res, next) {
 
       // Imposta il nome dell'utente nella sessione
       req.session.username = user.username; // Assicurati che 'username' sia il campo corretto
+      req.session.nome = user.nome;
+      req.session.cognome = user.cognome;
+      req.session.email = user.email;
+      req.session.cellulare = user.cellulare;
 
       return res.redirect('/');
     });
