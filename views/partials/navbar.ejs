@@ -31,12 +31,11 @@
                 <!-- Pulsante Accedi -->
                 <li class="nav-item dropdown">
                 <% if (username) { %>
-                    <a class="btn ms-3 dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="btn dropdown-toggle ms-3" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <%= username %>
                     </a>
                     <ul class="dropdown-menu mr-3" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/Profilo">Profilo</a></li>
-                        <li><a class="dropdown-item" href="/Impostazioni">Impostazioni</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form id="logout-form" action="/logout" method="POST" style="display: none;">

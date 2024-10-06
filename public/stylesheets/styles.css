@@ -16,7 +16,7 @@
   color: white;
 }
 
-#eliminaConfermaButton:hover {
+#confirmDeleteButton:hover {
   background-color: red;
   border-color: red;
   color: white;

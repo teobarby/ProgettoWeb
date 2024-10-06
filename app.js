@@ -96,8 +96,31 @@ passport.serializeUser(function(user, cb) {
     next();
   });
 
+  
+  app.delete('/delete-user/:username', (req, res) => {
+    const username = req.params.username;
+    console.log('Eliminazione richiesta per utente:', username);
 
+    const db = new DataBase();
 
+    db.deleteUserByUsername(username)
+        .then(result => {
+            // Distruggi la sessione dell'utente
+            req.session.destroy(err => {
+                if (err) {
+                    console.error('Errore durante il logout:', err);
+                    return res.status(500).json({ message: 'Errore durante il logout.' });
+                }
+
+                // Rispondi con un messaggio di successo
+                res.status(200).json({ message: `Utente ${username} eliminato con successo.`, loggedOut: true });
+            });
+        })
+        .catch(err => {
+            console.error('Errore durante l\'eliminazione dell\'utente:', err);
+            res.status(500).json({ message: 'Errore durante l\'eliminazione dell\'utente.' });
+        });
+});
 
 app.use('/', indexRouter);
 app.use('/', authRouter);

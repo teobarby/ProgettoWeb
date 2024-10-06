@@ -45,6 +45,27 @@ class DataBase {
         });
     }
 
+    deleteUserByUsername(username) {
+        return new Promise((resolve, reject) => {
+            const sql = `DELETE FROM Registrati WHERE username = ?`;
+    
+            this.open();
+            this.db.run(sql, [username], function(err) {
+                if (err) {
+                    console.error("Errore durante l'eliminazione dell'utente:", err.message);
+                    reject(err);
+                } else if (this.changes === 0) {
+                    // Nessuna riga eliminata, l'utente non esiste
+                    reject(new Error('Utente non trovato'));
+                } else {
+                    console.log(`Utente ${username} eliminato.`);
+                    resolve({ message: `Utente ${username} eliminato con successo.` });
+                }
+            });
+            this.close();
+        });
+    }
+
     trovaUtenteUsername(username) {
         return new Promise((resolve, reject) => {
             const sql = `SELECT *
