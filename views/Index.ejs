@@ -15,7 +15,22 @@
         </header>
 
         <% if (ristoranti.length === 0) { %>
-            <p>Nessun ristorante trovato per la tua ricerca.</p>
+            <section class="py-5">
+                <div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+                    <div class="card shadow-lg p-4" style="max-width: 600px; background-color: white; border-radius: 10px;">
+                        <div class="text-center">
+                            <!-- Faccina triste -->
+                            <div class="display-1 text-muted mb-3">
+                                😔
+                            </div>
+                            <h2 class="display-6 fw-bold text-black mb-3">Nessun ristorante trovato</h2>
+                            <p class="lead text-muted mb-1">Siamo spiacenti, ma non ci sono ristoranti che corrispondono alla tua ricerca.</p>
+                            <p class="lead text-muted">Prova a cercare con altre parole chiave o esplora altre categorie.</p>
+                            <a href="/" class="btn btn-outline-dark btn-lg mt-4">Torna alla home</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
         <% } else { %>
         <!-- Section -->
         <section class="py-5">
