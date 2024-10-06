@@ -152,6 +152,47 @@ class DataBase {
             });
         });
     }
+
+    searchRestaurants(keyword) {
+        return new Promise((resolve, reject) => {
+            const sql = `
+                SELECT R.*, 
+                       (SELECT AVG(valutazione) 
+                        FROM Recensioni 
+                        WHERE ristorante = R.id) AS valutazione_media 
+                FROM Ristoranti AS R 
+                WHERE R.nome LIKE ? 
+                   OR R.paroleChiave LIKE ? 
+                   OR R.categoria LIKE ? 
+                   OR R.città LIKE ? 
+                   OR R.telefono LIKE ?;
+            `;
+    
+            // Controlla se la keyword è vuota
+            if (keyword.trim() === '') {
+                return resolve([]); // Restituisci un array vuoto se non ci sono parole chiave
+            }
+    
+            const likeKeyword = `%${keyword}%`;
+            const params = [likeKeyword, likeKeyword, likeKeyword, likeKeyword, likeKeyword];
+    
+            console.log("Eseguendo la query:", sql); // Log della query
+            console.log("Parametri:", params); // Log dei parametri
+    
+            this.open();
+            this.db.all(sql, params, (err, rows) => {
+                if (err) {
+                    console.log("Errore nella query:", err);
+                    reject(err);
+                } else {
+                    console.log("Ristoranti trovati:", rows);
+                    resolve(rows);
+                }
+                this.close();
+            });
+        });
+    }
+    
 }
 
 module.exports = DataBase;

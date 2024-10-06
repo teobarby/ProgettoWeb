@@ -1,10 +1,6 @@
 var express = require('express');
 var passport = require('passport');
-var LocalStrategy = require('passport-local');
-var crypto = require('crypto');
 var router = express.Router();
-const DataBase = require("../db"); // db.js
-const db = new DataBase();
 
 
 /* GET home page. */

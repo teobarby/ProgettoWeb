@@ -16,4 +16,19 @@ router.get('/', async function(req, res, next) {
   }
 });
 
+router.get('/cerca', async (req, res) => {
+  const keyword = req.query.keyword || '';
+  console.log(`Keyword di ricerca: ${keyword}`); // Log della keyword
+  const title = `Risultati di ricerca per "${keyword}"`;
+  const username = req.session.username || null;
+  try {
+      const ristoranti = await db.searchRestaurants(keyword.trim());
+      console.log(`Ristoranti trovati: ${JSON.stringify(ristoranti)}`); // Log dei ristoranti trovati
+      res.render('index', { ristoranti, title, username });
+  } catch (error) {
+      console.error('Errore durante la ricerca:', error);
+      res.status(500).send('Errore durante la ricerca');
+  }
+});
+
 module.exports = router;

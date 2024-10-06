@@ -25,9 +25,13 @@
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ms-lg-4">
                 <!-- Input per la barra di ricerca -->
-                <input class="form-control me-2 " type="search" placeholder="Cerca" aria-label="Search">
-                <!-- Bottone per avviare la ricerca -->
-                <button class="btn btn-outline-dark " type="submit"><i class="bi bi-search"></i></button>
+                            <!-- Form per la barra di ricerca -->
+                <form class="d-flex mb-0" action="/cerca" method="GET">
+                    <!-- Input per la barra di ricerca -->
+                    <input type="text" name="keyword" class="form-control me-2" placeholder="Cerca ristorante..." required>
+                    <!-- Bottone per avviare la ricerca -->
+                    <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+                </form>
                 <!-- Pulsante Accedi -->
                 <li class="nav-item dropdown">
                 <% if (username) { %>
