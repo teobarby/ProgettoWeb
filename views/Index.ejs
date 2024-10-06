@@ -54,11 +54,15 @@
                                         <h5 class="fw-bolder"><%= Ristoranti.nome %></h5> <!-- Nome Ristoranti -->
                                         <!-- Valutazioni Clienti-->
                                         <div class="d-flex justify-content-center small text-warning mb-2">
-                                            <% for (let i = 0; i < Math.round(Ristoranti.valutazione_media); i++) { %>
-                                                <a href="" class="star-link"><i class="bi bi-star-fill"></i></a>
-                                            <% } %>
-                                            <% for (let i = 0; i < 5 - Math.round(Ristoranti.valutazione_media); i++) { %>
-                                                <a href="" class="star-link"><i class="bi bi-star"></i></a>
+                                            <% if (Ristoranti.valutazione_media && Ristoranti.valutazione_media > 0) { %>
+                                                <!-- Stelle piene -->
+                                                <% for (let i = 0; i < Math.round(Ristoranti.valutazione_media); i++) { %>
+                                                    <a href="#" class="star-link"><i class="bi bi-star-fill"></i></a>
+                                                <% } %>
+                                                <!-- Stelle vuote per completare a 5 -->
+                                                <% for (let i = 0; i < 5 - Math.round(Ristoranti.valutazione_media); i++) { %>
+                                                    <a href="#" class="star-link"><i class="bi bi-star"></i></a>
+                                                <% } %>
                                             <% } %>
                                         </div>
                                         <!-- Parole chiave -->
