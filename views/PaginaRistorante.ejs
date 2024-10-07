@@ -200,118 +200,47 @@
         </div>
 
         <!-- Modal per recensioni-->
-<div class="modal fade" id="recensioneModal" tabindex="-1" aria-labelledby="recensioneModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="recensioneModalLabel">Lascia una recensione</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formRecensione" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="valutazioneRecensione" class="form-label">Valutazione</label>
-                        <select class="form-select" id="valutazioneRecensione" required>
-                            <option value="5">★★★★★</option>
-                            <option value="4">★★★★☆</option>
-                            <option value="3">★★★☆☆</option>
-                            <option value="2">★★☆☆☆</option>
-                            <option value="1">★☆☆☆☆</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="immagineRecensione" class="form-label">Aggiungi un'immagine</label>
-                        <input class="form-control" type="file" id="immagineRecensione" accept="image/*">
-                    </div>
-                    <div class="mb-3">
-                        <label for="nomeUtente" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="nomeUtente" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="titoloRecensione" class="form-label">Titolo</label>
-                        <input type="text" class="form-control" id="titoloRecensione" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="testoRecensione" class="form-label">Recensione</label>
-                        <textarea class="form-control" id="testoRecensione" rows="3" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Invia Recensione</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-        <div class="modal fade" id="informazioniRistoranteModal" tabindex="-1" aria-labelledby="informazioniRistoranteModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+        <div class="modal fade" id="recensioneModal" tabindex="-1" aria-labelledby="recensioneModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="informazioniRistoranteModalLabel">Informazioni sul ristorante</h5>
+                        <h5 class="modal-title" id="recensioneModalLabel">Lascia una recensione</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="formRecensione" enctype="multipart/form-data">
                             <div class="mb-3">
-                                <label for="nomeRistoranteInput" class="form-label">Nome del ristorante</label>
-                                <input type="text" class="form-control" id="nomeRistoranteInput" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="menuPDFInput" class="form-label">Immagine di copertina (JPEG, JPJ)</label>
-                                <input type="file" class="form-control" id="menuPDFInput">
-                                <small class="text-muted">Inserisci l'Immagine di copertina del tuo ristorante</small>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Categoria</label>
-                                <select class="form-select" aria-label="Seleziona categoria" required>
-                                    <option selected disabled>Seleziona categoria...</option>
-                                    <!-- Opzioni per le categorie -->
-                                    <option value="Pizzerie">Pizzeria</option>
-                                    <option value="Ristoranti">Ristorante</option>
-                                    <option value="Cucina Orientale">Cucina orientale</option>
-                                    <option value="Bar">Bar</option>
-                                    <option value="Paninoteche">Paninoteca</option>
-                                    <option value="Gelaterie">Gelateria</option>
-                                    <option value="Rosticcerie">Rosticceria</option>
-                                    <option value="Caffetterie">Caffetteria</option>
-                                    <option value="Fast Food">Fast food</option>
-                                    <option value="Trattorie">Trattoria</option>
-                                    <option value="Trattorie">Altro</option>
+                                <label for="valutazioneRecensione" class="form-label">Valutazione</label>
+                                <select class="form-select" id="valutazioneRecensione" required>
+                                    <option value="5">★★★★★</option>
+                                    <option value="4">★★★★☆</option>
+                                    <option value="3">★★★☆☆</option>
+                                    <option value="2">★★☆☆☆</option>
+                                    <option value="1">★☆☆☆☆</option>
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="indirizzoInput" class="form-label">Indirizzo</label>
-                                <input type="text" class="form-control" id="indirizzoInput" required>
+                                <label for="immagineRecensione" class="form-label">Aggiungi un'immagine</label>
+                                <input class="form-control" type="file" id="immagineRecensione" accept="image/*">
                             </div>
                             <div class="mb-3">
-                                <label for="paroleChiaveInput" class="form-label">Parole chiave</label>
-                                <input type="text" class="form-control" id="paroleChiaveInput" required>
+                                <label for="nomeUtente" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nomeUtente" required>
                             </div>
                             <div class="mb-3">
-                                <label for="descrizioneRistoranteInput" class="form-label">Descrizione</label>
-                                <textarea class="form-control" id="descrizioneRistoranteInput" rows="3" required></textarea>
+                                <label for="titoloRecensione" class="form-label">Titolo</label>
+                                <input type="text" class="form-control" id="titoloRecensione" required>
                             </div>
                             <div class="mb-3">
-                                <label for="orariAperturaInput" class="form-label">Orari di apertura</label>
-                                <input type="text" class="form-control" id="orariAperturaInput">
+                                <label for="testoRecensione" class="form-label">Recensione</label>
+                                <textarea class="form-control" id="testoRecensione" rows="3" required></textarea>
                             </div>
-                            <div class="mb-3">
-                                <label for="menuPDFInput" class="form-label">Menu (PDF)</label>
-                                <input type="file" class="form-control" id="menuPDFInput">
-                                <small class="text-muted">Carica il menu in formato PDF</small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="promoAttiveInput" class="form-label">Promo attive</label>
-                                <textarea class="form-control" id="promoAttiveInput" required></textarea>
-                            </div>
-                            <!-- Utilizza text-center per centrare il pulsante "Invia Informazioni" -->
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Aggiungi ristorante</button>
-                            </div>
+                            <button type="submit" class="btn btn-primary">Invia Recensione</button>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>   
     </body>    
 </html>
 
