@@ -4,6 +4,9 @@ var router = express.Router();
 const DataBase = require("../db"); // db.js
 const db = new DataBase();
 
+const multer = require('multer');
+const upload = multer({ dest: '/Users/matteobarbieri/Documents/Uni/ProgettoWeb/uploads' });
+
 /* GET home page. */
 router.get('/profilo', async (req, res, next) => {
   // Verifica se l'utente è loggato
@@ -44,6 +47,75 @@ router.get('/inserisci-ristorante', (req, res) => {
           return res.status(500).send('Errore durante il recupero delle categorie');
       }
       res.render('inserisci-ristorante', { categorie });
+  });
+});
+
+ // Cartella di destinazione per i file caricati
+
+ router.post('/inserisci-ristorante', upload.fields([
+  { name: 'immagineCopertinaInput' },
+  { name: 'menuPDFInput' }
+]), (req, res) => {
+
+  // Verifica se l'utente è loggato
+  if (!req.session || !req.session.username) {
+      return res.status(403).send('Utente non autorizzato');
+  }
+
+  // Recupera i dati dal corpo della richiesta
+  const {
+      nomeRistorante, // Aggiornato
+      categoria,
+      città, // Aggiornato
+      indirizzo, // Aggiornato
+      telefono, // Aggiornato
+      paroleChiave, // Aggiornato
+      descrizione, // Aggiornato
+      orarioAperturaPranzo,
+      orarioChiusuraPranzo,
+      orarioAperturaCena,
+      orarioChiusuraCena,
+      promoAttive // Aggiornato
+  } = req.body;
+
+  // Ottieni i percorsi dei file caricati
+  const immagineCopertina = req.files['immagineCopertinaInput'][0].path;
+  const menuPDF = req.files['menuPDFInput'] ? req.files['menuPDFInput'][0].path : null;
+
+  // Ottieni il nome dell'utente dalla sessione
+  const proprietario = req.session.username;
+
+  // Genera la stringa degli orari
+  let orari = [];
+  if (orarioAperturaPranzo && orarioChiusuraPranzo) {
+      orari.push(`${orarioAperturaPranzo}-${orarioChiusuraPranzo}`);
+  }
+  if (orarioAperturaCena && orarioChiusuraCena) {
+      orari.push(`${orarioAperturaCena}-${orarioChiusuraCena}`);
+  }
+  const orariString = orari.length > 0 ? orari.join(', ') : '';
+
+  // Aggiungi i dati al database
+  db.addRistorante({
+      nome: nomeRistorante,
+      immagine: immagineCopertina,
+      categoria,
+      città,
+      indirizzo,
+      telefono,
+      paroleChiave,
+      descrizione,
+      orari: orariString,
+      menuPDF,
+      promoAttive,
+      proprietario
+  })
+  .then(() => {
+      res.redirect('/'); // Reindirizza a una pagina di successo
+  })
+  .catch(err => {
+      console.error(err);
+      res.status(500).send('Errore durante l\'inserimento del ristorante');
   });
 });
 

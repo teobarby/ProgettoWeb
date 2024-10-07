@@ -209,6 +209,24 @@ class DataBase {
         });
     }
     
+    addRistorante({ nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, città, telefono }) {
+        return new Promise((resolve, reject) => {
+
+            console.log({
+                nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, città, telefono
+            });
+
+            const sql = `INSERT INTO Ristoranti (nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, città, telefono) 
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+            this.open();
+            this.db.run(sql, [nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, città, telefono], function (err) {
+                if (err) return reject(err);
+                resolve(this.lastID); // Restituisce l'ID dell'ultimo ristorante inserito
+            });
+            this.close();
+        });
+    }
 }
 
 module.exports = DataBase;
