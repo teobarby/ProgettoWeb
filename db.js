@@ -81,6 +81,22 @@ class DataBase {
         });
     }
 
+   
+    getCategorie() {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT *
+                         FROM Categorie`;
+
+            this.open();
+            this.db.all(sql, (err, row) => {
+                if (err) return reject(err);
+                resolve(row);
+            });
+            this.close();
+        });
+    }
+    
+
     getHomePage() {
         return new Promise((resolve, reject) => {
             const sql = `SELECT Ristoranti.*, AVG(Recensioni.valutazione) AS valutazione_media 

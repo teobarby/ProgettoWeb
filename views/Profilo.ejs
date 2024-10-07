@@ -91,26 +91,17 @@
                                 <input type="text" class="form-control" id="nomeRistoranteInput" required>
                             </div>
                             <div class="mb-3">
-                                <label for="menuPDFInput" class="form-label">Immagine di copertina (JPEG, JPJ)</label>
-                                <input type="file" class="form-control" id="menuPDFInput">
-                                <small class="text-muted">Inserisci l'Immagine di copertina del tuo ristorante</small>
+                                <label for="immagineCopertinaInput" class="form-label">Immagine di copertina (JPEG, JPG)</label>
+                                <input type="file" class="form-control" id="immagineCopertinaInput" accept=".jpg,.jpeg">
+                                <small class="text-muted">Inserisci l'immagine di copertina del tuo ristorante</small>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Categoria</label>
+                                <label for="categoria" class="form-label">Categoria</label>
                                 <select class="form-select" aria-label="Seleziona categoria" required>
                                     <option selected disabled>Seleziona categoria...</option>
-                                    <!-- Opzioni per le categorie -->
-                                    <option value="Pizzerie">Pizzeria</option>
-                                    <option value="Ristoranti">Ristorante</option>
-                                    <option value="Cucina Orientale">Cucina orientale</option>
-                                    <option value="Bar">Bar</option>
-                                    <option value="Paninoteche">Paninoteca</option>
-                                    <option value="Gelaterie">Gelateria</option>
-                                    <option value="Rosticcerie">Rosticceria</option>
-                                    <option value="Caffetterie">Caffetteria</option>
-                                    <option value="Fast Food">Fast food</option>
-                                    <option value="Trattorie">Trattoria</option>
-                                    <option value="Trattorie">Altro</option>
+                                    <% categorie.forEach(categoria => { %> 
+                                        <option value="<%= categoria.nome %>"><%= categoria.nome %></option>
+                                    <% }) %>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -123,7 +114,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="telefonoInput" class="form-label">Telefono</label>
-                                <input class="form-control" id="telefonoInput" equired>
+                                <input type="number" class="form-control" id="telefonoInput" required>
                             </div>
                             <div class="mb-3">
                                 <label for="paroleChiaveInput" class="form-label">Parole chiave</label>
@@ -134,19 +125,47 @@
                                 <textarea class="form-control" id="descrizioneRistoranteInput" rows="3" required></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="orariAperturaInput" class="form-label">Orari di apertura</label>
-                                <input type="text" class="form-control" id="orariAperturaInput">
-                            </div>
+                                
+                                <!-- Orari di Pranzo e Cena -->
+                                <div class="card p-3 mb-4 shadow-sm">
+                                    <div class="row mb-3">
+                                        <!-- Apertura Pranzo -->
+                                        <div class="col-md-6 mb-3">
+                                            <label for="orarioAperturaPranzo" class="form-label">Apertura Pranzo</label>
+                                            <input type="time" class="form-control" id="orarioAperturaPranzo" name="orarioAperturaPranzo">
+                                        </div>
+                                        <!-- Chiusura Pranzo -->
+                                        <div class="col-md-6 mb-3">
+                                            <label for="orarioChiusuraPranzo" class="form-label">Chiusura Pranzo</label>
+                                            <input type="time" class="form-control" id="orarioChiusuraPranzo" name="orarioChiusuraPranzo">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <!-- Apertura Cena -->
+                                        <div class="col-md-6 mb-3">
+                                            <label for="orarioAperturaCena" class="form-label">Apertura Cena</label>
+                                            <input type="time" class="form-control" id="orarioAperturaCena" name="orarioAperturaCena">
+                                        </div>
+                                        <!-- Chiusura Cena -->
+                                        <div class="col-md-6 mb-3">
+                                            <label for="orarioChiusuraCena" class="form-label">Chiusura Cena</label>
+                                            <input type="time" class="form-control" id="orarioChiusuraCena" name="orarioChiusuraCena">
+                                        </div>
+                                    </div>
+                                    <small class="text-muted">Se il tuo Ristorante apre una sola volta al giorno, lascia vuoti gli altri campi</small>
+
+                                </div>
+                        
                             <div class="mb-3">
                                 <label for="menuPDFInput" class="form-label">Menu (PDF)</label>
-                                <input type="file" class="form-control" id="menuPDFInput">
+                                <input type="file" class="form-control" id="menuPDFInput" accept=".pdf">
                                 <small class="text-muted">Carica il menu in formato PDF</small>
                             </div>
                             <div class="mb-3">
                                 <label for="promoAttiveInput" class="form-label">Promo attive</label>
                                 <textarea class="form-control" id="promoAttiveInput" required></textarea>
                             </div>
-                            <!-- Utilizza text-center per centrare il pulsante "Invia Informazioni" -->
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Aggiungi ristorante</button>
                             </div>

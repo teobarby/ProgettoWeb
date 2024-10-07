@@ -14,6 +14,8 @@ router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Auth', message: errorMessage, username: req.session.username });
 });
 
+
+
 router.post('/login/password', function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err) {
