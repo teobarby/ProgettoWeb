@@ -20,9 +20,8 @@
                     <% let firstImageLoaded = false; %>  <!-- Variabile per tenere traccia della prima immagine valida -->
                     <% ristorante.forEach((recensione, index) => { %>
                         <% if (recensione.immagine) { %>  <!-- Controlla se immagine non è NULL -->
-                            <div class="carousel-item <%= !firstImageLoaded ? 'active' : '' %>">
-                                <img src="//localhost:3000/<%= recensione.immagine %>" class="d-block w-100" alt="Immagine Recensione">
-                            </div>
+                            <div class="carousel-item <%= !firstImageLoaded ? 'active' : '' %> mb-2">
+                                <img src="/<%= recensione.immagine %>" class="d-block w-100" alt="Immagine Recensione">                            </div>
                             <% firstImageLoaded = true; %>  <!-- Imposta la prima immagine valida come attiva -->
                         <% } %>
                     <% }); %>
@@ -39,7 +38,7 @@
         </div>
 
         
-        <div class="container-fluid mt-3"></div>>
+        <div class="container-fluid mt-4">
             <div class="row" style="margin-right: 40px; margin-left: 40px;" >
                 <div class="col-lg-10 offset-lg-1" >
                     <div class="restaurant-info text-center bg-white p-4 rounded" >
@@ -64,9 +63,9 @@
                         <div class="mb-4 mt-2"> <%= ristorante[0].orari %></div>
         
                         <!-- Pulsanti Menu e Prenota -->
-                        <a href="#" class="btn btn-outline-dark me-3">Scopri il Menu</a>
+                        <a href="<%= ristorante[0].menu %>" class="btn btn-outline-dark me-3" download>Scopri il Menu</a>
                         <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prenotaModal">Prenota</a>
-                    </div>
+                     </div>
         
                     <!-- Sezione promozioni -->
                     <div class="promotions mt-3 bg-white p-4 rounded shadow giallino">
@@ -85,58 +84,52 @@
                     
 
 
-                        <div class="container mt-5 mb-5">
-                            <div class="row">
-                                <!-- Sezione Recensioni -->
-                                <div class="card bg-white p-4">
-                                    <div class="d-flex justify-content-between align-items-center mb-4 ms-1">
-                                        <h4 class="mb-0">Valutazione Media: 
-                                            <span class="text-muted">
-                                                <%= (ristorante[0] && ristorante[0].valutazione_media) || 'N/A' %> su 5
-                                            </span>
-                                        </h4>
-                                        <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#recensioneModal">
-                                            Scrivi una Recensione
-                                        </a>
-                                    </div>
-                        
-                                    <div id="reviewsContainer">
-                                        <!-- Recensioni esistenti -->
-                                        <% if (ristorante.length > 0) { %>
-                                            <% ristorante.forEach(function(recensione, index) { %>
-                                                <div class="card mb-3 recensione-item <%= index >= 4 ? 'd-none' : '' %>" data-bs-toggle="modal" data-bs-target="#replyModal" style="cursor: pointer;">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title small-text">Recensione di <%= recensione.scrittore %> - <%= recensione.titolo || "Recensione" %></h5>
-                                                        <div class="d-flex align-items-center mb-2">
-                                                            <span class="text-warning me-2">
-                                                                <div class="d-flex justify-content-center small text-warning" style="font-size:14px">
-                                                                    <% for (let i = 0; i < Math.round(recensione.valutazione); i++) { %>
-                                                                        <a href="" class="star-link"><i class="bi bi-star-fill"></i></a>
-                                                                    <% } %>
-                                                                    <% for (let i = 0; i < 5 - Math.round(recensione.valutazione); i++) { %>
-                                                                        <a href="" class="star-link"><i class="bi bi-star"></i></a>
-                                                                    <% } %>
-                                                                </div>
-                                                            </span>
-                                                            <span class="text-muted "  style="font-size:14px"><%= recensione.valutazione %>.0 su 5</span>
-                                                        </div>
-                                                        <p class="card-text" style="font-size:14px"><%= recensione.testo %></p>
+                    <div class="container mt-5 mb-5">
+                        <div class="row">
+                            <div class="card bg-white p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-4 ms-1">
+                                    <h4 class="mb-0">Valutazione Media: 
+                                        <span class="text-muted">
+                                            <%= (ristorante[0] && ristorante[0].valutazione_media) || 'N/A' %> su 5
+                                        </span>
+                                    </h4>
+                                    <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#recensioneModal">
+                                        Scrivi una Recensione
+                                    </a>
+                                </div>
+                    
+                                <div id="reviewsContainer">
+                                    <% const recensioni = ristorante.filter(item => item.scrittore); %>
+                                    <% if (recensioni.length > 0) { %>
+                                        <% recensioni.forEach(function(recensione, index) { %>
+                                            <div class="card mb-3 recensione-item <%= index >= 4 ? 'd-none' : '' %>" data-bs-toggle="modal" data-bs-target="#replyModal" style="cursor: pointer;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title small-text">Recensione di <%= recensione.scrittore || "Utente" %> - <%= recensione.titolo || "Recensione" %></h5>
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <span class="text-warning me-2">
+                                                            <div class="d-flex justify-content-center small text-warning" style="font-size:14px">
+                                                                <% for (let i = 0; i < Math.round(recensione.valutazione); i++) { %>
+                                                                    <a href="" class="star-link"><i class="bi bi-star-fill"></i></a>
+                                                                <% } %>
+                                                                <% for (let i = 0; i < 5 - Math.round(recensione.valutazione); i++) { %>
+                                                                    <a href="" class="star-link"><i class="bi bi-star"></i></a>
+                                                                <% } %>
+                                                            </div>
+                                                        </span>
+                                                        <span class="text-muted" style="font-size:14px"><%= recensione.valutazione || "N/A" %>.0 su 5</span>
                                                     </div>
+                                                    <p class="card-text" style="font-size:14px"><%= recensione.testo || "Nessun testo disponibile." %></p>
                                                 </div>
-                                            <% }); %>
-                                        <% } else { %>
-                                            <div class="alert alert-info small-text">
-                                                Nessuna recensione disponibile. Sii il primo a scrivere una recensione!
                                             </div>
-                                        <% } %>
-                                    </div>
-                        
-                                    <!-- Bottone per visualizzare altre recensioni -->
-                                    <% if (ristorante.length > 4) { %>
-                                        <div class="text-center mt-4">
-                                            <button id="loadMoreReviews" class="btn btn-outline-dark">Visualizza altre recensioni</button>
+                                        <% }); %>
+                                    <% } else { %>
+                                        <div class="alert alert-info small-text">
+                                            😞 Nessuna recensione disponibile. Sii il primo a scrivere una recensione!
                                         </div>
                                     <% } %>
+                                    <div class="text-center mt-4">
+                                        <button id="loadMoreReviews" class="btn btn-outline-dark">Visualizza altre recensioni</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -245,27 +238,6 @@
 </html>
 
 <script>
-     document.addEventListener('DOMContentLoaded', function() {
-        const loadMoreButton = document.getElementById('loadMoreReviews');
-        let visibleCount = 4; // Numero iniziale di recensioni visibili
-        const increment = 2; // Numero di recensioni da mostrare ad ogni click
-        const reviews = document.querySelectorAll('.recensione-item'); // Seleziona tutte le recensioni
-        
-        loadMoreButton.addEventListener('click', function() {
-            // Mostra solo il numero successivo di recensioni specificato da "increment"
-            for (let i = visibleCount; i < visibleCount + increment; i++) {
-                if (i < reviews.length) {
-                    reviews[i].classList.remove('d-none'); // Rimuovi la classe per mostrare l'elemento
-                }
-            }
-            visibleCount += increment;
-
-            // Se tutte le recensioni sono state mostrate, nascondi il bottone
-            if (visibleCount >= reviews.length) {
-                loadMoreButton.style.display = 'none';
-            }
-        });
-    });
 
 
         // Seleziona il bottone

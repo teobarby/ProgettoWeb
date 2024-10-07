@@ -35,14 +35,25 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Funzione per caricare più recensioni (puoi implementare una chiamata Ajax qui)
-    var loadMoreReviewsButton = document.getElementById('loadMoreReviews');
-    if (loadMoreReviewsButton) {
-        loadMoreReviewsButton.addEventListener('click', function() {
-            // Esempio: carica altre recensioni tramite Ajax o mostra altre recensioni già caricate
-            alert('Altre recensioni caricate!');
-        });
-    }
+    const loadMoreButton = document.getElementById('loadMoreReviews');
+    let visibleCount = 4; // Numero iniziale di recensioni visibili
+    const increment = 2; // Numero di recensioni da mostrare ad ogni click
+    const reviews = document.querySelectorAll('.recensione-item'); // Seleziona tutte le recensioni
+
+    loadMoreButton.addEventListener('click', function() {
+        // Mostra solo il numero successivo di recensioni specificato da "increment"
+        for (let i = visibleCount; i < visibleCount + increment; i++) {
+            if (i < reviews.length) {
+                reviews[i].classList.remove('d-none'); // Rimuovi la classe per mostrare l'elemento
+            }
+        }
+        visibleCount += increment;
+
+        // Se tutte le recensioni sono state mostrate, nascondi il bottone
+        if (visibleCount >= reviews.length) {
+            loadMoreButton.style.display = 'none';
+        }
+    });
 
     // Formato minimo per la data di prenotazione (imposta la data odierna come minimo)
     var dataPrenotazioneInput = document.getElementById('dataPrenotazione');
@@ -94,6 +105,12 @@ document.addEventListener("DOMContentLoaded", function() {
             alert('Errore durante l\'eliminazione: ' + error.message);
         });
     });
+
+
+
+
+    
+    
 });
 
 
