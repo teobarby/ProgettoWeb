@@ -97,18 +97,18 @@ router.get('/inserisci-ristorante', (req, res) => {
 
   // Aggiungi i dati al database
   db.addRistorante({
-      nome: nomeRistorante,
-      indirizzo,
-      orari: orariString,
-      descrizione,
-      copertina: immagineCopertina,
-      menu: menuPDF,
-      proprietario,
-      categoria,
-      paroleChiave,
-      promo,
-      citta,
-      telefono
+    nome: nomeRistorante,
+    indirizzo,
+    orari: orariString,
+    descrizione,
+    copertina: immagineCopertina,
+    menu: menuPDF,
+    proprietario,
+    categoria,
+    paroleChiave,
+    promo,
+    citta,
+    telefono
   })
   .then(() => {
       res.redirect('/'); // Reindirizza a una pagina di successo
