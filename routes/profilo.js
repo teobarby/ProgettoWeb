@@ -66,7 +66,7 @@ router.get('/inserisci-ristorante', (req, res) => {
   const {
       nomeRistorante, // Aggiornato
       categoria,
-      città, // Aggiornato
+      citta, // Aggiornato
       indirizzo, // Aggiornato
       telefono, // Aggiornato
       paroleChiave, // Aggiornato
@@ -100,7 +100,7 @@ router.get('/inserisci-ristorante', (req, res) => {
       nome: nomeRistorante,
       immagine: immagineCopertina,
       categoria,
-      città,
+      citta,
       indirizzo,
       telefono,
       paroleChiave,

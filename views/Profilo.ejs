@@ -76,6 +76,61 @@
             
         </section>
 
+        <div class="modal fade" id="eliminaModal" tabindex="-1" aria-labelledby="modificaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modificaModalLabel">Conferma Eliminazione Account</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Sei sicuro di voler eliminare il tuo account? Questa azione è <strong>irreversibile</strong> e tutti i tuoi dati andranno persi. Non sarà possibile tornare indietro.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark ms-4" data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-outline-danger ms-2" id="confirmDeleteButton" data-username="<%= username %>">Conferma Eliminazione</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modificaModal" tabindex="-1" aria-labelledby="modificaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modificaModalLabel">Modifica profilo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="modificaForm">
+                            <div class="mb-3">
+                                <label for="nomeInput" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nomeModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cognomeInput" class="form-label">Cognome</label>
+                                <input type="text" class="form-control" id="cognomeModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="emailModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefonoInput" class="form-label">Telefono</label>
+                                <input type="tel" class="form-control" id="telefonoModalInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="preferenzeInput" class="form-label">Preferenze Alimentari</label>
+                                <input type="text" class="form-control" id="preferenzeModalInput" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary topmarg">Modifica</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <%- include('partials/footer') %>
     </body>
@@ -92,16 +147,16 @@
                     <form action="/inserisci-ristorante" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="nomeRistoranteInput" class="form-label">Nome del ristorante</label>
-                            <input type="text" class="form-control" id="nomeRistoranteInput"name="nomeRistorante" required>
+                            <input type="text" class="form-control shadow-sm" id="nomeRistoranteInput"name="nomeRistorante" required>
                         </div>
                         <div class="mb-3">
                             <label for="immagineCopertinaInput" class="form-label">Immagine di copertina (JPEG, JPG)</label>
-                            <input type="file" class="form-control" id="immagineCopertinaInput" name="immagineCopertinaInput" accept=".jpg,.jpeg" required>
+                            <input type="file" class="form-control shadow-sm" id="immagineCopertinaInput" name="immagineCopertinaInput" accept=".jpg,.jpeg" required>
                             <small class="text-muted">Inserisci l'immagine di copertina del tuo ristorante</small>
                         </div>
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoria</label>
-                            <select class="form-select" name="categoria" aria-label="Seleziona categoria" required>
+                            <select class="form-select shadow-sm" name="categoria" aria-label="Seleziona categoria" required>
                                 <option selected disabled>Seleziona categoria...</option>
                                 <% categorie.forEach(categoria => { %> 
                                     <option value="<%= categoria.nome %>"><%= categoria.nome %></option>
@@ -110,25 +165,25 @@
                         </div>
                         <div class="mb-3">
                             <label for="cittàInput" class="form-label">Città</label>
-                            <input type="text" class="form-control" id="cittàInput" name="città" required>
+                            <input type="text" class="form-control shadow-sm" id="cittàInput" name="citta" required>                        
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3" >
                             <label for="indirizzoInput" class="form-label">Indirizzo</label>
-                            <input type="text" class="form-control" id="indirizzoInput" name="indirizzo" required>
+                            <input type="text" class="form-control shadow-sm" id="indirizzoInput" name="indirizzo" required>
                         </div>
                         <div class="mb-3">
                             <label for="telefonoInput" class="form-label">Telefono</label>
-                            <input type="number" class="form-control" id="telefonoInput" name="telefono" required>
+                            <input type="number" class="form-control shadow-sm" id="telefonoInput" name="telefono" required>
                         </div>
                         <div class="mb-3">
                             <label for="paroleChiaveInput" class="form-label">Parole chiave</label>
-                            <input type="text" class="form-control" id="paroleChiaveInput" name="paroleChiave" required>
+                            <input type="text" class="form-control shadow-sm" id="paroleChiaveInput" name="paroleChiave" required>
                         </div>
                         <div class="mb-3">
                             <label for="descrizioneRistoranteInput" class="form-label">Descrizione</label>
-                            <textarea class="form-control" id="descrizioneRistoranteInput" name="descrizione" rows="3" required></textarea>
+                            <textarea class="form-control shadow-sm" id="descrizioneRistoranteInput" name="descrizione" rows="3" required></textarea>
                         </div>
-                        <div class="mb-3">
+                        
                             
                             <!-- Orari di Pranzo e Cena -->
                             <div class="card p-3 mb-4 shadow-sm">
@@ -136,12 +191,12 @@
                                     <!-- Apertura Pranzo -->
                                     <div class="col-md-6 mb-3">
                                         <label for="orarioAperturaPranzo" class="form-label">Apertura Pranzo</label>
-                                        <input type="time" class="form-control" id="orarioAperturaPranzo" name="orarioAperturaPranzo">
+                                        <input type="time" class="form-control shadow-sm" id="orarioAperturaPranzo" name="orarioAperturaPranzo">
                                     </div>
                                     <!-- Chiusura Pranzo -->
                                     <div class="col-md-6 mb-3">
                                         <label for="orarioChiusuraPranzo" class="form-label">Chiusura Pranzo</label>
-                                        <input type="time" class="form-control" id="orarioChiusuraPranzo" name="orarioChiusuraPranzo">
+                                        <input type="time" class="form-control shadow-sm" id="orarioChiusuraPranzo" name="orarioChiusuraPranzo">
                                     </div>
                                 </div>
 
@@ -149,27 +204,28 @@
                                     <!-- Apertura Cena -->
                                     <div class="col-md-6 mb-3">
                                         <label for="orarioAperturaCena" class="form-label">Apertura Cena</label>
-                                        <input type="time" class="form-control" id="orarioAperturaCena" name="orarioAperturaCena">
+                                        <input type="time" class="form-control shadow-sm" id="orarioAperturaCena" name="orarioAperturaCena">
                                     </div>
                                     <!-- Chiusura Cena -->
                                     <div class="col-md-6 mb-3">
                                         <label for="orarioChiusuraCena" class="form-label">Chiusura Cena</label>
-                                        <input type="time" class="form-control" id="orarioChiusuraCena" name="orarioChiusuraCena">
+                                        <input type="time" class="form-control shadow-sm" id="orarioChiusuraCena" name="orarioChiusuraCena">
                                     </div>
                                 </div>
                                 <small class="text-muted">Se il tuo Ristorante apre una sola volta al giorno, lascia vuoti gli altri campi</small>
+                                </div>
 
-                            </div>
+                        <div class="mb-3m">
+                            <label for="promoAttiveInput" class="form-label">Promo attive</label>
+                            <textarea class="form-control shadow-sm" id="promoAttiveInput" name="promoAttive" rows="10" required></textarea>
+                        </div>   
                     
                         <div class="mb-3">
                             <label for="menuPDFInput" class="form-label">Menu (PDF)</label>
-                            <input type="file" class="form-control" id="menuPDFInput" name="menuPDFInput" accept=".pdf" required>
+                            <input type="file" class="form-control shadow-sm" id="menuPDFInput" name="menuPDFInput" accept=".pdf" required>
                             <small class="text-muted">Carica il menu in formato PDF</small>
                         </div>
-                        <div class="mb-3">
-                            <label for="promoAttiveInput" class="form-label">Promo attive</label>
-                            <textarea class="form-control" id="promoAttiveInput" name="promoAttive" rows="10" required></textarea>
-                        </div>
+                        
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Aggiungi ristorante</button>
                         </div>
@@ -179,59 +235,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modificaModal" tabindex="-1" aria-labelledby="modificaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modificaModalLabel">Modifica profilo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="modificaForm">
-                        <div class="mb-3">
-                            <label for="nomeInput" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="nomeModalInput" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="cognomeInput" class="form-label">Cognome</label>
-                            <input type="text" class="form-control" id="cognomeModalInput" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="emailInput" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="emailModalInput" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="telefonoInput" class="form-label">Telefono</label>
-                            <input type="tel" class="form-control" id="telefonoModalInput" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="preferenzeInput" class="form-label">Preferenze Alimentari</label>
-                            <input type="text" class="form-control" id="preferenzeModalInput" required>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary topmarg">Modifica</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
-    <div class="modal fade" id="eliminaModal" tabindex="-1" aria-labelledby="modificaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modificaModalLabel">Conferma Eliminazione Account</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>Sei sicuro di voler eliminare il tuo account? Questa azione è <strong>irreversibile</strong> e tutti i tuoi dati andranno persi. Non sarà possibile tornare indietro.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark ms-4" data-bs-dismiss="modal">Annulla</button>
-                <button type="button" class="btn btn-outline-danger ms-2" id="confirmDeleteButton" data-username="<%= username %>">Conferma Eliminazione</button>
-            </div>
-          </div>
-        </div>
-    </div>
+    
 </html>
