@@ -180,7 +180,7 @@ class DataBase {
                 WHERE R.nome LIKE ? 
                    OR R.paroleChiave LIKE ? 
                    OR R.categoria LIKE ? 
-                   OR R.città LIKE ? 
+                   OR R.citta LIKE ? 
                    OR R.telefono LIKE ?;
             `;
     
@@ -209,18 +209,18 @@ class DataBase {
         });
     }
     
-    addRistorante({ nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, città, telefono }) {
+    addRistorante({ nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono }) {
         return new Promise((resolve, reject) => {
 
             console.log({
-                nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, città, telefono
+                nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono
             });
 
-            const sql = `INSERT INTO Ristoranti (nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, città, telefono) 
+            const sql = `INSERT INTO Ristoranti (nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono) 
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
             this.open();
-            this.db.run(sql, [nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, città, telefono], function (err) {
+            this.db.run(sql, [nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono], function (err) {
                 if (err) return reject(err);
                 resolve(this.lastID); // Restituisce l'ID dell'ultimo ristorante inserito
             });

@@ -75,7 +75,7 @@ router.get('/inserisci-ristorante', (req, res) => {
       orarioChiusuraPranzo,
       orarioAperturaCena,
       orarioChiusuraCena,
-      promoAttive // Aggiornato
+      promo // Aggiornato
   } = req.body;
 
   // Ottieni i percorsi dei file caricati
@@ -98,17 +98,17 @@ router.get('/inserisci-ristorante', (req, res) => {
   // Aggiungi i dati al database
   db.addRistorante({
       nome: nomeRistorante,
-      immagine: immagineCopertina,
-      categoria,
-      citta,
       indirizzo,
-      telefono,
-      paroleChiave,
-      descrizione,
       orari: orariString,
-      menuPDF,
-      promoAttive,
-      proprietario
+      descrizione,
+      copertina: immagineCopertina,
+      menu: menuPDF,
+      proprietario,
+      categoria,
+      paroleChiave,
+      promo,
+      citta,
+      telefono
   })
   .then(() => {
       res.redirect('/'); // Reindirizza a una pagina di successo
