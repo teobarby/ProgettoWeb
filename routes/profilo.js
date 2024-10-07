@@ -3,9 +3,12 @@ var router = express.Router();
 
 const DataBase = require("../db"); // db.js
 const db = new DataBase();
+const path = require('path'); // Importa il modulo 'path'
 
 const multer = require('multer');
-const upload = multer({ dest: '/Users/matteobarbieri/Documents/Uni/ProgettoWeb/uploads' });
+const upload = multer({ dest: path.join(__dirname, '../public/uploads') });
+
+ const fs = require('fs');
 
 /* GET home page. */
 router.get('/profilo', async (req, res, next) => {
@@ -50,13 +53,14 @@ router.get('/inserisci-ristorante', (req, res) => {
   });
 });
 
- // Cartella di destinazione per i file caricati
+ 
 
- router.post('/inserisci-ristorante', upload.fields([
+
+router.post('/inserisci-ristorante', upload.fields([
   { name: 'immagineCopertinaInput' },
   { name: 'menuPDFInput' }
-]), (req, res) => {
-
+]), async (req, res) => {
+  
   // Verifica se l'utente è loggato
   if (!req.session || !req.session.username) {
       return res.status(403).send('Utente non autorizzato');
@@ -64,28 +68,59 @@ router.get('/inserisci-ristorante', (req, res) => {
 
   // Recupera i dati dal corpo della richiesta
   const {
-      nomeRistorante, // Aggiornato
+      nomeRistorante,
       categoria,
-      citta, // Aggiornato
-      indirizzo, // Aggiornato
-      telefono, // Aggiornato
-      paroleChiave, // Aggiornato
-      descrizione, // Aggiornato
+      citta,
+      indirizzo,
+      telefono,
+      paroleChiave,
+      descrizione,
       orarioAperturaPranzo,
       orarioChiusuraPranzo,
       orarioAperturaCena,
       orarioChiusuraCena,
-      promo // Aggiornato
+      promo
   } = req.body;
 
-  // Ottieni i percorsi dei file caricati
-  const immagineCopertina = req.files['immagineCopertinaInput'][0].path;
-  const menuPDF = req.files['menuPDFInput'] ? req.files['menuPDFInput'][0].path : null;
+  const immagineCopertina = req.files['immagineCopertinaInput'][0];
+  const menuPDF = req.files['menuPDFInput'] ? req.files['menuPDFInput'][0] : null;
 
-  // Ottieni il nome dell'utente dalla sessione
+  const estensioneCopertina = path.extname(immagineCopertina.originalname);
+  const estensioneMenu = menuPDF ? path.extname(menuPDF.originalname) : '';
+
+  const nomeImmagine = `${immagineCopertina.filename}${estensioneCopertina}`;
+  const nuovoPercorsoImmagine = path.join(__dirname, '../public/uploads', nomeImmagine);
+
+  try {
+      if (fs.existsSync(immagineCopertina.path)) {
+          fs.renameSync(immagineCopertina.path, nuovoPercorsoImmagine);
+      } else {
+          return res.status(400).send('File immagine non trovato');
+      }
+  } catch (err) {
+      console.error('Errore nel rinominare l\'immagine:', err);
+      return res.status(500).send('Errore durante il caricamento dell\'immagine');
+  }
+
+  let percorsoMenuRelativo = null;
+  if (menuPDF) {
+      const nomeMenu = `${menuPDF.filename}${estensioneMenu}`;
+      const nuovoPercorsoMenu = path.join(__dirname, '../public/uploads', nomeMenu);
+
+      try {
+          if (fs.existsSync(menuPDF.path)) {
+              fs.renameSync(menuPDF.path, nuovoPercorsoMenu);
+              percorsoMenuRelativo = `/uploads/${nomeMenu}`;
+          }
+      } catch (err) {
+          console.error('Errore nel rinominare il menu:', err);
+          return res.status(500).send('Errore durante il caricamento del menu');
+      }
+  }
+
+  const percorsoImmagineRelativo = `/uploads/${nomeImmagine}`;
   const proprietario = req.session.username;
 
-  // Genera la stringa degli orari
   let orari = [];
   if (orarioAperturaPranzo && orarioChiusuraPranzo) {
       orari.push(`${orarioAperturaPranzo}-${orarioChiusuraPranzo}`);
@@ -95,28 +130,27 @@ router.get('/inserisci-ristorante', (req, res) => {
   }
   const orariString = orari.length > 0 ? orari.join(', ') : '';
 
-  // Aggiungi i dati al database
-  db.addRistorante({
-    nome: nomeRistorante,
-    indirizzo,
-    orari: orariString,
-    descrizione,
-    copertina: immagineCopertina,
-    menu: menuPDF,
-    proprietario,
-    categoria,
-    paroleChiave,
-    promo,
-    citta,
-    telefono
-  })
-  .then(() => {
+  try {
+      await db.addRistorante({
+          nome: nomeRistorante,
+          indirizzo,
+          orari: orariString,
+          descrizione,
+          copertina: percorsoImmagineRelativo,
+          menu: percorsoMenuRelativo,
+          proprietario,
+          categoria,
+          paroleChiave,
+          promo,
+          citta,
+          telefono
+      });
       res.redirect('/'); // Reindirizza a una pagina di successo
-  })
-  .catch(err => {
+  } catch (err) {
       console.error(err);
       res.status(500).send('Errore durante l\'inserimento del ristorante');
-  });
+  }
 });
+
 
 module.exports = router;

@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sqlite3 = require('sqlite3').verbose();
-var app = express();
+const app = express();
 
 const config = require('./config.json');
 const indexRouter = require('./routes/index');
