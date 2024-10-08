@@ -151,87 +151,75 @@
                     <form action="/<%= possiedeRistorante ? 'modifica-ristorante' : 'inserisci-ristorante' %>" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="nomeRistoranteInput" class="form-label">Nome del ristorante</label>
-                            <input type="text" class="form-control shadow-sm" id="nomeRistoranteInput"name="nomeRistorante" required>
+                            <input type="text" class="form-control shadow-sm" id="nomeRistoranteInput" name="nomeRistorante" value="<%= (ristoranti.length > 0 ? ristoranti[0].nome : '') %>" required>
                         </div>
                         <div class="mb-3">
                             <label for="immagineCopertinaInput" class="form-label">Immagine di copertina (JPEG, JPG)</label>
-                            
                             <input type="file" class="form-control shadow-sm" id="immagineCopertinaInput" name="immagineCopertinaInput" accept=".jpg,.jpeg" <% if (possiedeRistorante) { %> required <% } %>>
                             <small class="text-muted">Inserisci l'immagine di copertina del tuo ristorante</small>
-                         </div>
+                        </div>
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoria</label>
                             <select class="form-select shadow-sm" name="categoria" aria-label="Seleziona categoria" required>
                                 <option selected disabled>Seleziona categoria...</option>
                                 <% categorie.forEach(categoria => { %> 
-                                    <option value="<%= categoria.nome %>"><%= categoria.nome %></option>
+                                    <option value="<%= categoria.nome %>"><%= categoria.nome %></option>                               
                                 <% }) %>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="cittàInput" class="form-label">Città</label>
-                            <input type="text" class="form-control shadow-sm" id="cittàInput" name="citta" required>                        
+                            <input type="text" class="form-control shadow-sm" id="cittàInput" name="citta" value="<%= (ristoranti.length > 0 ? ristoranti[0].citta : '') %>" required>
                         </div>
-                        <div class="mb-3" >
+                        <div class="mb-3">
                             <label for="indirizzoInput" class="form-label">Indirizzo</label>
-                            <input type="text" class="form-control shadow-sm" id="indirizzoInput" name="indirizzo" required>
+                            <input type="text" class="form-control shadow-sm" id="indirizzoInput" name="indirizzo" value="<%= (ristoranti.length > 0 ? ristoranti[0].indirizzo : '') %>" required>
                         </div>
                         <div class="mb-3">
                             <label for="telefonoInput" class="form-label">Telefono</label>
-                            <input type="number" class="form-control shadow-sm" id="telefonoInput" name="telefono" required>
+                            <input type="number" class="form-control shadow-sm" id="telefonoInput" name="telefono" value="<%= (ristoranti.length > 0 ? ristoranti[0].telefono : '') %>" required>
                         </div>
                         <div class="mb-3">
                             <label for="paroleChiaveInput" class="form-label">Parole chiave</label>
-                            <input type="text" class="form-control shadow-sm" id="paroleChiaveInput" name="paroleChiave" required>
+                            <input type="text" class="form-control shadow-sm" id="paroleChiaveInput" name="paroleChiave" value="<%= (ristoranti.length > 0 ? ristoranti[0].paroleChiave : '') %>" required>
                         </div>
                         <div class="mb-3">
                             <label for="descrizioneRistoranteInput" class="form-label">Descrizione</label>
-                            <textarea class="form-control shadow-sm" id="descrizioneRistoranteInput" name="descrizione" rows="4" required></textarea>
+                            <textarea class="form-control shadow-sm" id="descrizioneRistoranteInput" name="descrizione" rows="4" required><%= (ristoranti.length > 0 ? ristoranti[0].descrizione : '') %></textarea>
                         </div>
-                        
-                            
-                            <!-- Orari di Pranzo e Cena -->
-                            <label class="form-label">Orari di apertura</label>
-                            <div class="card p-3 mb-4 shadow-sm">
-                                <div class="row mb-3">
-                                    <!-- Apertura Pranzo -->
-                                    <div class="col-md-6 mb-3">
-                                        <label for="orarioAperturaPranzo" class="form-label">Apertura Pranzo</label>
-                                        <input type="time" class="form-control shadow-sm" id="orarioAperturaPranzo" name="orarioAperturaPranzo">
-                                    </div>
-                                    <!-- Chiusura Pranzo -->
-                                    <div class="col-md-6 mb-3">
-                                        <label for="orarioChiusuraPranzo" class="form-label">Chiusura Pranzo</label>
-                                        <input type="time" class="form-control shadow-sm" id="orarioChiusuraPranzo" name="orarioChiusuraPranzo">
-                                    </div>
+                        <label class="form-label">Orari di apertura</label>
+                        <div class="card p-3 mb-4 shadow-sm">
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3">
+                                    <label for="orarioAperturaPranzo" class="form-label">Apertura Pranzo</label>
+                                    <input type="time" class="form-control shadow-sm" id="orarioAperturaPranzo" name="orarioAperturaPranzo" value="<%= (ristoranti.length > 0 ? ristoranti[0].orarioAperturaPranzo : '') %>">
                                 </div>
-
-                                <div class="row">
-                                    <!-- Apertura Cena -->
-                                    <div class="col-md-6 mb-3">
-                                        <label for="orarioAperturaCena" class="form-label">Apertura Cena</label>
-                                        <input type="time" class="form-control shadow-sm" id="orarioAperturaCena" name="orarioAperturaCena">
-                                    </div>
-                                    <!-- Chiusura Cena -->
-                                    <div class="col-md-6 mb-3">
-                                        <label for="orarioChiusuraCena" class="form-label">Chiusura Cena</label>
-                                        <input type="time" class="form-control shadow-sm" id="orarioChiusuraCena" name="orarioChiusuraCena">
-                                    </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="orarioChiusuraPranzo" class="form-label">Chiusura Pranzo</label>
+                                    <input type="time" class="form-control shadow-sm" id="orarioChiusuraPranzo" name="orarioChiusuraPranzo" value="<%= (ristoranti.length > 0 ? ristoranti[0].orarioChiusuraPranzo : '') %>">
                                 </div>
-                                <small class="text-muted">Se il tuo Ristorante apre una sola volta al giorno, lascia vuoti gli altri campi</small>
                             </div>
-                            
-                        <div class="mb-3m">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="orarioAperturaCena" class="form-label">Apertura Cena</label>
+                                    <input type="time" class="form-control shadow-sm" id="orarioAperturaCena" name="orarioAperturaCena" value="<%= (ristoranti.length > 0 ? ristoranti[0].orarioAperturaCena : '') %>">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="orarioChiusuraCena" class="form-label">Chiusura Cena</label>
+                                    <input type="time" class="form-control shadow-sm" id="orarioChiusuraCena" name="orarioChiusuraCena" value="<%= (ristoranti.length > 0 ? ristoranti[0].orarioChiusuraCena : '') %>">
+                                </div>
+                            </div>
+                            <small class="text-muted">Se il tuo Ristorante apre una sola volta al giorno, lascia vuoti gli altri campi</small>
+                        </div>
+                        <div class="mb-3">
                             <label for="promoAttiveInput" class="form-label">Promo attive</label>
-                            <textarea class="form-control shadow-sm" id="promoAttiveInput" name="promo" rows="2" required></textarea>
-                        </div>   
-                    
+                            <textarea class="form-control shadow-sm" id="promoAttiveInput" name="promo" rows="2" required><%= (ristoranti.length > 0 ? ristoranti[0].promo : '') %></textarea>
+                        </div>
                         <div class="mb-3">
                             <label for="menuPDFInput" class="form-label">Menu (PDF)</label>
-                            <input type="file" class="form-control shadow-sm" id="menuPDFInput" name="menuPDFInput" accept=".pdf" required>
+                            <input type="file" class="form-control shadow-sm" id="menuPDFInput" name="menuPDFInput" accept=".pdf" <% if (possiedeRistorante) { %> required <% } %>>
                             <small class="text-muted">Carica il menu in formato PDF</small>
                         </div>
-                        
                         <div class="text-center">
                             <button type="submit" class="btn btn-outline-dark ">Aggiungi ristorante</button>
                         </div>
@@ -246,6 +234,8 @@
     document.getElementById('confirmDeleteButton').addEventListener('click', function() {
         const username = this.getAttribute('data-username');  // Ottiene l'username dall'attributo data-username
         console.log('Eliminazione richiesta per:', username);  // Log per controllare l'username
+
+
 
         fetch(`/delete-user/${username}`, {
             method: 'DELETE',
