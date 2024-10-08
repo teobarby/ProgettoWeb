@@ -264,12 +264,10 @@ class DataBase {
 
     modRistorante({ id, nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono }) {
         return new Promise((resolve, reject) => {
-    
             console.log({
                 id, nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono
             });
     
-            // Utilizza UPDATE invece di INSERT
             const sql = `UPDATE Ristoranti SET 
                 nome = ?, 
                 indirizzo = ?, 
@@ -283,14 +281,21 @@ class DataBase {
                 promo = ?, 
                 citta = ?, 
                 telefono = ? 
-                WHERE id = ?`; // Aggiungi la condizione WHERE per aggiornare il ristorante specifico
+                WHERE id = ?`;
     
             this.open();
+    
             this.db.run(sql, [nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono, id], function (err) {
-                if (err) return reject(err);
+                if (err) {
+                    console.error('Errore durante l\'aggiornamento del ristorante:', err);
+                    return reject(err);
+                }
+    
+                // `this` qui fa riferimento alla connessione del database, non all'oggetto padre
                 resolve(this.changes); // Restituisce il numero di righe modificate
             });
-            this.close();
+    
+            this.close(); // Chiudi la connessione una volta che il comando è stato eseguito
         });
     }
 }

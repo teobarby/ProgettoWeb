@@ -29,8 +29,6 @@ router.get('/profilo', async (req, res, next) => {
       const possiedeRistorante = !!ristorante; // true se esiste, false altrimenti
       const ristoranti = await db.getRistoranteUsername(username); // Assicurati che questa funzione ritorni un array
 
-
-
       // Renderizza la pagina del profilo con i dati dell'utente e le categorie
       res.render('profilo', { 
         title: 'Profilo', 
@@ -191,8 +189,15 @@ router.post('/modifica-ristorante', upload.fields([
       return res.status(403).send('Utente non autorizzato');
   }
 
-  // Recupera i dati dal corpo della richiesta
+
+    const ristorante = await db.getRistoranteUsername(req.session.username);
+
+  
+
+
+
   const {
+      id = ristorante[0].id,
       nomeRistorante,
       categoria,
       citta,
@@ -207,27 +212,26 @@ router.post('/modifica-ristorante', upload.fields([
       promo
   } = req.body;
 
-  // Verifica se i file sono stati caricati correttamente
   const immagineCopertina = req.files['immagineCopertinaInput'] ? req.files['immagineCopertinaInput'][0] : null;
   const menuPDF = req.files['menuPDFInput'] ? req.files['menuPDFInput'][0] : null;
 
-  if (!immagineCopertina) {
-      return res.status(400).send('Immagine di copertina non fornita');
-  }
+  let percorsoImmagineRelativo = null;
+  if (immagineCopertina) {
+      const estensioneCopertina = path.extname(immagineCopertina.originalname);
+      const nomeImmagine = `${immagineCopertina.filename}${estensioneCopertina}`;
+      const nuovoPercorsoImmagine = path.join(__dirname, '../public/uploads', nomeImmagine);
 
-  const estensioneCopertina = path.extname(immagineCopertina.originalname);
-  const nomeImmagine = `${immagineCopertina.filename}${estensioneCopertina}`;
-  const nuovoPercorsoImmagine = path.join(__dirname, '../public/uploads', nomeImmagine);
-
-  try {
-      if (fs.existsSync(immagineCopertina.path)) {
-          fs.renameSync(immagineCopertina.path, nuovoPercorsoImmagine);
-      } else {
-          return res.status(400).send('File immagine non trovato');
+      try {
+          if (fs.existsSync(immagineCopertina.path)) {
+              await fs.promises.rename(immagineCopertina.path, nuovoPercorsoImmagine);
+              percorsoImmagineRelativo = `/uploads/${nomeImmagine}`;
+          } else {
+              return res.status(400).send('File immagine non trovato');
+          }
+      } catch (err) {
+          console.error('Errore nel rinominare l\'immagine:', err);
+          return res.status(500).send('Errore durante il caricamento dell\'immagine');
       }
-  } catch (err) {
-      console.error('Errore nel rinominare l\'immagine:', err);
-      return res.status(500).send('Errore durante il caricamento dell\'immagine');
   }
 
   let percorsoMenuRelativo = null;
@@ -238,7 +242,7 @@ router.post('/modifica-ristorante', upload.fields([
 
       try {
           if (fs.existsSync(menuPDF.path)) {
-              fs.renameSync(menuPDF.path, nuovoPercorsoMenu);
+              await fs.promises.rename(menuPDF.path, nuovoPercorsoMenu);
               percorsoMenuRelativo = `/uploads/${nomeMenu}`;
           }
       } catch (err) {
@@ -247,11 +251,8 @@ router.post('/modifica-ristorante', upload.fields([
       }
   }
 
-  const percorsoImmagineRelativo = `/uploads/${nomeImmagine}`;
   const proprietario = req.session.username;
-
-  // Gestione degli orari
-  let orari = [];
+  const orari = [];
   if (orarioAperturaPranzo && orarioChiusuraPranzo) {
       orari.push(`${orarioAperturaPranzo}-${orarioChiusuraPranzo}`);
   }
@@ -262,6 +263,7 @@ router.post('/modifica-ristorante', upload.fields([
 
   try {
       await db.modRistorante({
+          id,
           nome: nomeRistorante,
           indirizzo,
           orari: orariString,
@@ -275,13 +277,11 @@ router.post('/modifica-ristorante', upload.fields([
           citta,
           telefono
       });
-      res.redirect('/'); // Reindirizza a una pagina di successo
+      res.redirect('/profilo'); // Modifica la pagina di successo se necessario
   } catch (err) {
-      console.error(err);
+      console.error('Errore durante l\'inserimento del ristorante:', err);
       res.status(500).send('Errore durante l\'inserimento del ristorante');
   }
 });
-
-
 
 module.exports = router;

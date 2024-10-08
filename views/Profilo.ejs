@@ -155,10 +155,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="immagineCopertinaInput" class="form-label">Immagine di copertina (JPEG, JPG)</label>
-                            <% if (ristoranti.lenght >= 0) { %>
-                                <input type="hidden" name="immagineAttuale" value="<%= informazioniRistorante.immagine %>">
-                                <img src="<%= informazioniRistorante.immagine %>" alt="Immagine di copertura" class="img-fluid mb-3" />
-                            <% } %>
+                            
                             <input type="file" class="form-control shadow-sm" id="immagineCopertinaInput" name="immagineCopertinaInput" accept=".jpg,.jpeg" <% if (possiedeRistorante) { %> required <% } %>>
                             <small class="text-muted">Inserisci l'immagine di copertina del tuo ristorante</small>
                          </div>
