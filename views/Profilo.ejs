@@ -237,6 +237,30 @@
     </div>
 
     
+<script>
+    document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+        const username = this.getAttribute('data-username');  // Ottiene l'username dall'attributo data-username
+        console.log('Eliminazione richiesta per:', username);  // Log per controllare l'username
 
+        fetch(`/delete-user/${username}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Utente eliminato con successo.');
+                window.location.href = '/';  // Redirigi dopo l'eliminazione
+            } else {
+                return response.json().then(data => { throw new Error(data.message); });
+            }
+        })
+        .catch(error => {
+            console.error('Errore durante l\'eliminazione:', error);
+            alert('Errore durante l\'eliminazione: ' + error.message);
+        });
+    });
+</script>
     
 </html>
