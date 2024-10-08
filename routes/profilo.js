@@ -25,6 +25,12 @@ router.get('/profilo', async (req, res, next) => {
       // Recupera le categorie dal database
       const categorie = await db.getCategorie();
 
+      const ristorante = await db.possiedeRistorante(username);
+      const possiedeRistorante = !!ristorante; // true se esiste, false altrimenti
+      const ristoranti = await db.getRistoranteUsername(username); // Assicurati che questa funzione ritorni un array
+
+
+
       // Renderizza la pagina del profilo con i dati dell'utente e le categorie
       res.render('profilo', { 
         title: 'Profilo', 
@@ -33,7 +39,9 @@ router.get('/profilo', async (req, res, next) => {
         nome: nome,
         cognome: cognome,
         cellulare: cellulare,
-        categorie: categorie // Passa anche le categorie
+        categorie: categorie,
+        possiedeRistorante: possiedeRistorante,
+        ristoranti: ristoranti
       });
     } catch (err) {
       res.status(500).send('Errore durante il recupero delle categorie');
@@ -151,6 +159,129 @@ router.post('/inserisci-ristorante', upload.fields([
       res.status(500).send('Errore durante l\'inserimento del ristorante');
   }
 });
+
+
+
+
+
+
+router.get('/modifica-ristorante', (req, res) => {
+  const username = req.session.username;
+  db.getRistoranteUsername(username)
+      .then(ristoranti => {
+          if (!ristoranti || ristoranti.length === 0) {
+              return res.status(404).send('Nessun ristorante trovato');
+          }
+          res.render('inserisci-ristorante', { ristoranti });
+      })
+      .catch(err => {
+          console.error(err);
+          res.status(500).send('Errore durante il recupero dei ristoranti');
+      });
+});
+
+
+
+router.post('/modifica-ristorante', upload.fields([
+  { name: 'immagineCopertinaInput' },
+  { name: 'menuPDFInput' }
+]), async (req, res) => {
+  // Verifica se l'utente è loggato
+  if (!req.session || !req.session.username) {
+      return res.status(403).send('Utente non autorizzato');
+  }
+
+  // Recupera i dati dal corpo della richiesta
+  const {
+      nomeRistorante,
+      categoria,
+      citta,
+      indirizzo,
+      telefono,
+      paroleChiave,
+      descrizione,
+      orarioAperturaPranzo,
+      orarioChiusuraPranzo,
+      orarioAperturaCena,
+      orarioChiusuraCena,
+      promo
+  } = req.body;
+
+  // Verifica se i file sono stati caricati correttamente
+  const immagineCopertina = req.files['immagineCopertinaInput'] ? req.files['immagineCopertinaInput'][0] : null;
+  const menuPDF = req.files['menuPDFInput'] ? req.files['menuPDFInput'][0] : null;
+
+  if (!immagineCopertina) {
+      return res.status(400).send('Immagine di copertina non fornita');
+  }
+
+  const estensioneCopertina = path.extname(immagineCopertina.originalname);
+  const nomeImmagine = `${immagineCopertina.filename}${estensioneCopertina}`;
+  const nuovoPercorsoImmagine = path.join(__dirname, '../public/uploads', nomeImmagine);
+
+  try {
+      if (fs.existsSync(immagineCopertina.path)) {
+          fs.renameSync(immagineCopertina.path, nuovoPercorsoImmagine);
+      } else {
+          return res.status(400).send('File immagine non trovato');
+      }
+  } catch (err) {
+      console.error('Errore nel rinominare l\'immagine:', err);
+      return res.status(500).send('Errore durante il caricamento dell\'immagine');
+  }
+
+  let percorsoMenuRelativo = null;
+  if (menuPDF) {
+      const estensioneMenu = path.extname(menuPDF.originalname);
+      const nomeMenu = `${menuPDF.filename}${estensioneMenu}`;
+      const nuovoPercorsoMenu = path.join(__dirname, '../public/uploads', nomeMenu);
+
+      try {
+          if (fs.existsSync(menuPDF.path)) {
+              fs.renameSync(menuPDF.path, nuovoPercorsoMenu);
+              percorsoMenuRelativo = `/uploads/${nomeMenu}`;
+          }
+      } catch (err) {
+          console.error('Errore nel rinominare il menu:', err);
+          return res.status(500).send('Errore durante il caricamento del menu');
+      }
+  }
+
+  const percorsoImmagineRelativo = `/uploads/${nomeImmagine}`;
+  const proprietario = req.session.username;
+
+  // Gestione degli orari
+  let orari = [];
+  if (orarioAperturaPranzo && orarioChiusuraPranzo) {
+      orari.push(`${orarioAperturaPranzo}-${orarioChiusuraPranzo}`);
+  }
+  if (orarioAperturaCena && orarioChiusuraCena) {
+      orari.push(`${orarioAperturaCena}-${orarioChiusuraCena}`);
+  }
+  const orariString = orari.length > 0 ? orari.join(', ') : '';
+
+  try {
+      await db.modRistorante({
+          nome: nomeRistorante,
+          indirizzo,
+          orari: orariString,
+          descrizione,
+          copertina: percorsoImmagineRelativo,
+          menu: percorsoMenuRelativo,
+          proprietario,
+          categoria,
+          paroleChiave,
+          promo,
+          citta,
+          telefono
+      });
+      res.redirect('/'); // Reindirizza a una pagina di successo
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Errore durante l\'inserimento del ristorante');
+  }
+});
+
 
 
 module.exports = router;

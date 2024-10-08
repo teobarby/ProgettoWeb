@@ -68,7 +68,11 @@
                     </div>
                     <!-- solo se non possiede il ristorante, se lo possiede appare in alto nella tendina del profilo "gestisci il tuo ristorante", e lo facciamo apparire anche qua direi, al posto di questo tasto , dovrebbe essere una cavolatona -->
                     <div class="text-center mt-5">
-                        <button type="button" class="btn btn-outline-dark mb-4" data-bs-toggle="modal" data-bs-target="#informazioniRistoranteModal">Aggiungi il tuo Ristorante</button>
+                        <% if (possiedeRistorante) { %>
+                            <button type="button" class="btn btn-outline-dark mb-4" data-bs-toggle="modal" data-bs-target="#informazioniRistoranteModal" onclick="caricaInfoRistorante()">Modifica Ristorante</button>
+                        <% } else { %>
+                            <button type="button" class="btn btn-outline-dark mb-4" data-bs-toggle="modal" data-bs-target="#informazioniRistoranteModal">Aggiungi il tuo Ristorante</button>
+                        <% } %>
                     </div>
                 </div>
             </div>
@@ -144,16 +148,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/inserisci-ristorante" method="POST" enctype="multipart/form-data">
+                    <form action="/<%= possiedeRistorante ? 'modifica-ristorante' : 'inserisci-ristorante' %>" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="nomeRistoranteInput" class="form-label">Nome del ristorante</label>
                             <input type="text" class="form-control shadow-sm" id="nomeRistoranteInput"name="nomeRistorante" required>
                         </div>
                         <div class="mb-3">
                             <label for="immagineCopertinaInput" class="form-label">Immagine di copertina (JPEG, JPG)</label>
-                            <input type="file" class="form-control shadow-sm" id="immagineCopertinaInput" name="immagineCopertinaInput" accept=".jpg,.jpeg" required>
+                            <% if (ristoranti.lenght >= 0) { %>
+                                <input type="hidden" name="immagineAttuale" value="<%= informazioniRistorante.immagine %>">
+                                <img src="<%= informazioniRistorante.immagine %>" alt="Immagine di copertura" class="img-fluid mb-3" />
+                            <% } %>
+                            <input type="file" class="form-control shadow-sm" id="immagineCopertinaInput" name="immagineCopertinaInput" accept=".jpg,.jpeg" <% if (possiedeRistorante) { %> required <% } %>>
                             <small class="text-muted">Inserisci l'immagine di copertina del tuo ristorante</small>
-                        </div>
+                         </div>
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoria</label>
                             <select class="form-select shadow-sm" name="categoria" aria-label="Seleziona categoria" required>
@@ -215,7 +223,7 @@
                                 </div>
                                 <small class="text-muted">Se il tuo Ristorante apre una sola volta al giorno, lascia vuoti gli altri campi</small>
                             </div>
-
+                            
                         <div class="mb-3m">
                             <label for="promoAttiveInput" class="form-label">Promo attive</label>
                             <textarea class="form-control shadow-sm" id="promoAttiveInput" name="promo" rows="2" required></textarea>

@@ -155,6 +155,21 @@ class DataBase {
         });
     }
 
+    possiedeRistorante(username) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT *
+                         FROM Ristoranti
+                         WHERE proprietario = ?`;
+    
+            this.open();
+            this.db.get(sql, [username], (err, row) => {
+                if (err) return reject(err);
+                resolve(row); // Restituisce 'row' che dovrebbe contenere i dati del ristorante
+            });
+            this.close();
+        });
+    }
+
     get(sql, params = []) {
         return new Promise((resolve, reject) => {
             this.open();
@@ -223,6 +238,57 @@ class DataBase {
             this.db.run(sql, [nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono], function (err) {
                 if (err) return reject(err);
                 resolve(this.lastID); // Restituisce l'ID dell'ultimo ristorante inserito
+            });
+            this.close();
+        });
+    }
+
+    getRistoranteUsername(username) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT *
+                         FROM Ristoranti
+                         WHERE proprietario = ?`;
+    
+            this.open();
+            this.db.all(sql, [username], (err, rows) => {
+                this.close(); // Chiudi la connessione qui, dopo la query
+    
+                if (err) {
+                    return reject(err); // Rifiuta la promessa se c'è un errore
+                }
+    
+                resolve(rows); // Restituisce 'rows' che contiene tutti i ristoranti
+            });
+        });
+    }
+
+    modRistorante({ id, nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono }) {
+        return new Promise((resolve, reject) => {
+    
+            console.log({
+                id, nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono
+            });
+    
+            // Utilizza UPDATE invece di INSERT
+            const sql = `UPDATE Ristoranti SET 
+                nome = ?, 
+                indirizzo = ?, 
+                orari = ?, 
+                descrizione = ?, 
+                copertina = ?, 
+                menu = ?, 
+                proprietario = ?, 
+                categoria = ?, 
+                paroleChiave = ?, 
+                promo = ?, 
+                citta = ?, 
+                telefono = ? 
+                WHERE id = ?`; // Aggiungi la condizione WHERE per aggiornare il ristorante specifico
+    
+            this.open();
+            this.db.run(sql, [nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono, id], function (err) {
+                if (err) return reject(err);
+                resolve(this.changes); // Restituisce il numero di righe modificate
             });
             this.close();
         });

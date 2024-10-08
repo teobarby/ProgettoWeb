@@ -122,14 +122,16 @@
                                                 </div>
                                             </div>
                                         <% }); %>
+                                        <div class="text-center mt-4">
+                                            <% if (recensioni.length > 4) { %>
+                                                <button id="loadMoreReviews" class="btn btn-outline-dark">Visualizza altre recensioni</button>
+                                            <% } %>
+                                        </div>
                                     <% } else { %>
                                         <div class="alert alert-info small-text">
                                             😞 Nessuna recensione disponibile. Sii il primo a scrivere una recensione!
                                         </div>
                                     <% } %>
-                                    <div class="text-center mt-4">
-                                        <button id="loadMoreReviews" class="btn btn-outline-dark">Visualizza altre recensioni</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
