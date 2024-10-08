@@ -118,13 +118,38 @@ passport.serializeUser(function(user, cb) {
                 console.error('Errore durante il logout:', err);
                 return res.status(500).json({ message: 'Errore durante il logout.' });
             }
-            res.status(200).json({ message: `Utente ${username} eliminato con successo.`, loggedOut: true });
+            res.status(200).json({ message: 'Utente e ristorante eliminati con successo, logout eseguito.' }); // Risposta di successo
         });
     } catch (err) {
         console.error('Errore durante l\'eliminazione dell\'utente:', err);
         res.status(500).json({ message: 'Errore durante l\'eliminazione dell\'utente.' });
     }
 });
+
+
+app.delete('/delete-rest/:username', async (req, res) => {
+    const username = req.params.username;
+    console.log('Eliminazione richiesta per utente:', username);
+
+    const db = new DataBase();
+
+    try {
+        const ristorante = await db.getRistoranteUsername(username);
+        if (ristorante && ristorante.length > 0) {
+            const ristoranteId = ristorante[0].id; // Assicurati che l'ID esista
+            console.log(`Eliminazione del ristorante con ID: ${ristoranteId}`);
+
+            await db.deleteRistorante(ristoranteId); // Elimina il ristorante
+        }
+        res.status(200).json({ message: 'Utente e ristorante eliminati con successo, logout eseguito.' }); // Risposta di successo
+
+    } catch (err) {
+        console.error('Errore durante l\'eliminazione del ristorante:', err);
+        res.status(500).json({ message: 'Errore durante l\'eliminazione del ristorante.' });
+    }
+});
+
+
 
 app.use('/', indexRouter);
 app.use('/', authRouter);

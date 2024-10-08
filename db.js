@@ -74,7 +74,7 @@ class DataBase {
             this.db.run(query, [id], function(err) {
                 if (err) {
                     console.error('Errore durante l\'eliminazione del ristorante:', err);
-                    return reject(err);
+                    reject(err);
                 }
                 resolve(this.changes); // this.changes contiene il numero di righe eliminate
             });

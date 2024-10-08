@@ -70,6 +70,8 @@
                     <div class="text-center mt-5">
                         <% if (possiedeRistorante) { %>
                             <button type="button" class="btn btn-outline-dark mb-4" data-bs-toggle="modal" data-bs-target="#informazioniRistoranteModal" onclick="caricaInfoRistorante()">Modifica Ristorante</button>
+                            <button type="button" class="btn btn-outline-danger mb-4 ms-2" data-bs-toggle="modal" data-bs-target="#eliminaRistoranteModal" onclick="eliminaRistorante()">Elimina Ristorante</button>
+
                         <% } else { %>
                             <button type="button" class="btn btn-outline-dark mb-4" data-bs-toggle="modal" data-bs-target="#informazioniRistoranteModal">Aggiungi il tuo Ristorante</button>
                         <% } %>
@@ -88,11 +90,30 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <p>Sei sicuro di voler eliminare il tuo account? Questa azione è <strong>irreversibile</strong> e tutti i tuoi dati andranno persi. Non sarà possibile tornare indietro.</p>
+                  <p>Sei sicuro di voler eliminare il tuo account? Questa azione è <strong>irreversibile</strong> e tutti i tuoi dati e quelli del tuo ristorante (se presenti) andranno persi. Non sarà possibile tornare indietro.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark ms-4" data-bs-dismiss="modal">Annulla</button>
                     <button type="button" class="btn btn-outline-danger ms-2" id="confirmDeleteButton" data-username="<%= username %>">Conferma Eliminazione</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="eliminaRistoranteModal" tabindex="-1" aria-labelledby="modificaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modificaModalLabel">Conferma Eliminazione Ristorante</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Sei sicuro di voler eliminare il tuo Ristorante? Questa azione è <strong>irreversibile</strong> e tutti i tuoi dati andranno persi. Non sarà possibile tornare indietro.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark ms-4" data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-outline-danger ms-2" id="confirmDeleteRestaurantButton" data-username="<%= username %>">Conferma Eliminazione</button>
                 </div>
               </div>
             </div>
@@ -155,15 +176,22 @@
                         </div>
                         <div class="mb-3">
                             <label for="immagineCopertinaInput" class="form-label">Immagine di copertina (JPEG, JPG)</label>
-                            <input type="file" class="form-control shadow-sm" id="immagineCopertinaInput" name="immagineCopertinaInput" accept=".jpg,.jpeg" <% if (possiedeRistorante) { %> required <% } %>>
-                            <small class="text-muted">Inserisci l'immagine di copertina del tuo ristorante</small>
+                            <input type="file" class="form-control shadow-sm" id="immagineCopertinaInput" name="immagineCopertinaInput" accept=".jpg,.jpeg" <% if (!possiedeRistorante) { %> required <% } %>>
+                            <% if(possiedeRistorante) { %>
+                                <small class="text-muted">Se vuoi modificare la copertina carica il file, altrimenti lascia il campo vuoto.</small>
+                            <% } else { %>
+                                <small class="text-muted">Inserisci l'immagine di copertina</small>
+                            <% } %> 
                         </div>
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoria</label>
                             <select class="form-select shadow-sm" name="categoria" aria-label="Seleziona categoria" required>
-                                <option selected disabled>Seleziona categoria...</option>
-                                <% categorie.forEach(categoria => { %> 
-                                    <option value="<%= categoria.nome %>"><%= categoria.nome %></option>                               
+                                <option >Seleziona categoria...</option>
+                                <% categorie.forEach(categoria => { %>
+                                    <option value="<%= categoria.nome %>" 
+                                        <%= (ristoranti.length > 0 && ristoranti[0].categoria === categoria.nome) ? 'selected' : '' %>>
+                                        <%= categoria.nome %>
+                                    </option>
                                 <% }) %>
                             </select>
                         </div>
@@ -217,12 +245,26 @@
                         </div>
                         <div class="mb-3">
                             <label for="menuPDFInput" class="form-label">Menu (PDF)</label>
-                            <input type="file" class="form-control shadow-sm" id="menuPDFInput" name="menuPDFInput" accept=".pdf" <% if (possiedeRistorante) { %> required <% } %>>
-                            <small class="text-muted">Carica il menu in formato PDF</small>
+                            <input type="file" class="form-control shadow-sm" id="menuPDFInput" name="menuPDFInput" accept=".pdf" <% if (!possiedeRistorante) { %> required <% } %>>
+                            <% if(possiedeRistorante) { %>
+                                <small class="text-muted">Se vuoi modificare menu, carica il nuovo PDF, altrimenti lascia il campo vuoto.</small>
+                            <% } else { %>
+                                <small class="text-muted">Carica il menu in formato PDF</small>
+                            <% } %> 
+
+
+                           
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-outline-dark ">Aggiungi ristorante</button>
-                        </div>
+                        <% if(possiedeRistorante) { %>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-outline-dark ">Conferma Modifiche</button>
+                            </div>
+                        <% } else { %>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-outline-dark ">Aggiungi ristorante</button>
+                            </div>
+                        <% } %>
+                        
                     </form>
                 </div>
             </div>
@@ -241,15 +283,50 @@
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
+        }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();  // Ottieni il messaggio di successo
+            } else {
+                return response.json().then(data => { throw new Error(data.message); });
+            }
+        })
+        .then(data => {
+            console.log(data.message);  // Log del messaggio di successo
+            window.location.href = `/?_=${new Date().getTime()}`;  // Forza il caricamento di una nuova pagina
+        })
+        .catch(error => {
+            console.error('Errore durante l\'eliminazione:', error);
+            alert('Errore durante l\'eliminazione: ' + error.message);
+        });
+    });
+
+
+
+
+    document.getElementById('confirmDeleteRestaurantButton').addEventListener('click', function() {
+        const username = this.getAttribute('data-username');  // Ottiene l'username dall'attributo data-username
+        console.log('Eliminazione richiesta per:', username);  // Log per controllare l'username
+
+
+
+        fetch(`/delete-rest/${username}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
             }
         })
         .then(response => {
             if (response.ok) {
-                alert('Utente eliminato con successo.');
-                window.location.href = '/';  // Redirigi dopo l'eliminazione
+                return response.json();  // Ottieni il messaggio di successo
             } else {
                 return response.json().then(data => { throw new Error(data.message); });
             }
+        })
+        .then(data => {
+            console.log(data.message);  // Log del messaggio di successo
+            window.location.href = `/?_=${new Date().getTime()}`;  // Forza il caricamento di una nuova pagina
         })
         .catch(error => {
             console.error('Errore durante l\'eliminazione:', error);
