@@ -50,6 +50,8 @@ router.get('/profilo', async (req, res, next) => {
   }
 });
 
+
+
 router.get('/inserisci-ristorante', (req, res) => {
   db.getCategorie((err, categorie) => {
       if (err) {
@@ -158,25 +160,6 @@ router.post('/inserisci-ristorante', upload.fields([
   }
 });
 
-
-
-
-
-
-router.get('/modifica-ristorante', (req, res) => {
-  const username = req.session.username;
-  db.getRistoranteUsername(username)
-      .then(ristoranti => {
-          if (!ristoranti || ristoranti.length === 0) {
-              return res.status(404).send('Nessun ristorante trovato');
-          }
-          res.render('inserisci-ristorante', { ristoranti });
-      })
-      .catch(err => {
-          console.error(err);
-          res.status(500).send('Errore durante il recupero dei ristoranti');
-      });
-});
 
 
 
@@ -337,6 +320,37 @@ router.delete('/delete-rest/:username', async (req, res) => {
       console.error('Errore durante l\'eliminazione del ristorante:', err);
       res.status(500).json({ message: 'Errore durante l\'eliminazione del ristorante.' });
   }
+});
+
+
+router.post('/update-profilo', (req, res) => {
+  // Estrai i dati dal corpo della richiesta
+  const { nuovoUsername, nome, cognome, email, cellulare } = req.body;
+  const username = req.session.username;
+  console.log(`Username attuale: ${username}`); // Aggiungi questa riga per il debug
+
+
+  // Verifica che i dati siano presenti
+  if (!nuovoUsername || !nome || !cognome || !email || !cellulare) {
+      return res.status(400).send('Tutti i campi sono obbligatori.');
+  }
+
+
+  // Chiamata alla funzione per aggiornare il profilo
+  db.updateProfilo(username, nome, cognome, email, cellulare, nuovoUsername)
+      .then(changes => {
+          if (changes > 0) {
+            req.session.username = null; // o req.session.destroy()
+
+             res.redirect('/login'); // Modifica la pagina di successo se necessario
+          } else {
+              res.status(404).send('Nessun utente trovato con questo username.');
+          }
+      })
+      .catch(err => {
+          console.error('Errore durante l\'aggiornamento del profilo:', err);
+          res.status(500).send('Errore interno del server.');
+      });
 });
 
 

@@ -126,26 +126,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="modificaForm">
+                        <form action="/update-profilo" method="POST" id="modificaForm">
                             <div class="mb-3">
                                 <label for="nomeInput" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nomeModalInput" required>
+                                <input type="text" class="form-control" name="nome" id="nomeModalInput" value="<%= nome %>"  maxlength="20" required>
                             </div>
                             <div class="mb-3">
                                 <label for="cognomeInput" class="form-label">Cognome</label>
-                                <input type="text" class="form-control" id="cognomeModalInput" required>
+                                <input type="text" class="form-control" name="cognome" id="cognomeModalInput" value="<%= cognome %>"  maxlength="25" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="usernameInput" class="form-label">Username</label>
+                                <input type="text" class="form-control" name="nuovoUsername" id="UsernameModalInput" value="<%= username %>"  maxlength="30" required>
                             </div>
                             <div class="mb-3">
                                 <label for="emailInput" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="emailModalInput" required>
+                                <input type="email" class="form-control" name="email" id="emailModalInput" value="<%= email %>"  maxlength="30" required>
                             </div>
                             <div class="mb-3">
                                 <label for="telefonoInput" class="form-label">Telefono</label>
-                                <input type="tel" class="form-control" id="telefonoModalInput" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="preferenzeInput" class="form-label">Preferenze Alimentari</label>
-                                <input type="text" class="form-control" id="preferenzeModalInput" required>
+                                <input type="tel" class="form-control" name="cellulare" id="telefonoModalInput" value="<%= cellulare %>"  pattern="[0-9]*" maxlength="15" required>
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary topmarg">Modifica</button>

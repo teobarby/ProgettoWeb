@@ -98,6 +98,28 @@ class DataBase {
         });
     }
 
+
+    updateProfilo(username, nome, cognome, email, cellulare, nuovoUsername) {
+        return new Promise((resolve, reject) => {
+            // Definisci la query SQL per aggiornare i dettagli dell'utente
+            const sql = `UPDATE Registrati 
+                         SET nome = ?, cognome = ?, email = ?, cellulare = ?, username = ? 
+                         WHERE username = ?`;
+            this.open();
+            // Esegui la query con i valori passati come parametri
+            this.db.run(sql, [nome, cognome, email, cellulare, nuovoUsername, username], function(err) {
+                if (err) {
+                    console.error('Errore durante l\'update:', err);
+                    return reject(err);
+                }
+                console.log(`Update con successo: ${username}`);
+                resolve(this.changes); // 'this.changes' contiene il numero di righe aggiornate
+            });
+            this.close();
+        });
+    }
+
+
     trovaUtenteUsername(username) {
         return new Promise((resolve, reject) => {
             const sql = `SELECT *
