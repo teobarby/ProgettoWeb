@@ -93,14 +93,18 @@
                                             <%= (ristorante[0] && ristorante[0].valutazione_media) || 'N/A' %> su 5
                                         </span>
                                     </h4>
-                                    <% if(username) { %>
+                                    <% if(username && !possiedeRecensione) { %>
                                     <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#recensioneModal">
                                         Scrivi una Recensione
                                     </a>
-                                    <% } else { %>
-                                    <a href="/login" class="btn btn-outline-dark">
-                                        Accedi per inserire una recensione
-                                    </a>
+                                    <% } else if (possiedeRecensione){ %>
+                                        <a>
+                                            <button type="button" class="btn btn-outline-danger ms-2" id="confirmDeleteButton" data-username="<%= username %>" data-ristorante-id="<%= ristorante[0].id %>"> Elimina la tua recensioene</button>
+                                        </a>
+                                    <% } else {%>
+                                        <a href="/login" class="btn btn-outline-dark">
+                                            Accedi per inserire una recensione
+                                        </a>
                                     <% } %>
                                 </div>
                     
@@ -268,6 +272,32 @@
     
     
 
+    document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+    const username = this.getAttribute('data-username');  // Ottiene l'username dall'attributo data-username
+    const ristoranteId = this.getAttribute('data-ristorante-id'); // Ottiene l'ID del ristorante dall'attributo data-ristorante-id
+    console.log('Eliminazione richiesta per:', username, 'ristorante ID:', ristoranteId);  // Log per controllare l'username e l'ID del ristorante
+
+    fetch(`/delete-rec/${username}/${ristoranteId}`, {  // Includi l'ristoranteId nella richiesta
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(data => { throw new Error(data.message); });
+        }
+        return response.json();  // Ottieni il messaggio di successo
+    })
+    .then(data => {
+        console.log('Recensione eliminata con successo:', data.message);  // Log del messaggio di successo
+        location.reload();  // Ricarica la pagina per riflettere la cancellazione
+    })
+    .catch(error => {
+        console.error('Errore durante l\'eliminazione:', error);
+        alert('Errore durante l\'eliminazione: ' + error.message);
+    });
+});
     
     
 </script>

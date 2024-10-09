@@ -82,6 +82,22 @@ class DataBase {
         });
     }
 
+    deleteRec(username, id) {
+        return new Promise((resolve, reject) => {
+            const sql = `DELETE FROM Recensioni WHERE scrittore = ? AND ristorante = ?`;
+            this.open();
+            this.db.run(sql, [username, id], (err) => {
+                if (err) {
+                    console.error('Errore durante l\'eliminazione della recensione:', err);
+                    return reject(err);
+                }
+                console.log(`Recensione eliminata con successo per scrittore: ${username}, ristorante ID: ${id}`);
+                resolve();
+            });
+            this.close();
+        });
+    }
+
     trovaUtenteUsername(username) {
         return new Promise((resolve, reject) => {
             const sql = `SELECT *
@@ -127,6 +143,21 @@ class DataBase {
             this.close();
         });
     }
+
+    getRecRestUsername(username, id) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT * FROM Recensioni
+                         WHERE scrittore = ? AND ristorante = ?` 
+            this.open();
+            this.db.all(sql, [username, id], (err, row) => {
+                if (err) return reject(err);
+                resolve(row);
+            });
+            this.close();
+        });
+    }
+
+    
 
     getInfoRistorante(id) {
         return new Promise((resolve, reject) => {
@@ -186,6 +217,22 @@ class DataBase {
             this.close();
         });
     }
+
+    possiedeRecensione(username, id) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT *
+                         FROM Recensioni
+                         WHERE scrittore = ? AND ristorante = ?`;
+    
+            this.open();
+            this.db.get(sql, [username, id], (err, row) => {
+                if (err) return reject(err);
+                resolve(row); // Restituisce 'row' che dovrebbe contenere i dati del ristorante
+            });
+            this.close();
+        });
+    }
+
 
     get(sql, params = []) {
         return new Promise((resolve, reject) => {

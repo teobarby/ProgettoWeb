@@ -326,7 +326,7 @@
         })
         .then(data => {
             console.log(data.message);  // Log del messaggio di successo
-            window.location.href = `/?_=${new Date().getTime()}`;  // Forza il caricamento di una nuova pagina
+            location.reload();  // Ricarica la pagina per riflettere la cancellazione
         })
         .catch(error => {
             console.error('Errore durante l\'eliminazione:', error);

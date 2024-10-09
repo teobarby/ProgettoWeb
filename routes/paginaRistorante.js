@@ -11,7 +11,10 @@ const fs = require('fs'); // Aggiungi questa riga
 // Aggiungi questa route per gestire la visualizzazione di un ristorante specifico
 router.get('/ristorante/:id', async function(req, res, next) {
   const ristoranteId = req.params.id;
-
+  const username = req.session.username;
+  const recensioneRelativa = db.getRecRestUsername(username, ristoranteId);
+  const recensione = await db.possiedeRecensione(username, ristoranteId);
+  const possiedeRecensione = !!recensione;
   try {
     // Esegui una query per ottenere le informazioni del ristorante specifico
     const ristorante = await db.getInfoRistorante(ristoranteId); // Passa l'ID del ristorante alla funzione
@@ -20,7 +23,7 @@ router.get('/ristorante/:id', async function(req, res, next) {
       return res.status(404).send('Ristorante non trovato'); // Se non esiste, ritorna un 404
     }
 
-    return res.render('paginaRistorante', { title: 'Ristorante', ristorante, username: req.session.username });
+    return res.render('paginaRistorante', { title: 'Ristorante', ristorante, username, possiedeRecensione });
 
   } catch (err) {
     console.log("Errore nel caricamento del ristorante:", err);
@@ -97,6 +100,26 @@ router.post('/inserisci-recensione', upload.fields([
   } catch (err) {
       console.error('Errore durante l\'inserimento della recensione:', err);
       res.status(500).send('Errore durante l\'inserimento della recensione');
+  }
+});
+
+
+
+
+
+router.delete('/delete-rec/:username/:ristoranteId', async (req, res) => {
+  const username = req.params.username;
+  const ristoranteId = req.params.ristoranteId; // Aggiungi questo
+  console.log('Eliminazione richiesta per utente:', username);
+
+  const db = new DataBase();
+
+  try {
+      await db.deleteRec(username, ristoranteId);
+      return res.json({ message: 'Recensione eliminata con successo.' }); // Rispondi con un messaggio JSON
+  } catch (err) {
+      console.error('Errore durante l\'eliminazione:', err);
+      return res.status(500).json({ message: 'Errore durante l\'eliminazione.' });
   }
 });
 
