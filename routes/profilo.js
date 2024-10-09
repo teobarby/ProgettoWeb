@@ -284,6 +284,4 @@ router.post('/modifica-ristorante', upload.fields([
   }
 });
 
-
-
 module.exports = router;
