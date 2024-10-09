@@ -93,9 +93,15 @@
                                             <%= (ristorante[0] && ristorante[0].valutazione_media) || 'N/A' %> su 5
                                         </span>
                                     </h4>
+                                    <% if(!username) { %>
                                     <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#recensioneModal">
                                         Scrivi una Recensione
                                     </a>
+                                    <% } else { %>
+                                    <a href="/login" class="btn btn-outline-dark">
+                                        Accedi per inserire una recensione
+                                    </a>
+                                    <% } %>
                                 </div>
                     
                                 <div id="reviewsContainer">
