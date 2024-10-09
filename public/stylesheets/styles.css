@@ -22,6 +22,11 @@
   color: white;
 }
 
+#confirmDeletePrenButton:hover {
+  background-color: red;
+  border-color: red;
+  color: white;
+}
 
 
 .dropdown-item {
@@ -48,6 +53,12 @@
 }
 
 #confirmDeleteRestaurantButton:hover {
+  background-color: red;
+  border-color: red;
+  color: white;
+}
+
+#confirmDeleteRecButton:hover {
   background-color: red;
   border-color: red;
   color: white;

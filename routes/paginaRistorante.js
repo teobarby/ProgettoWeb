@@ -122,6 +122,31 @@ router.delete('/delete-rec/:username/:ristoranteId', async (req, res) => {
   }
 });
 
+router.post('/prenota', async (req, res) => {
+  const ristoranteId = req.body.ristoranteId;
+  const dataPrenotazione = req.body.dataPrenotazione;
+  const oraPrenotazione = req.body.oraPrenotazione;
+  const numeroPersone = req.body.numeroPersone;
 
+  console.log('Dati della richiesta:', req.body); // Controlla cosa contiene req.body
+  console.log('ristoranteId:', ristoranteId); // Aggiungi questo log
+
+  try {
+      // Aggiungi la prenotazione al database
+      await db.addPrenotazione({
+          cliente: req.session.username,
+          ristoranteId,
+          data: dataPrenotazione,
+          orario: oraPrenotazione,
+          npersone: numeroPersone
+      });
+
+      res.redirect(`/ristorante/${ristoranteId}`);
+  } catch (err) {
+      console.error('Errore durante l\'inserimento della prenotazione:', err);
+      res.status(500).send('Errore durante l\'inserimento della prenotazione');
+  }
+});
+  
 
 module.exports = router;

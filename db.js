@@ -373,6 +373,26 @@ class DataBase {
         });
     }
 
+    getPrenotazioniUsername(username) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT *
+                         FROM Prenotazioni
+                         WHERE cliente = ?
+                         ORDER BY data DESC, orario DESC`;
+    
+            this.open();
+            this.db.all(sql, [username], (err, rows) => {
+                this.close(); // Chiudi la connessione qui, dopo la query
+    
+                if (err) {
+                    return reject(err); // Rifiuta la promessa se c'è un errore
+                }
+    
+                resolve(rows); // Restituisce 'rows' che contiene tutti i ristoranti
+            });
+        });
+    }
+
     modRistorante({ id, nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono }) {
         return new Promise((resolve, reject) => {
             console.log({
@@ -409,6 +429,34 @@ class DataBase {
             this.close(); // Chiudi la connessione una volta che il comando è stato eseguito
         });
     }
+
+
+    addPrenotazione({ cliente, ristoranteId, data, orario, npersone }) {
+        return new Promise((resolve, reject) => {
+
+            console.log({
+                cliente, ristoranteId, data, orario, npersone
+            });
+    
+            const sql = `INSERT INTO Prenotazioni (cliente, ristorante, data, orario, npersone) 
+                         VALUES (?, ?, ?, ?, ?)`;
+    
+            this.open(); // Assicurati che open() gestisca la connessione correttamente
+    
+            // Esegui la query
+            this.db.run(sql, [cliente, ristoranteId, data, orario, npersone], function (err) {
+                if (err) {
+                    return reject(err);
+                }
+    
+                resolve(this.lastID); // Restituisce l'ID dell'ultima recensione inserita
+            });
+    
+            this.close(); // Chiudi la connessione dopo l'esecuzione della query
+        });
+    }
+
+    
 }
 
 module.exports = DataBase;

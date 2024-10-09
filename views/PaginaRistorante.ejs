@@ -63,8 +63,14 @@
                         <div class="mb-4 mt-2"> <%= ristorante[0].orari %></div>
         
                         <!-- Pulsanti Menu e Prenota -->
-                        <a href="<%= ristorante[0].menu %>" class="btn btn-outline-dark me-3" download>Scopri il Menu</a>
-                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prenotaModal">Prenota</a>
+                        <a href="<%= ristorante[0].menu %>" class="btn btn-outline-dark me-3" download="<%= ristorante[0].nome_ristorante %> : Menu">Scopri il Menu</a>
+                        <% if(username) { %>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prenotaModal">Prenota</a>
+                        <% } else { %>
+                            <a href="/login" class="btn btn-primary">
+                                Accedi e Prenota
+                            </a>
+                        <% } %>
                      </div>
                      
                     <!-- Sezione promozioni -->
@@ -161,19 +167,20 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="/prenota" method="POST">
                             <div class="mb-3">
                                 <label for="dataPrenotazione" class="form-label">Data</label>
-                                <input type="date" class="form-control" id="dataPrenotazione" required min="2024-05-17">
+                                <input type="date" name="dataPrenotazione" class="form-control" id="dataPrenotazione" required min="2024-11-01">
                             </div>
                             <div class="mb-3">
                                 <label for="oraPrenotazione" class="form-label">Ora</label>
-                                <input type="time" class="form-control" id="oraPrenotazione" required>
+                                <input type="time" name="oraPrenotazione" class="form-control" id="oraPrenotazione" required>
                             </div>
                             <div class="mb-3">
                                 <label for="numeroPersone" class="form-label">Numero di persone</label>
-                                <input type="number" class="form-control" id="numeroPersone" required min="1">
+                                <input type="number" name="numeroPersone" class="form-control" id="numeroPersone" required min="1">
                             </div>
+                            <input type="hidden" name="ristoranteId" value="<%= ristorante[0].id %>">
                             <button type="submit" class="btn btn-primary">Prenota</button>
                         </form>
                     </div>

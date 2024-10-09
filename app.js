@@ -12,6 +12,7 @@ const authRouter = require('./routes/auth');
 const iscrizioneRouter = require('./routes/iscrizione');
 const ristoranteRouter = require('./routes/paginaRistorante');
 const profiloRouter = require('./routes/profilo');
+const cronoRouter = require('./routes/crono');
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -103,6 +104,8 @@ app.use('/', authRouter);
 app.use('/', iscrizioneRouter);
 app.use('/', ristoranteRouter);
 app.use('/', profiloRouter);
+app.use('/', cronoRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

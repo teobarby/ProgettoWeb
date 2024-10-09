@@ -1,0 +1,123 @@
+<!DOCTYPE ejs>
+<html lang="it">
+    <%- include('partials/head'); %>
+    
+    <body>
+        <%- include('partials/navbar'); %>
+        <!-- Header-->
+        <header class="bg-dark pt-5 pb-5">
+            <div class="container px-4 px-lg-5 my-2">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Prenotazioni</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Visualizza e gestisci le tue prenotazioni</p>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <% if (prenotazioni.length > 0) { %>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <% prenotazioni.forEach(function(prenotazione) { %>
+                                <div class="col">
+                                    <div class="card h-100 shadow-sm border-0">
+                                        <div class="card-body p-4">
+                                            <h5 class="card-title text-primary mb-3">Prenotazione per <strong><%= ristoranti.find(r => r.id === prenotazione.ristorante).nome %>
+                                            </strong></h5>
+                                            <div class="card-text">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span><i class="bi bi-person"></i> <strong>Cliente:</strong></span>
+                                                    <span><%= prenotazione.cliente %></span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span><i class="bi bi-calendar"></i> <strong>Data:</strong></span>
+                                                    <span><%= prenotazione.data %></span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span><i class="bi bi-clock"></i> <strong>Ora:</strong></span>
+                                                    <span><%= prenotazione.orario %></span>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <span><i class="bi bi-people"></i> <strong>Numero di persone:</strong></span>
+                                                    <span><%= prenotazione.npersone %></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer bg-transparent text-center border-0">
+                                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#prenotaModificaModal">Modifica Prenotazione</button>
+                                            <button class="btn btn-outline-danger" id="eliminaButton" data-bs-toggle="modal" data-bs-target="#eliminaPrenotazioneModal">Annulla Prenotazione</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } else { %>
+                        <div class="alert alert-info text-center">Non hai effettuato prenotazioni.</div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    <%- include('partials/footer') %>
+
+
+    <div class="modal fade" id="prenotaModificaModal" tabindex="-1" aria-labelledby="prenotaModificaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="prenotaModalLabel">Prenota un tavolo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/modifica-prenotazione" method="POST">
+                        <div class="mb-3">
+                            <label for="dataPrenotazione" class="form-label">Data</label>
+                            <input type="date" name="dataPrenotazione" class="form-control" id="dataPrenotazione" required min="2024-11-01">
+                        </div>
+                        <div class="mb-3">
+                            <label for="oraPrenotazione" class="form-label">Ora</label>
+                            <input type="time" name="oraPrenotazione" class="form-control" id="oraPrenotazione" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="numeroPersone" class="form-label">Numero di persone</label>
+                            <input type="number" name="numeroPersone" class="form-control" id="numeroPersone" required min="1">
+                        </div>
+                        <input type="hidden" name="ristoranteId" value="<%= ristoranti[0].id %>">
+                        <button type="submit" class="btn btn-primary">Prenota</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="eliminaPrenotazioneModal" tabindex="-1" aria-labelledby="modificaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modificaModalLabel">Conferma Eliminazione Account</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Sei sicuro di voler eliminare la prenotazione? Questa azione è <strong>irreversibile</strong> e potresti perdere il tavolo riservato.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark ms-4" data-bs-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-outline-danger ms-2" id="confirmDeletePrenButton" data-username="<%= username %>">Conferma Eliminazione</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    </body>
+</html>
