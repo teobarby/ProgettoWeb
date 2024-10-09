@@ -12,7 +12,7 @@
                     <p class="lead fw-normal text-white-50 mb-0">Visualizza e gestisci le informazioni del tuo profilo.</p>
                     <button class="btn btn-outline-light topmarg" id="modificaButton" data-bs-toggle="modal" data-bs-target="#modificaModal">Modifica</button>
                     
-                    <button class="btn btn-outline-light topmarg ms-2" id="eliminaButton" data-bs-toggle="modal" data-bs-target="#eliminaModal">Elimina Account</button>
+                    <button class="btn btn-outline-light topmarg ms-2" id="eliminaRistoranteButton" data-bs-toggle="modal" data-bs-target="#eliminaModal">Elimina Account</button>
                 </div>
             </div>
         </header>
@@ -70,7 +70,7 @@
                     <div class="text-center mt-5">
                         <% if (possiedeRistorante) { %>
                             <button type="button" class="btn btn-outline-dark mb-4" data-bs-toggle="modal" data-bs-target="#informazioniRistoranteModal" onclick="caricaInfoRistorante()">Modifica Ristorante</button>
-                            <button type="button" class="btn btn-outline-danger mb-4 ms-2" data-bs-toggle="modal" data-bs-target="#eliminaRistoranteModal" onclick="eliminaRistorante()">Elimina Ristorante</button>
+                            <button type="button" class="btn btn-outline-danger mb-4 ms-2" data-bs-toggle="modal" id="eliminaButton" data-bs-target="#eliminaRistoranteModal" onclick="eliminaRistorante()">Elimina Ristorante</button>
 
                         <% } else { %>
                             <button type="button" class="btn btn-outline-dark mb-4" data-bs-toggle="modal" data-bs-target="#informazioniRistoranteModal">Aggiungi il tuo Ristorante</button>
@@ -186,7 +186,7 @@
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoria</label>
                             <select class="form-select shadow-sm" name="categoria" aria-label="Seleziona categoria" required>
-                                <option >Seleziona categoria...</option>
+                                <option value="" disabled selected>Seleziona categoria...</option>
                                 <% categorie.forEach(categoria => { %>
                                     <option value="<%= categoria.nome %>" 
                                         <%= (ristoranti.length > 0 && ristoranti[0].categoria === categoria.nome) ? 'selected' : '' %>>
