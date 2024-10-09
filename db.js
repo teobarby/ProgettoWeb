@@ -131,6 +131,7 @@ class DataBase {
     getInfoRistorante(id) {
         return new Promise((resolve, reject) => {
             const sql = `SELECT 
+                Ristoranti.id,
                 Ristoranti.nome AS nome_ristorante,
                 Ristoranti.indirizzo,
                 Ristoranti.orari,
@@ -256,6 +257,31 @@ class DataBase {
                 resolve(this.lastID); // Restituisce l'ID dell'ultimo ristorante inserito
             });
             this.close();
+        });
+    }
+
+
+    addRecensione({ scrittore, ristoranteId, testo, valutazione, dataora, immagine, titolo }) {
+        return new Promise((resolve, reject) => {
+            console.log({
+                scrittore, ristoranteId, testo, valutazione, dataora, immagine, titolo
+            });
+    
+            const sql = `INSERT INTO Recensioni (scrittore, ristorante, testo, valutazione, dataora, immagine, titolo) 
+                         VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    
+            this.open(); // Assicurati che open() gestisca la connessione correttamente
+    
+            // Esegui la query
+            this.db.run(sql, [scrittore, ristoranteId, testo, valutazione, dataora, immagine, titolo], function (err) {
+                if (err) {
+                    return reject(err);
+                }
+    
+                resolve(this.lastID); // Restituisce l'ID dell'ultima recensione inserita
+            });
+    
+            this.close(); // Chiudi la connessione dopo l'esecuzione della query
         });
     }
 

@@ -72,18 +72,10 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Gestione del form per inviare recensioni
-    var formRecensione = document.querySelector('#recensioneModal form');
-    if (formRecensione) {
-        formRecensione.addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Logica di invio della recensione
-            alert('Recensione inviata!');
-        });
-    }
-
     
 
+
+    
 
     
     

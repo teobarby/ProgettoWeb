@@ -22,6 +22,25 @@
   color: white;
 }
 
+
+
+.dropdown-item {
+  color: #000000; /* Grigio scuro di base */
+  transition: color 0.3s ease, background-color 0.3s ease; /* Animazione fluida */
+}
+
+.dropdown-item:hover, 
+.dropdown-item:focus { /*rgba(248, 249, 250, 0.41) più chiaro quando hover o focus */
+  background-color: #e9ecef; /* Sfondo leggero */
+  text-decoration: none;
+}
+
+.dropdown-item:active {
+  color: #343a40; /* Grigio scuro quando viene cliccato */
+  background-color: #b6b8b9; /* Cambia lo sfondo leggermente quando attivo */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
 #confirmDeleteButton:hover {
   background-color: red;
   border-color: red;
@@ -75,11 +94,7 @@
   object-fit: cover;
 }
 
-.carousel {
-  max-width: 1100px;
-  margin: 0 auto;
-  
-}
+
 
 .restaurant-info h1 {
   font-size: 34px;
