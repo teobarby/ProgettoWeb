@@ -12,23 +12,23 @@
                     <div class="card-body">
                         <form class="mb-0" action="/signup" method="post">
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="nome" id="inputName" type="text" placeholder="Nome" required pattern=".*\S.*" title="Il campo Nome non può essere vuoto o contenere solo spazi."/>
+                                <input class="form-control" name="nome" id="inputName" type="text" placeholder="Nome" required pattern=".*\S.*" title="Il campo Nome non può essere vuoto o contenere solo spazi." maxlength="20"/>
                                 <label for="inputName">Nome</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="cognome" id="inputSurname" type="text" placeholder="Cognome" required pattern=".*\S.*" title="Il campo Nome non può essere vuoto o contenere solo spazi."/>
+                                <input class="form-control" name="cognome" id="inputSurname" type="text" placeholder="Cognome" required pattern=".*\S.*" title="Il campo Cognome non può essere vuoto o contenere solo spazi." maxlength="25"/>
                                 <label for="inputSurname">Cognome</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="username" name="username" type="text" placeholder="Username" autocomplete="username" required>
+                                <input class="form-control" id="username" name="username" type="text" placeholder="Username" autocomplete="username" required maxlength="30"/>
                                 <label for="username">Username</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="email" id="inputEmail" type="email" placeholder="name@example.com" required/>
+                                <input class="form-control" name="email" id="inputEmail" type="email" placeholder="name@example.com" required maxlength="30"/>
                                 <label for="inputEmail">Email</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" name="cellulare" id="inputPhone" type="tel" placeholder="Telefono" required pattern="[0-9]*" title="Inserisci un numero di telefono valido" />
+                                <input class="form-control" name="cellulare" id="inputPhone" type="tel" placeholder="Telefono" required pattern="[0-9]*" title="Inserisci un numero di telefono valido" maxlength="15"/>
                                 <label for="inputPhone">Telefono</label>
                             </div>
                             <div class="form-floating mb-3">
@@ -41,6 +41,7 @@
                                     required 
                                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" 
                                     title="La password deve contenere almeno 8 caratteri, di cui almeno una maiuscola, una minuscola e un simbolo." 
+                                    maxlength="30"
                                 />
                                 <label for="inputPassword">Password</label>
                             </div>

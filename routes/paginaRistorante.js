@@ -95,8 +95,7 @@ router.post('/inserisci-recensione', upload.fields([
           titolo
       });
 
-      // Reindirizza a una pagina di successo o mostra un messaggio di successo
-      res.redirect('/'); // Reindirizza a una pagina di successo
+      res.redirect(`/ristorante/${ristoranteId}`);
   } catch (err) {
       console.error('Errore durante l\'inserimento della recensione:', err);
       res.status(500).send('Errore durante l\'inserimento della recensione');

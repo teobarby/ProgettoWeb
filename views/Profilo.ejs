@@ -171,7 +171,7 @@
                     <form action="/<%= possiedeRistorante ? 'modifica-ristorante' : 'inserisci-ristorante' %>" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="nomeRistoranteInput" class="form-label">Nome del ristorante</label>
-                            <input type="text" class="form-control shadow-sm" id="nomeRistoranteInput" name="nomeRistorante" value="<%= (ristoranti.length > 0 ? ristoranti[0].nome : '') %>" required>
+                            <input type="text" class="form-control shadow-sm" id="nomeRistoranteInput" name="nomeRistorante" value="<%= (ristoranti.length > 0 ? ristoranti[0].nome : '') %>" required maxlength="30">
                         </div>
                         <div class="mb-3">
                             <label for="immagineCopertinaInput" class="form-label">Immagine di copertina (JPEG, JPG)</label>
@@ -196,23 +196,23 @@
                         </div>
                         <div class="mb-3">
                             <label for="cittàInput" class="form-label">Città</label>
-                            <input type="text" class="form-control shadow-sm" id="cittàInput" name="citta" value="<%= (ristoranti.length > 0 ? ristoranti[0].citta : '') %>" required>
+                            <input type="text" class="form-control shadow-sm" id="cittàInput" name="citta" value="<%= (ristoranti.length > 0 ? ristoranti[0].citta : '') %>" required maxlength="40">
                         </div>
                         <div class="mb-3">
                             <label for="indirizzoInput" class="form-label">Indirizzo</label>
-                            <input type="text" class="form-control shadow-sm" id="indirizzoInput" name="indirizzo" value="<%= (ristoranti.length > 0 ? ristoranti[0].indirizzo : '') %>" required>
+                            <input type="text" class="form-control shadow-sm" id="indirizzoInput" name="indirizzo" value="<%= (ristoranti.length > 0 ? ristoranti[0].indirizzo : '') %>" required maxlength="40">
                         </div>
                         <div class="mb-3">
                             <label for="telefonoInput" class="form-label">Telefono</label>
-                            <input type="number" class="form-control shadow-sm" id="telefonoInput" name="telefono" value="<%= (ristoranti.length > 0 ? ristoranti[0].telefono : '') %>" required>
+                            <input type="tel" class="form-control shadow-sm" id="telefonoInput" name="telefono" pattern="[0-9]*" value="<%= (ristoranti.length > 0 ? ristoranti[0].telefono : '') %>" required">
                         </div>
                         <div class="mb-3">
                             <label for="paroleChiaveInput" class="form-label">Parole chiave</label>
-                            <input type="text" class="form-control shadow-sm" id="paroleChiaveInput" name="paroleChiave" value="<%= (ristoranti.length > 0 ? ristoranti[0].paroleChiave : '') %>" required>
+                            <input type="text" class="form-control shadow-sm" id="paroleChiaveInput" name="paroleChiave" value="<%= (ristoranti.length > 0 ? ristoranti[0].paroleChiave : '') %>" required maxlength="30">
                         </div>
                         <div class="mb-3">
                             <label for="descrizioneRistoranteInput" class="form-label">Descrizione</label>
-                            <textarea class="form-control shadow-sm" id="descrizioneRistoranteInput" name="descrizione" rows="4" required><%= (ristoranti.length > 0 ? ristoranti[0].descrizione : '') %></textarea>
+                            <textarea class="form-control shadow-sm" id="descrizioneRistoranteInput" name="descrizione" rows="4" required maxlength="600"><%= (ristoranti.length > 0 ? ristoranti[0].descrizione : '') %> </textarea>
                         </div>
                         <label class="form-label">Orari di apertura</label>
                         <div class="card p-3 mb-4 shadow-sm">
@@ -240,7 +240,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="promoAttiveInput" class="form-label">Promo attive</label>
-                            <textarea class="form-control shadow-sm" id="promoAttiveInput" name="promo" rows="2" required><%= (ristoranti.length > 0 ? ristoranti[0].promo : '') %></textarea>
+                            <textarea class="form-control shadow-sm" id="promoAttiveInput" name="promo" rows="2" required maxlength="100"><%= (ristoranti.length > 0 ? ristoranti[0].promo : '') %></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="menuPDFInput" class="form-label">Menu (PDF)</label>
