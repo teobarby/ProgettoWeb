@@ -284,4 +284,61 @@ router.post('/modifica-ristorante', upload.fields([
   }
 });
 
+
+
+router.delete('/delete-user/:username', async (req, res) => {
+  const username = req.params.username;
+  console.log('Eliminazione richiesta per utente:', username);
+
+  const db = new DataBase();
+
+  try {
+      const ristorante = await db.getRistoranteUsername(username);
+      if (ristorante && ristorante.length > 0) {
+          const ristoranteId = ristorante[0].id; // Assicurati che l'ID esista
+          console.log(`Eliminazione del ristorante con ID: ${ristoranteId}`);
+
+          await db.deleteRistorante(ristoranteId); // Elimina il ristorante
+      }
+
+      await db.deleteUserByUsername(username); // Elimina l'utente
+      req.session.destroy(err => {
+          if (err) {
+              console.error('Errore durante il logout:', err);
+              return res.status(500).json({ message: 'Errore durante il logout.' });
+          }
+          res.status(200).json({ message: 'Utente e ristorante eliminati con successo, logout eseguito.' }); // Risposta di successo
+      });
+  } catch (err) {
+      console.error('Errore durante l\'eliminazione dell\'utente:', err);
+      res.status(500).json({ message: 'Errore durante l\'eliminazione dell\'utente.' });
+  }
+});
+
+
+
+router.delete('/delete-rest/:username', async (req, res) => {
+  const username = req.params.username;
+  console.log('Eliminazione richiesta per utente:', username);
+
+  const db = new DataBase();
+
+  try {
+      const ristorante = await db.getRistoranteUsername(username);
+      if (ristorante && ristorante.length > 0) {
+          const ristoranteId = ristorante[0].id; // Assicurati che l'ID esista
+          console.log(`Eliminazione del ristorante con ID: ${ristoranteId}`);
+
+          await db.deleteRistorante(ristoranteId); // Elimina il ristorante
+      }
+      res.status(200).json({ message: 'Utente e ristorante eliminati con successo, logout eseguito.' }); // Risposta di successo
+
+  } catch (err) {
+      console.error('Errore durante l\'eliminazione del ristorante:', err);
+      res.status(500).json({ message: 'Errore durante l\'eliminazione del ristorante.' });
+  }
+});
+
+
+
 module.exports = router;
