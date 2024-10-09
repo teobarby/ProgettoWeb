@@ -175,9 +175,9 @@
                         </div>
                         <div class="mb-3">
                             <label for="immagineCopertinaInput" class="form-label">Immagine di copertina (JPEG, JPG)</label>
-                            <input type="file" class="form-control shadow-sm" id="immagineCopertinaInput" name="immagineCopertinaInput" accept=".jpg,.jpeg" <% if (!possiedeRistorante) { %> required <% } %>>
+                            <input type="file" class="form-control shadow-sm" id="immagineCopertinaInput" name="immagineCopertinaInput" accept=".jpg,.jpeg" required>
                             <% if(possiedeRistorante) { %>
-                                <small class="text-muted">Se vuoi modificare la copertina carica il file, altrimenti lascia il campo vuoto.</small>
+                                <small class="text-muted">Carica la nuova copertina (jpg, jpeg)</small>
                             <% } else { %>
                                 <small class="text-muted">Inserisci l'immagine di copertina</small>
                             <% } %> 
@@ -244,11 +244,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="menuPDFInput" class="form-label">Menu (PDF)</label>
-                            <input type="file" class="form-control shadow-sm" id="menuPDFInput" name="menuPDFInput" accept=".pdf" <% if (!possiedeRistorante) { %> required <% } %>>
+                            <input type="file" class="form-control shadow-sm" id="menuPDFInput" name="menuPDFInput" accept=".pdf" required>
                             <% if(possiedeRistorante) { %>
-                                <small class="text-muted">Se vuoi modificare menu, carica il nuovo PDF, altrimenti lascia il campo vuoto.</small>
+                                <small class="text-muted">Carica il nuovo menu (pdf)</small>
                             <% } else { %>
-                                <small class="text-muted">Carica il menu in formato PDF</small>
+                                <small class="text-muted">Carica il menu (pdf)</small>
                             <% } %> 
 
 
