@@ -10,6 +10,9 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-0">
                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Iscriviti a GustoInRete</h3></div>
                     <div class="card-body">
+                        <% if (typeof errorMessage !== 'undefined') { %>
+                            <div class="alert alert-danger"><%= errorMessage %></div>
+                        <% } %>
                         <form class="mb-0" action="/signup" method="post">
                             <div class="form-floating mb-3">
                                 <input class="form-control" name="nome" id="inputName" type="text" placeholder="Nome" required pattern=".*\S.*" title="Il campo Nome non può essere vuoto o contenere solo spazi." maxlength="20"/>

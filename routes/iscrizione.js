@@ -21,7 +21,13 @@ router.post('/signup', async function(req, res, next) {
       // Calcola l'hash della password
       const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
 
-      
+      usernameTemp = req.body.username;
+      const userExists = await db.trovaUtenteUsername(usernameTemp);
+
+      if(userExists) {
+        return res.render('iscrizione', {
+          errorMessage: 'Questo username è già in uso, scegline un altro.', username: req.session.username, title: 'Iscrizione'});
+      }
 
       // Esegui la query di inserimento
       await db.run('INSERT INTO Registrati (username, nome, cognome, email, cellulare, password) VALUES (?, ?, ?, ?, ?, ?)', [
