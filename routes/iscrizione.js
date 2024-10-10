@@ -21,6 +21,8 @@ router.post('/signup', async function(req, res, next) {
       // Calcola l'hash della password
       const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
 
+      
+
       // Esegui la query di inserimento
       await db.run('INSERT INTO Registrati (username, nome, cognome, email, cellulare, password) VALUES (?, ?, ?, ?, ?, ?)', [
           req.body.username,
@@ -42,7 +44,7 @@ router.post('/signup', async function(req, res, next) {
           if (err) {
               return next(err);
           }
-          res.redirect('/');
+          res.redirect('/login');
       });
   } catch (err) {
       return next(err);

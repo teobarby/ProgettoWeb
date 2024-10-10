@@ -21,7 +21,8 @@
                     <% ristorante.forEach((recensione, index) => { %>
                         <% if (recensione.immagine) { %>  <!-- Controlla se immagine non è NULL -->
                             <div class="carousel-item <%= !firstImageLoaded ? 'active' : '' %> mb-2">
-                                <img src="/<%= recensione.immagine %>" class="d-block w-100" alt="Immagine Recensione">                            </div>
+                                <img src="/<%= recensione.immagine %>" class="d-block w-100" alt="Immagine Recensione">                            
+                            </div>
                             <% firstImageLoaded = true; %>  <!-- Imposta la prima immagine valida come attiva -->
                         <% } %>
                     <% }); %>
@@ -46,8 +47,11 @@
                         <h1 class="pasq d-inline-block ms-5 mt-1" ><%= ristorante[0].nome_ristorante %></h1>
         
                         <!-- Bottone per i preferiti -->
-                        <button id="favoriteButton" class=" mb-4 btn btn-outline-danger float-end rounded-circle position-relative" aria-label="Aggiungi ai Preferiti" style="width: 50px; height: 50px; border: none; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: background-color 0.3s, transform 0.2s;">
-                            <i class="bi bi-heart" style="font-size: 24px; color: red;"></i>
+                        <button id="favoriteButton" class="btn btn-outline-danger mb-4 float-end rounded-circle position-relative" aria-label="Aggiungi ai Preferiti" style="width: 50px; height: 50px; border: none; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: background-color 0.3s, transform 0.2s;">
+                            <i id="favoriteIcon" class="bi bi-heart" style="font-size: 24px; color: red;"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-danger" id="favoriteCount" style="font-size: 0.75rem; margin-left: -10px; margin-top: -10px;">
+                                <%= nPreferiti %>
+                            </span>
                         </button>
         
                         <!-- Descrizione dinamica -->
@@ -256,26 +260,6 @@
 </html>
 
 <script>
-
-
-        // Seleziona il bottone
-    const favoriteButton = document.getElementById('favoriteButton');
-
-    // Aggiungi un evento di clic
-    favoriteButton.addEventListener('click', function() {
-        // Controlla se il bottone ha già il colore di sfondo rosso
-        if (favoriteButton.classList.contains('btn-outline-danger')) {
-            // Cambia il colore di sfondo e il tipo di bottone
-            favoriteButton.classList.remove('btn-outline-danger');
-            favoriteButton.classList.add('btn-danger');
-        } else {
-            // Torna allo stato iniziale
-            favoriteButton.classList.remove('btn-danger');
-            favoriteButton.classList.add('btn-outline-danger');
-        }
-    });
-
-
     
     
 

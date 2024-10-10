@@ -135,6 +135,27 @@ class DataBase {
         });
     }
 
+    getNPreferiti(ristoranteId) {
+        return new Promise((resolve, reject) => {
+
+            const sql = `SELECT COUNT(*) AS count 
+                         FROM Preferisce 
+                         WHERE ristorante = ?`;
+    
+            this.open(); // Apri la connessione al database
+            
+            this.db.all(sql, [ristoranteId], (err, row) => {
+                if (err) {
+                    console.error("Errore nella query:", err); // Stampa l'errore per il debug
+                    return reject(err);
+                }
+                resolve(row); // Restituisce l'intero oggetto, quindi puoi accedere a row.count
+            });
+        }).finally(() => {
+            this.close(); // Chiudi il database dopo aver eseguito la query
+        });
+    }
+
    
     getCategorie() {
         return new Promise((resolve, reject) => {

@@ -12,18 +12,26 @@ const fs = require('fs'); // Aggiungi questa riga
 router.get('/ristorante/:id', async function(req, res, next) {
   const ristoranteId = req.params.id;
   const username = req.session.username;
-  const recensioneRelativa = db.getRecRestUsername(username, ristoranteId);
   const recensione = await db.possiedeRecensione(username, ristoranteId);
   const possiedeRecensione = !!recensione;
+// Recupera il numero di preferiti per un ristorante specifico
+  
+
   try {
+
+    
     // Esegui una query per ottenere le informazioni del ristorante specifico
-    const ristorante = await db.getInfoRistorante(ristoranteId); // Passa l'ID del ristorante alla funzione
+    const ristorante = await db.getInfoRistorante(ristoranteId);
+    const preferiti = await db.getNPreferiti(ristoranteId); // Qui ottieni l'oggetto con il conteggio
+
+    nPreferiti = preferiti[0].count;
 
     if (!ristorante || ristorante.length === 0) {
       return res.status(404).send('Ristorante non trovato'); // Se non esiste, ritorna un 404
     }
 
-    return res.render('paginaRistorante', { title: 'Ristorante', ristorante, username, possiedeRecensione });
+
+    return res.render('paginaRistorante', { title: 'Ristorante', ristorante, username, possiedeRecensione, nPreferiti});
 
   } catch (err) {
     console.log("Errore nel caricamento del ristorante:", err);
