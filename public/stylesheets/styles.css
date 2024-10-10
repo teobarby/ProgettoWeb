@@ -28,6 +28,16 @@
   color: white;
 }
 
+.img-custom {
+  max-width: 300px; /* Imposta la larghezza massima desiderata */
+  height: auto; /* Mantiene le proporzioni */
+}
+
+#confirmDeletePrenButtonModal:hover {
+  background-color: red;
+  border-color: red;
+  color: white;
+}
 
 .dropdown-item {
   color: #000000; /* Grigio scuro di base */

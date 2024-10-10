@@ -456,7 +456,24 @@ class DataBase {
         });
     }
 
-    
+
+    deletePrenByUsernameRistorante(username, ristorante, data, orario) {
+        return new Promise((resolve, reject) => {
+            const sql = `DELETE FROM Prenotazioni 
+            WHERE cliente = ? AND ristorante = ? AND data = ? AND orario = ?`;
+            this.open();
+            this.db.run(sql, [username, ristorante, data, orario], (err) => {
+                if (err) {
+                    console.error('Errore durante l\'eliminazione della prenotazione:', err);
+                    return reject(err);
+                }
+                console.log(`Prenotazione eliminata con successo per scrittore: ${username}, ristorante ID: ${ristorante}, del ${data} alle ${orario}`);
+                resolve();
+            });
+            this.close();
+        });
+    }
+
 }
 
 module.exports = DataBase;
