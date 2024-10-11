@@ -171,7 +171,7 @@
                     <form action="/<%= possiedeRistorante ? 'modifica-ristorante' : 'inserisci-ristorante' %>" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="nomeRistoranteInput" class="form-label">Nome del ristorante</label>
-                            <input type="text" class="form-control shadow-sm" id="nomeRistoranteInput" name="nomeRistorante" value="<%= (ristoranti.length > 0 ? ristoranti[0].nome : '') %>" required maxlength="30">
+                            <input type="text" class="form-control shadow-sm" id="nomeRistoranteInput" name="nomeRistorante" value="<%= (ristoranti.length > 0 ? ristoranti[0].nome : '') %>" required maxlength="30" pattern=".*\S+.*" title="Il campo Nome non può essere vuoto o contenere solo spazi.">
                         </div>
                         <div class="mb-3">
                             <label for="immagineCopertinaInput" class="form-label">Immagine di copertina (JPEG, JPG)</label>
@@ -184,7 +184,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoria</label>
-                            <select class="form-select shadow-sm" name="categoria" aria-label="Seleziona categoria" required>
+                            <select class="form-select shadow-sm" name="categoria" aria-label="Seleziona categoria"required>
                                 <option value="" disabled selected>Seleziona categoria...</option>
                                 <% categorie.forEach(categoria => { %>
                                     <option value="<%= categoria.nome %>" 
@@ -196,19 +196,21 @@
                         </div>
                         <div class="mb-3">
                             <label for="cittàInput" class="form-label">Città</label>
-                            <input type="text" class="form-control shadow-sm" id="cittàInput" name="citta" value="<%= (ristoranti.length > 0 ? ristoranti[0].citta : '') %>" required maxlength="40">
+                            <input type="text" class="form-control shadow-sm" id="cittàInput" name="citta" value="<%= (ristoranti.length > 0 ? ristoranti[0].citta : '') %>" required maxlength="40" pattern=".*\S+.*" title="Il campo Città non può essere vuoto o contenere solo spazi.">
                         </div>
                         <div class="mb-3">
                             <label for="indirizzoInput" class="form-label">Indirizzo</label>
-                            <input type="text" class="form-control shadow-sm" id="indirizzoInput" name="indirizzo" value="<%= (ristoranti.length > 0 ? ristoranti[0].indirizzo : '') %>" required maxlength="40">
+                            <input type="text" class="form-control shadow-sm" id="indirizzoInput" name="indirizzo" value="<%= (ristoranti.length > 0 ? ristoranti[0].indirizzo : '') %>" required maxlength="40" pattern=".*\S+.*" title="Il campo Indirizzo non può essere vuoto o contenere solo spazi.">
                         </div>
                         <div class="mb-3">
                             <label for="telefonoInput" class="form-label">Telefono</label>
-                            <input type="tel" class="form-control shadow-sm" id="telefonoInput" name="telefono" pattern="[0-9]*" value="<%= (ristoranti.length > 0 ? ristoranti[0].telefono : '') %>" required">
+                            <input type="tel" class="form-control shadow-sm" id="telefonoInput" name="telefono" pattern="[0-9]*" value="<%= (ristoranti.length > 0 ? ristoranti[0].telefono : '') %>" required title="Il campo Telefono non può essere vuoto o contenere solo spazi.">
                         </div>
                         <div class="mb-3">
                             <label for="paroleChiaveInput" class="form-label">Parole chiave</label>
-                            <input type="text" class="form-control shadow-sm" id="paroleChiaveInput" name="paroleChiave" value="<%= (ristoranti.length > 0 ? ristoranti[0].paroleChiave : '') %>" required maxlength="30">
+                            <input type="text" class="form-control shadow-sm" id="paroleChiaveInput" name="paroleChiave" value="<%= (ristoranti.length > 0 ? ristoranti[0].paroleChiave : '') %>" required maxlength="30" pattern=".*\S+.*" title="Il campo Parole chiave non può essere vuoto o contenere solo spazi.">
+                            <small class="text-muted">Separare le parole da una virgola</small>
+
                         </div>
                         <div class="mb-3">
                             <label for="descrizioneRistoranteInput" class="form-label">Descrizione</label>
@@ -218,29 +220,29 @@
                         <div class="card p-3 mb-4 shadow-sm">
                             <div class="row mb-3">
                                 <div class="col-md-6 mb-3">
-                                    <label for="orarioAperturaPranzo" class="form-label">Apertura Pranzo</label>
-                                    <input type="time" class="form-control shadow-sm" id="orarioAperturaPranzo" name="orarioAperturaPranzo" value="<%= (ristoranti.length > 0 ? ristoranti[0].orarioAperturaPranzo : '') %>">
+                                    <label for="orarioAperturaPranzo" class="form-label">Prima Apertura</label>
+                                    <input type="time" class="form-control shadow-sm" id="orarioAperturaPranzo" name="orarioAperturaPranzo" value="<%= (ristoranti.length > 0 ? ristoranti[0].orarioAperturaPranzo : '') %>" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="orarioChiusuraPranzo" class="form-label">Chiusura Pranzo</label>
-                                    <input type="time" class="form-control shadow-sm" id="orarioChiusuraPranzo" name="orarioChiusuraPranzo" value="<%= (ristoranti.length > 0 ? ristoranti[0].orarioChiusuraPranzo : '') %>">
+                                    <label for="orarioChiusuraPranzo" class="form-label">Prima Chiusura</label>
+                                    <input type="time" class="form-control shadow-sm" id="orarioChiusuraPranzo" name="orarioChiusuraPranzo" value="<%= (ristoranti.length > 0 ? ristoranti[0].orarioChiusuraPranzo : '') %>" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="orarioAperturaCena" class="form-label">Apertura Cena</label>
+                                    <label for="orarioAperturaCena" class="form-label">Seconda Apertura</label>
                                     <input type="time" class="form-control shadow-sm" id="orarioAperturaCena" name="orarioAperturaCena" value="<%= (ristoranti.length > 0 ? ristoranti[0].orarioAperturaCena : '') %>">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="orarioChiusuraCena" class="form-label">Chiusura Cena</label>
+                                    <label for="orarioChiusuraCena" class="form-label">Seconda Chiusura</label>
                                     <input type="time" class="form-control shadow-sm" id="orarioChiusuraCena" name="orarioChiusuraCena" value="<%= (ristoranti.length > 0 ? ristoranti[0].orarioChiusuraCena : '') %>">
                                 </div>
                             </div>
-                            <small class="text-muted">Se il tuo Ristorante apre una sola volta al giorno, lascia vuoti gli altri campi</small>
+                            <small class="text-muted">Se il tuo Ristorante apre una sola volta al giorno, lascia vuoti i campi in basso</small>
                         </div>
                         <div class="mb-3">
                             <label for="promoAttiveInput" class="form-label">Promo attive</label>
-                            <textarea class="form-control shadow-sm" id="promoAttiveInput" name="promo" rows="2" required maxlength="100"><%= (ristoranti.length > 0 ? ristoranti[0].promo : '') %></textarea>
+                            <textarea class="form-control shadow-sm" id="promoAttiveInput" name="promo" rows="2" maxlength="100"><%= (ristoranti.length > 0 ? ristoranti[0].promo : '') %></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="menuPDFInput" class="form-label">Menu (PDF)</label>

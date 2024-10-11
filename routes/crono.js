@@ -19,6 +19,7 @@ router.get('/CronologiaPrenotazioni', async function(req, res, next) {
   });
 
 
+
   router.delete('/delete-pren/:username/:ristorante/:data/:orario', async (req, res) => {
     const username = req.params.username;
     const ristorante = req.params.ristorante;

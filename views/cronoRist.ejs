@@ -1,0 +1,158 @@
+<!DOCTYPE ejs>
+<html lang="it">
+    <%- include('partials/head'); %>
+    
+    <body>
+        <%- include('partials/navbar'); %>
+        <!-- Header-->
+        <header class="bg-dark pt-5 pb-5">
+            <div class="container px-4 px-lg-5 my-2">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Prenotazioni</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Visualizza e gestisci le prenotazioni del tuo Ristorante</p>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-12">
+                <% if (possiedeRistorante) { %>
+                    <% if (prenotazioni.length > 0) { %>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <% prenotazioni.forEach(function(prenotazione) { %>
+                                <div class="col">
+                                    <div class="card h-100 shadow-sm border-0">
+                                        <div class="card-body p-4">
+                                            <h5 class="card-title mb-3">Prenotazione per <strong><%= ristoranti.find(r => r.id === prenotazione.ristorante).nome %>
+                                                <hr>
+                                            </strong></h5>
+                                            <div class="card-text">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span><i class="bi bi-person"></i> <strong>Cliente:</strong></span>
+                                                    <span><%= prenotazione.cliente %></span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span><i class="bi bi-calendar"></i> <strong>Data:</strong></span>
+                                                    <span><%= prenotazione.data %></span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span><i class="bi bi-clock"></i> <strong>Ora:</strong></span>
+                                                    <span><%= prenotazione.orario %></span>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <span><i class="bi bi-people"></i> <strong>Numero di persone:</strong></span>
+                                                    <span><%= prenotazione.npersone %></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer bg-transparent text-center border-0">
+                                            <button class="btn btn-outline-danger" id="confirmDeletePrenButtonModal" data-bs-toggle="modal" data-bs-target="#eliminaPrenotazioneModal"
+                                            data-ristorante="<%= prenotazione.ristorante %>"
+                                            data-data="<%= prenotazione.data %>"
+                                            data-ora="<%= prenotazione.orario %>"
+                                            data-id="<%= prenotazione.id %>">Annulla Prenotazione</button>          
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } else { %>
+                        <div class="alert alert-info text-center">😔 Nessuna prenotazione per il tuo ristorante.</div>
+                    <% } %>
+                <% } else { %>
+                    <div class="alert alert-info text-center">Forse è il momento giusto per aggiungere il tuo Ristorante. Vai nella sezione Profilo e aggiungi il tuo ristorante.</div>
+                <% } %>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    <%- include('partials/footer') %>
+
+
+    <div class="modal fade" id="eliminaPrenotazioneModal" tabindex="-1" aria-labelledby="modificaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modificaModalLabel">Conferma Eliminazione Account</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Sei sicuro di voler eliminare la prenotazione? Questa azione è <strong>irreversibile</strong> e potresti perdere il tavolo riservato.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark ms-4" data-bs-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-outline-danger ms-2" id="confirmDeletePrenButton" data-username="<%= username %>">Conferma Eliminazione</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+    <script>
+
+
+
+document.getElementById('eliminaPrenotazioneModal').addEventListener('show.bs.modal', function(event) {
+    // Bottone che ha attivato la modale
+    const button = event.relatedTarget;
+    const ristorante = button.getAttribute('data-ristorante');
+    const data = button.getAttribute('data-data');
+    const ora = button.getAttribute('data-ora');
+    const username = document.getElementById('confirmDeletePrenButton').getAttribute('data-username');  // Assicurati che l'username sia correttamente impostato
+
+    // Imposta i dati per la conferma
+    document.getElementById('confirmDeletePrenButton').setAttribute('data-ristorante', ristorante);
+    document.getElementById('confirmDeletePrenButton').setAttribute('data-data', data);
+    document.getElementById('confirmDeletePrenButton').setAttribute('data-ora', ora);
+});
+
+document.getElementById('confirmDeletePrenButton').addEventListener('click', function() {
+    const username = this.getAttribute('data-username');  // Ottiene l'username dall'attributo data-username
+    const ristorante = this.getAttribute('data-ristorante');
+    const data = this.getAttribute('data-data');
+    const ora = this.getAttribute('data-ora');
+    
+    console.log('Eliminazione richiesta per:', username, ristorante, data, ora);  // Log per controllare i valori
+    
+    fetch(`/delete-pren/${username}/${ristorante}/${data}/${ora}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();  // Ottieni il messaggio di successo
+        } else {
+            return response.json().then(data => { throw new Error(data.message); });
+        }
+    })
+    .then(data => {
+        console.log(data.message);  // Log del messaggio di successo
+        location.reload();  // Ricarica la pagina per riflettere la cancellazione
+    })
+    .catch(error => {
+        console.error('Errore durante l\'eliminazione:', error);
+        alert('Errore durante l\'eliminazione: ' + error.message);
+    });
+});
+
+
+
+    </script>
+
+
+
+
+    </body>
+</html>

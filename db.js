@@ -414,6 +414,26 @@ class DataBase {
         });
     }
 
+    getPrenotazioniRistorante(ristorante) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT *
+                        FROM Recensioni
+                        WHERE ristorante = ?
+                        ORDER BY dataora DESC`;
+    
+            this.open();
+            this.db.all(sql, [ristorante], (err, rows) => {
+                this.close(); // Chiudi la connessione qui, dopo la query
+    
+                if (err) {
+                    return reject(err); // Rifiuta la promessa se c'è un errore
+                }
+    
+                resolve(rows); // Restituisce 'rows' che contiene tutti i ristoranti
+            });
+        });
+    }
+
     modRistorante({ id, nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono }) {
         return new Promise((resolve, reject) => {
             console.log({

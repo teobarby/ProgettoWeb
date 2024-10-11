@@ -16,6 +16,7 @@ const cronoRouter = require('./routes/crono');
 const chiSiamoRouter = require('./routes/chiSiamo');
 const privacyPolicyRouter = require('./routes/privacyPolicy');
 const terminiRouter = require('./routes/termini');
+const cronoRistRouter = require('./routes/cronoRist');
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -111,6 +112,7 @@ app.use('/', cronoRouter);
 app.use('/', chiSiamoRouter);
 app.use('/', privacyPolicyRouter);
 app.use('/', terminiRouter);
+app.use('/', cronoRistRouter);
 
 
 // catch 404 and forward to error handler
