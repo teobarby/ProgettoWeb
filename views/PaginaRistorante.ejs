@@ -80,8 +80,13 @@
                         </div>
         
                         <!-- Descrizione dinamica -->
-                        <p class="lead mt-3"   style="background-color: #edede9"><%= ristorante[0].descrizione %></p>
-                        <hr>
+                        <p class="lead mt-3" style="background-color: #f5f5ef">
+                            <% if (ristorante[0].descrizione !== ' ' && ristorante[0].descrizione !== null && ristorante[0].descrizione !== '') { %>
+                              <%= ristorante[0].descrizione %>
+                            <% } else { %>
+                              <span style="color: red;">Attenzione: la descrizione non è disponibile.</span>
+                            <% } %>
+                        </p>                        <hr>
 
                         <a href="https://maps.google.com/?q=<%= ristorante[0].indirizzo %>">
                             <i class="bi bi-geo-alt"></i> <%= ristorante[0].indirizzo %>
