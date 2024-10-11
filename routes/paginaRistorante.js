@@ -6,6 +6,7 @@ const multer = require('multer');
 const path = require('path'); // Importa il modulo 'path'
 const upload = multer({ dest: path.join(__dirname, '../public/uploads') });
 const fs = require('fs'); // Aggiungi questa riga
+const { redirect } = require('express/lib/response');
 
 
 // Aggiungi questa route per gestire la visualizzazione di un ristorante specifico
@@ -14,6 +15,7 @@ router.get('/ristorante/:id', async function(req, res, next) {
   const username = req.session.username;
   const recensione = await db.possiedeRecensione(username, ristoranteId);
   const possiedeRecensione = !!recensione;
+  const isFavorite = await db.isFavorite(username, ristoranteId);
 // Recupera il numero di preferiti per un ristorante specifico
   
 
@@ -31,7 +33,7 @@ router.get('/ristorante/:id', async function(req, res, next) {
     }
 
 
-    return res.render('paginaRistorante', { title: 'Ristorante', ristorante, username, possiedeRecensione, nPreferiti});
+    return res.render('paginaRistorante', { title: 'Ristorante', ristorante, username, possiedeRecensione, nPreferiti, isFavorite});
 
   } catch (err) {
     console.log("Errore nel caricamento del ristorante:", err);
@@ -156,5 +158,37 @@ router.post('/prenota', async (req, res) => {
   }
 });
   
+
+
+// In app.js o nel file delle route
+router.post('/aggiungiPreferiti/:ristoranteId', async (req, res) => {
+  const ristoranteId = req.params.ristoranteId;
+  const userId = req.session.username; // Ottieni lo username dell'utente dalla sessione
+
+  if (!userId) {
+    return res.redirect('/login'); // Se l'utente non è loggato, reindirizza al login
+  }
+
+  try {
+    const isFavorite = await db.isFavorite(userId, ristoranteId); // Usa await per attendere il risultato
+
+    if (isFavorite) {
+      // Se è già nei preferiti, lo rimuove
+      await db.rimuoviDaPreferiti(userId, ristoranteId);
+      console.log(`Ristorante ${ristoranteId} rimosso dai preferiti per l'utente ${userId}`);
+    } else {
+      // Altrimenti, lo aggiunge
+      await db.aggiungiAiPreferiti(userId, ristoranteId);
+      console.log(`Ristorante ${ristoranteId} aggiunto ai preferiti per l'utente ${userId}`);
+    }
+    
+    // Reindirizza alla pagina del ristorante
+    res.redirect('/ristorante/' + ristoranteId);
+
+  } catch (error) {
+    console.error('Errore durante la gestione dei preferiti:', error);
+    res.status(500).send('Errore durante la gestione dei preferiti');
+  }
+});
 
 module.exports = router;

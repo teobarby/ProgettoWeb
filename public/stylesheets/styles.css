@@ -95,6 +95,17 @@
   border-radius: 10px; /* Arrotonda gli angoli */
 }
 
+#favoriteButton:hover {
+  background-color: red;
+  color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Ombreggiatura più intensa */
+  transform: scale(1.05); /* Leggero ingrandimento al passaggio del mouse */
+}
+#favoriteButton:active {
+  transform: scale(0.98); /* Rimpicciolisce leggermente al clic */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Riduce l'ombreggiatura */
+}
+
 .stretto {
   width: 200px; /* o un valore più piccolo */
 }

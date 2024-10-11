@@ -54,15 +54,30 @@
                 <div class="col-lg-10 offset-lg-1" >
                     <div class="restaurant-info text-center bg-white p-4 rounded" >
                         <!-- Titolo del ristorante -->
-                        <h1 class="pasq d-inline-block ms-5 mt-1" ><%= ristorante[0].nome_ristorante %></h1>
-        
-                        <!-- Bottone per i preferiti -->
-                        <button id="favoriteButton" class="btn btn-outline-danger mb-4 float-end rounded-circle position-relative" aria-label="Aggiungi ai Preferiti" style="width: 50px; height: 50px; border: none; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: background-color 0.3s, transform 0.2s;">
-                            <i id="favoriteIcon" class="bi bi-heart" style="font-size: 24px; color: red;"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-danger" id="favoriteCount" style="font-size: 0.75rem; margin-left: -10px; margin-top: -10px;">
-                                <%= nPreferiti %>
-                            </span>
-                        </button>
+                        <div class="d-flex justify-content-between align-items-center mt-1 position-relative">
+                            <!-- Nome del ristorante al centro -->
+                            <h1 class="pasq d-inline-block text-center w-100 position-absolute" style="left: 0; right: 0; margin: auto;"><%= ristorante[0].nome_ristorante %></h1>
+                            
+                            <!-- Bottone per i preferiti all'estrema destra -->
+                            <!-- Bottone per i preferiti all'estrema destra -->
+                            <form action="/aggiungiPreferiti/<%= ristorante[0].id %>" class="ms-auto" method="POST">
+
+                                <% if (isFavorite) { %>
+                                    <!-- Se il ristorante è già nei preferiti, pulsante rosso -->
+                                    <button id="favoriteButton" name="favoriteButton" class="btn btn-outline-danger position-relative ms-auto" aria-label="Aggiungi ai Preferiti" 
+                                        style="width: auto; padding: 10px 20px; border-radius: 30px; background-color: red; border: 2px solid red; color: white; font-size: 16px; font-weight: bold; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;">
+                                        Preferiti | <%= nPreferiti %>
+                                    </button>
+                                <% } else { %>
+                                    <!-- Se il ristorante non è nei preferiti, pulsante bianco -->
+                                    <button id="favoriteButton" name="favoriteButton" class="btn btn-outline-danger position-relative ms-auto" aria-label="Aggiungi ai Preferiti" 
+                                        style="width: auto; padding: 10px 20px; border-radius: 30px; background-color: white; border: 2px solid red; color: red; font-size: 16px; font-weight: bold; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;">
+                                        Preferiti | <%= nPreferiti %>
+                                    </button>
+                                <% } %>
+                                
+                            </form>
+                        </div>
         
                         <!-- Descrizione dinamica -->
                         <p class="lead mt-3"   style="background-color: #edede9"><%= ristorante[0].descrizione %></p>
@@ -299,6 +314,9 @@
         alert('Errore durante l\'eliminazione: ' + error.message);
     });
 });
-    
-    
+
+
+
+
+
 </script>

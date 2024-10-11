@@ -1,39 +1,7 @@
 // Assicurati che il documento sia pronto prima di eseguire script
 document.addEventListener("DOMContentLoaded", function() {
 
-    // Prenotazione - Modal
-    var prenotaModal = document.getElementById('prenotaModal');
-    if (prenotaModal) {
-        prenotaModal.addEventListener('show.bs.modal', function (event) {
-            // Puoi aggiungere qualsiasi logica qui per pre-popolare i campi del modal se necessario
-        });
-    }
 
-    // Risposta alla recensione - Modal
-    var replyModal = document.getElementById('replyModal');
-    if (replyModal) {
-        replyModal.addEventListener('show.bs.modal', function (event) {
-            // Aggiungi logica per pre-popolare il modal con i dettagli della recensione
-        });
-    }
-
-    var eliminaModal = document.getElementById('eliminaModal');
-    if (eliminaModal) {
-        eliminaModal.addEventListener('show.bs.modal', function (event) {
-            // Aggiungi logica per pre-popolare il modal con i dettagli della recensione
-        });
-    }
-
-    // Modal per aggiungere una recensione
-    var recensioneModal = document.getElementById('recensioneModal');
-    if (recensioneModal) {
-        recensioneModal.addEventListener('show.bs.modal', function (event) {
-            // Reset dei campi quando si apre il modal
-            document.getElementById('nomeUtente').value = '';
-            document.getElementById('titoloRecensione').value = '';
-            document.getElementById('testoRecensione').value = '';
-        });
-    }
 
     const loadMoreButton = document.getElementById('loadMoreReviews');
     let visibleCount = 4; // Numero iniziale di recensioni visibili
@@ -55,13 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Formato minimo per la data di prenotazione (imposta la data odierna come minimo)
-    var dataPrenotazioneInput = document.getElementById('dataPrenotazione');
-    if (dataPrenotazioneInput) {
-        var today = new Date().toISOString().split('T')[0];
-        dataPrenotazioneInput.setAttribute('min', today);
-    }
-
     // Gestione del form di prenotazione
     var formPrenotazione = document.querySelector('#prenotaModal form');
     if (formPrenotazione) {
@@ -75,10 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
 
 
-    
-
-    
-    
+   
 });
 
 

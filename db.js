@@ -135,25 +135,27 @@ class DataBase {
         });
     }
 
-    getNPreferiti(ristoranteId) {
-        return new Promise((resolve, reject) => {
+    async getNPreferiti(ristoranteId) {
+        try {
+            return await new Promise((resolve, reject) => {
 
-            const sql = `SELECT COUNT(*) AS count 
+                const sql = `SELECT COUNT(*) AS count 
                          FROM Preferisce 
                          WHERE ristorante = ?`;
-    
-            this.open(); // Apri la connessione al database
-            
-            this.db.all(sql, [ristoranteId], (err, row) => {
-                if (err) {
-                    console.error("Errore nella query:", err); // Stampa l'errore per il debug
-                    return reject(err);
-                }
-                resolve(row); // Restituisce l'intero oggetto, quindi puoi accedere a row.count
+
+                this.open(); // Apri la connessione al database
+
+                this.db.all(sql, [ristoranteId], (err, row) => {
+                    if (err) {
+                        console.error("Errore nella query:", err); // Stampa l'errore per il debug
+                        return reject(err);
+                    }
+                    resolve(row); // Restituisce l'intero oggetto, quindi puoi accedere a row.count
+                });
             });
-        }).finally(() => {
+        } finally {
             this.close(); // Chiudi il database dopo aver eseguito la query
-        });
+        }
     }
 
    
@@ -515,6 +517,75 @@ class DataBase {
         });
     }
 
+    aggiungiAiPreferiti(userId, ristoranteId) {
+        return new Promise((resolve, reject) => {
+            const sql = `INSERT INTO Preferisce (username, ristorante) 
+                         VALUES (?, ?)`;
+
+            this.open();
+            this.db.run(sql, [userId, ristoranteId], function(err) {
+                if (err) {
+                    return reject(err);
+                }
+                resolve();
+            });
+
+            this.close();
+        });
+    }
+
+    isFavorite(username, ristoranteId) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT * FROM Preferisce WHERE username = ? AND ristorante = ?`;
+            this.open();
+            this.db.get(sql, [username, ristoranteId], (err, row) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(row !== undefined);
+            });
+            this.close();
+        });
+    }
+
+    rimuoviDaPreferiti(username, ristoranteId) {
+        return new Promise((resolve, reject) => {
+            const sql = `DELETE FROM Preferisce WHERE username = ? AND ristorante = ?`;
+            this.open();
+            this.db.run(sql, [username, ristoranteId], (err) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve();
+            });
+            this.close();
+        });
+    }
+
+
+    getFavoriteRestaurants(username) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT Preferisce.*, Ristoranti.*, AVG(Recensioni.valutazione) AS valutazione_media
+                            FROM Preferisce
+                            LEFT JOIN Ristoranti ON Ristoranti.id = Preferisce.ristorante
+                            JOIN Recensioni ON Recensioni.ristorante = Ristoranti.id
+                            WHERE Preferisce.username = ?
+                            GROUP BY Ristoranti.id`;
+            this.open();
+            this.db.all(sql, [username], (err, rows) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(rows);
+            });
+            this.close();
+        });
+    }
+
+
+
+
 }
+
 
 module.exports = DataBase;
