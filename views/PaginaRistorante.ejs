@@ -10,6 +10,10 @@
                 <div class="carousel-indicators">
                     <% let validImageIndex = 0; %> <!-- Variabile per tenere traccia degli indici validi -->
                     <% ristorante.forEach((recensione, index) => { %>
+                        <% if (validImageIndex === 0 && ristorante[0].copertina) { %>  <!-- Controlla se immagine non è NULL -->
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= validImageIndex %>" class="<%= validImageIndex === 0 ? 'active' : '' %>" aria-label="Slide <%= validImageIndex + 1 %>"></button>
+                            <% validImageIndex++; %>  <!-- Incrementa solo per immagini valide -->
+                        <% } %>
                         <% if (recensione.immagine) { %>  <!-- Controlla se immagine non è NULL -->
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= validImageIndex %>" class="<%= validImageIndex === 0 ? 'active' : '' %>" aria-label="Slide <%= validImageIndex + 1 %>"></button>
                             <% validImageIndex++; %>  <!-- Incrementa solo per immagini valide -->
@@ -19,11 +23,17 @@
                 <div class="carousel-inner">
                     <% let firstImageLoaded = false; %>  <!-- Variabile per tenere traccia della prima immagine valida -->
                     <% ristorante.forEach((recensione, index) => { %>
+                        <% if (ristorante[0].copertina) { %>  <!-- Controlla se immagine non è NULL -->
+                            <div class="carousel-item <%= !firstImageLoaded ? 'active' : '' %> mb-2">
+                                <img src="<%= ristorante[0].copertina %>" class="d-block w-100" alt="Immagine Ristorante">
+                                <% firstImageLoaded = true; %>
+                            </div>
+                        <% } %>
                         <% if (recensione.immagine) { %>  <!-- Controlla se immagine non è NULL -->
                             <div class="carousel-item <%= !firstImageLoaded ? 'active' : '' %> mb-2">
                                 <img src="/<%= recensione.immagine %>" class="d-block w-100" alt="Immagine Recensione">                            
                             </div>
-                            <% firstImageLoaded = true; %>  <!-- Imposta la prima immagine valida come attiva -->
+                              <!-- Imposta la prima immagine valida come attiva -->
                         <% } %>
                     <% }); %>
                 </div>
