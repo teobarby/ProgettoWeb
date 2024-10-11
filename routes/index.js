@@ -31,6 +31,31 @@ router.get('/cerca', async (req, res) => {
   }
 });
 
+router.get('/cercaCat', async (req, res) => {
+  const categoria = req.query.category || '';  // Assicurati di usare 'categoria'
+  console.log(`Cerca per categoria: ${categoria}`); // Corretto: usa 'categoria' qui
+  const title = `Risultati di ricerca per categoria "${categoria}"`;
+  const username = req.session.username || null;
+
+  if (!categoria) {
+      return res.status(400).send('Categoria non specificata');
+  }
+
+  try {
+      const ristoranti = await db.cercaPerCategoria(categoria);
+      console.log(`Ristoranti trovati: ${JSON.stringify(ristoranti)}`);
+
+      if (ristoranti.length === 0) {
+          return res.render('index', { ristoranti: [], title: 'Nessun ristorante trovato', username });
+      }
+
+      res.render('index', { ristoranti, title, username });
+  } catch (error) {
+      console.error('Errore durante la ricerca:', error);
+      res.status(500).send('Errore durante la ricerca');
+  }
+});
+
 router.get('/preferiti', async (req, res) => {
   const username = req.session.username;
   if (!username) {

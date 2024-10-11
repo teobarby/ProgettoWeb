@@ -608,6 +608,31 @@ class DataBase {
         });
     }
 
+
+
+    cercaPerCategoria(categoria) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT Ristoranti.*, AVG(Recensioni.valutazione) AS valutazione_media
+                        FROM Ristoranti 
+                        LEFT JOIN Recensioni ON Recensioni.ristorante = Ristoranti.id 
+                        WHERE categoria = ?
+                        GROUP BY Ristoranti.id
+                        ORDER BY valutazione_media DESC`;
+            this.open();
+            this.db.all(sql, [categoria], (err, rows) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(rows);
+            });
+            this.close();
+        });
+    }
+
+
+
+
+
 }
 
 
