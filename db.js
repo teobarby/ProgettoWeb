@@ -414,15 +414,15 @@ class DataBase {
         });
     }
 
-    getPrenotazioniRistorante(ristorante) {
+    getPrenotazioniRistorante(ristoranteVerifica) {
         return new Promise((resolve, reject) => {
             const sql = `SELECT *
-                        FROM Recensioni
+                        FROM Prenotazioni
                         WHERE ristorante = ?
-                        ORDER BY dataora DESC`;
+                        ORDER BY data DESC, orario DESC`;
     
             this.open();
-            this.db.all(sql, [ristorante], (err, rows) => {
+            this.db.all(sql, [ristoranteVerifica], (err, rows) => {
                 this.close(); // Chiudi la connessione qui, dopo la query
     
                 if (err) {

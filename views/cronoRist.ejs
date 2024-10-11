@@ -48,11 +48,13 @@
                                             </div>
                                         </div>
                                         <div class="card-footer bg-transparent text-center border-0">
-                                            <button class="btn btn-outline-danger" id="confirmDeletePrenButtonModal" data-bs-toggle="modal" data-bs-target="#eliminaPrenotazioneModal"
+                                            <button class="btn btn-outline-danger" id="confirmDeletePrenRistButtonModal" data-bs-toggle="modal" data-bs-target="#eliminaPrenotazioneRistModal"
                                             data-ristorante="<%= prenotazione.ristorante %>"
                                             data-data="<%= prenotazione.data %>"
                                             data-ora="<%= prenotazione.orario %>"
-                                            data-id="<%= prenotazione.id %>">Annulla Prenotazione</button>          
+                                            data-username="<%=prenotazione.cliente %>"
+                                            data-id="<%= prenotazione.id %>">Annulla Prenotazione
+                                        </button> 
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +81,7 @@
     <%- include('partials/footer') %>
 
 
-    <div class="modal fade" id="eliminaPrenotazioneModal" tabindex="-1" aria-labelledby="modificaModalLabel" aria-hidden="true">
+    <div class="modal fade" id="eliminaPrenotazioneRistModal" tabindex="-1" aria-labelledby="modificaModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -87,11 +89,11 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>Sei sicuro di voler eliminare la prenotazione? Questa azione è <strong>irreversibile</strong> e potresti perdere il tavolo riservato.</p>
+              <p>Sei sicuro di voler eliminare la prenotazione? Questa azione è <strong>irreversibile</strong>. Ricorda di contattare il cliente.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark ms-4" data-bs-dismiss="modal">Annulla</button>
-                <button type="button" class="btn btn-outline-danger ms-2" id="confirmDeletePrenButton" data-username="<%= username %>">Conferma Eliminazione</button>
+                <button type="button" class="btn btn-outline-danger ms-2" id="confirmDeletePrenRistButton">Conferma Eliminazione</button>
             </div>
           </div>
         </div>
@@ -102,21 +104,22 @@
 
 
 
-document.getElementById('eliminaPrenotazioneModal').addEventListener('show.bs.modal', function(event) {
+document.getElementById('eliminaPrenotazioneRistModal').addEventListener('show.bs.modal', function(event) {
     // Bottone che ha attivato la modale
     const button = event.relatedTarget;
     const ristorante = button.getAttribute('data-ristorante');
     const data = button.getAttribute('data-data');
     const ora = button.getAttribute('data-ora');
-    const username = document.getElementById('confirmDeletePrenButton').getAttribute('data-username');  // Assicurati che l'username sia correttamente impostato
+    const username = button.getAttribute('data-username');  // Assicurati che l'username sia correttamente impostato
 
     // Imposta i dati per la conferma
-    document.getElementById('confirmDeletePrenButton').setAttribute('data-ristorante', ristorante);
-    document.getElementById('confirmDeletePrenButton').setAttribute('data-data', data);
-    document.getElementById('confirmDeletePrenButton').setAttribute('data-ora', ora);
+    document.getElementById('confirmDeletePrenRistButton').setAttribute('data-username', username);
+    document.getElementById('confirmDeletePrenRistButton').setAttribute('data-ristorante', ristorante);
+    document.getElementById('confirmDeletePrenRistButton').setAttribute('data-data', data);
+    document.getElementById('confirmDeletePrenRistButton').setAttribute('data-ora', ora);
 });
 
-document.getElementById('confirmDeletePrenButton').addEventListener('click', function() {
+document.getElementById('confirmDeletePrenRistButton').addEventListener('click', function() {
     const username = this.getAttribute('data-username');  // Ottiene l'username dall'attributo data-username
     const ristorante = this.getAttribute('data-ristorante');
     const data = this.getAttribute('data-data');
@@ -124,7 +127,7 @@ document.getElementById('confirmDeletePrenButton').addEventListener('click', fun
     
     console.log('Eliminazione richiesta per:', username, ristorante, data, ora);  // Log per controllare i valori
     
-    fetch(`/delete-pren/${username}/${ristorante}/${data}/${ora}`, {
+    fetch(`/delete-preRist/${username}/${ristorante}/${data}/${ora}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
