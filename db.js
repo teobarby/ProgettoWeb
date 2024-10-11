@@ -179,7 +179,8 @@ class DataBase {
             const sql = `SELECT Ristoranti.*, AVG(Recensioni.valutazione) AS valutazione_media 
                         FROM Ristoranti 
                         LEFT JOIN Recensioni ON Ristoranti.id = Recensioni.ristorante 
-                        GROUP BY Ristoranti.id`;
+                        GROUP BY Ristoranti.id
+                        ORDER BY valutazione_media DESC`;
             this.open();
             this.db.all(sql, (err, row) => {
                 if (err) return reject(err);
@@ -570,7 +571,8 @@ class DataBase {
                             LEFT JOIN Ristoranti ON Ristoranti.id = Preferisce.ristorante
                             JOIN Recensioni ON Recensioni.ristorante = Ristoranti.id
                             WHERE Preferisce.username = ?
-                            GROUP BY Ristoranti.id`;
+                            GROUP BY Ristoranti.id
+                            ORDER BY valutazione_media DESC`;
             this.open();
             this.db.all(sql, [username], (err, rows) => {
                 if (err) {
@@ -584,6 +586,27 @@ class DataBase {
 
 
 
+    getTopFavoriteRestaurants() {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT Ristoranti.*, 
+                        COUNT(Preferisce.ristorante) AS numero_preferiti, 
+                        AVG(Recensioni.valutazione) AS valutazione_media
+                        FROM Preferisce
+                        LEFT JOIN Ristoranti ON Ristoranti.id = Preferisce.ristorante
+                        LEFT JOIN Recensioni ON Recensioni.ristorante = Ristoranti.id
+                        GROUP BY Ristoranti.id
+                        ORDER BY numero_preferiti DESC
+                        LIMIT 3`;
+            this.open();
+            this.db.all(sql, (err, rows) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(rows);
+            });
+            this.close();
+        });
+    }
 
 }
 

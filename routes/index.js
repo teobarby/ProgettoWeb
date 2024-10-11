@@ -47,4 +47,17 @@ router.get('/preferiti', async (req, res) => {
   }
 });
 
+router.get('/topPreferiti', async (req, res) => {
+  const username = req.session.username || null;
+  
+  const title = 'Top 10 ristoranti preferiti';
+  try {
+      const ristoranti = await db.getTopFavoriteRestaurants();
+      res.render('index', { ristoranti, title, username });
+  } catch (error) {
+      console.error('Errore durante la gestione dei preferiti:', error);
+      res.status(500).send('Errore durante la gestione dei preferiti');
+  }
+});
+
 module.exports = router;
