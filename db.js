@@ -264,6 +264,21 @@ class DataBase {
         });
     }
 
+    possiedeRistoranteUsername(username, ristoranteId) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT *
+                         FROM Ristoranti
+                         WHERE proprietario = ? AND id = ?`;
+    
+            this.open();
+            this.db.get(sql, [username, ristoranteId], (err, row) => {
+                if (err) return reject(err);
+                resolve(row); // Restituisce 'row' che dovrebbe contenere i dati del ristorante
+            });
+            this.close();
+        });
+    }
+
     possiedeRecensione(username, id) {
         return new Promise((resolve, reject) => {
             const sql = `SELECT *
@@ -629,6 +644,52 @@ class DataBase {
         });
     }
 
+
+
+
+    getUserByUsername(username) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT * FROM Registrati WHERE username = ?`;
+            this.open();
+            this.db.get(sql, [username], (err, row) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(row);
+            });
+            this.close();
+        });
+    }
+
+
+    salvaRispostaAllaRecensione(scrittore, ristorante, proprietario, testo) {
+        return new Promise((resolve, reject) => {
+            const sql = `INSERT INTO Risposte (scrittorerecensione, ristorante, proprietario, testo) 
+                        VALUES (?, ?, ?, ?)`;
+            this.open();
+            this.db.run(sql, [scrittore, ristorante, proprietario, testo], (err) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve();
+            });
+            this.close();
+        });
+    }
+
+    haRisposto(scrittore, ristoranteId, proprietario) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT * FROM Risposte WHERE scrittorerecensione = ? AND ristorante = ? AND proprietario = ?`;
+            this.open();
+            this.db.get(sql, [scrittore, ristoranteId, proprietario], (err, row) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(row !== undefined);
+            });
+            this.close();
+        });
+    }
 
 
 

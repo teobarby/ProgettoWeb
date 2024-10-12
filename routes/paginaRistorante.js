@@ -6,7 +6,6 @@ const multer = require('multer');
 const path = require('path'); // Importa il modulo 'path'
 const upload = multer({ dest: path.join(__dirname, '../public/uploads') });
 const fs = require('fs'); // Aggiungi questa riga
-const { redirect } = require('express/lib/response');
 
 
 // Aggiungi questa route per gestire la visualizzazione di un ristorante specifico
@@ -15,6 +14,7 @@ router.get('/ristorante/:id', async function(req, res, next) {
   const username = req.session.username;
   const recensione = await db.possiedeRecensione(username, ristoranteId);
   const possiedeRecensione = !!recensione;
+  const possiedeRistorante = await db.possiedeRistoranteUsername(username, ristoranteId);
   const isFavorite = await db.isFavorite(username, ristoranteId);
 // Recupera il numero di preferiti per un ristorante specifico
   
@@ -33,7 +33,7 @@ router.get('/ristorante/:id', async function(req, res, next) {
     }
 
 
-    return res.render('paginaRistorante', { title: 'Ristorante', ristorante, username, possiedeRecensione, nPreferiti, isFavorite});
+    return res.render('paginaRistorante', { title: 'Ristorante', ristorante, username, possiedeRecensione, nPreferiti, isFavorite, possiedeRistorante});
 
   } catch (err) {
     console.log("Errore nel caricamento del ristorante:", err);
@@ -160,7 +160,6 @@ router.post('/prenota', async (req, res) => {
   
 
 
-// In app.js o nel file delle route
 router.post('/aggiungiPreferiti/:ristoranteId', async (req, res) => {
   const ristoranteId = req.params.ristoranteId;
   const userId = req.session.username; // Ottieni lo username dell'utente dalla sessione
@@ -190,5 +189,51 @@ router.post('/aggiungiPreferiti/:ristoranteId', async (req, res) => {
     res.status(500).send('Errore durante la gestione dei preferiti');
   }
 });
+
+
+
+
+router.post('/inviaRisposta', async (req, res) => {
+  const scrittore = req.body.scrittore;
+  const proprietario = req.session.username; // Ora puoi usare questo valore
+
+  
+
+  if (!proprietario) {
+      return res.status(401).json({ message: 'Utente non autorizzato.' });
+  }
+
+  try {
+      const ristorante = await db.getRistoranteUsername(proprietario); // Usa proprietario qui
+      const ristoranteId = ristorante[0].id;
+
+      const Risposto = await db.haRisposto(scrittore, ristoranteId, proprietario);
+      const haRisposto = !!Risposto;
+
+      if(haRisposto) {
+        return res.render('error', {title: 'Errore', message: 'Hai già risposto a questa recensione', username: proprietario});
+      }
+
+      if (!ristoranteId) {
+          return res.status(404).json({ message: 'Nessun ristorante trovato per questo proprietario.' });
+      }
+
+      const { testo } = req.body; // Cambia 'replyMessage' in 'testo'
+      if (!testo || testo.trim() === '') {
+          return res.status(400).json({ message: 'Il messaggio non può essere vuoto.' });
+      }
+
+      await db.salvaRispostaAllaRecensione(scrittore, ristoranteId, proprietario, testo);
+      
+      res.redirect(`/ristorante/${ristoranteId}`);
+
+    } catch (err) {
+      console.error('Errore durante l\'invio della risposta:', err);
+      res.status(500).json({ message: 'Errore durante l\'invio della risposta.' });
+  }
+});
+
+
+
 
 module.exports = router;

@@ -1,14 +1,30 @@
-<!DOCTYPE html>
+<!DOCTYPE ejs>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Errore</title>
-</head>
-<body>
-    <h1>Si è verificato un errore!</h1>
-    <p><%= message %></p>
-    <pre><%= error.stack %></pre>
-    <a href="/">Torna alla home</a>
-</body>
+    <%- include('partials/head') %>
+    <body>
+        <%- include('partials/navbar') %>
+
+
+
+        <section class="py-5">
+            <div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+                <div class="card shadow-lg p-4" style="max-width: 600px; background-color: white; border-radius: 10px;">
+                    <div class="text-center">
+                        <!-- Faccina triste -->
+                        <div class="display-1 text-muted mb-3">
+                            😨
+                        </div>
+                        <h2 class="display-6 fw-bold text-black mb-3">Hey non ci provare</h2>
+                        <p class="lead text-muted mb-1"><%= message %></p>
+                        <a href="/" class="btn btn-outline-dark btn-lg mt-4">Torna alla home</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <%- include('partials/footer') %>
+    </body>
 </html>

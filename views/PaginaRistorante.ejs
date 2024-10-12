@@ -152,23 +152,35 @@
                                     <% const recensioni = ristorante.filter(item => item.scrittore); %>
                                     <% if (recensioni.length > 0) { %>
                                         <% recensioni.forEach(function(recensione, index) { %>
-                                            <div class="card mb-3 recensione-item <%= index >= 4 ? 'd-none' : '' %>" data-bs-toggle="modal" data-bs-target="#replyModal" style="cursor: pointer;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title small-text">Recensione di <%= recensione.scrittore || "Utente" %> - <%= recensione.titolo || "Recensione" %></h5>
-                                                    <div class="d-flex align-items-center mb-2">
-                                                        <span class="text-warning me-2">
-                                                            <div class="d-flex justify-content-center small text-warning" style="font-size:14px">
-                                                                <% for (let i = 0; i < Math.round(recensione.valutazione); i++) { %>
-                                                                    <a href="" class="star-link"><i class="bi bi-star-fill"></i></a>
-                                                                <% } %>
-                                                                <% for (let i = 0; i < 5 - Math.round(recensione.valutazione); i++) { %>
-                                                                    <a href="" class="star-link"><i class="bi bi-star"></i></a>
-                                                                <% } %>
-                                                            </div>
-                                                        </span>
-                                                        <span class="text-muted" style="font-size:14px"><%= recensione.valutazione || "N/A" %>.0 su 5</span>
+                                            <div class="card mb-3 recensione-item <%= index >= 4 ? 'd-none' : '' %>" data-bs-toggle="modal" style="cursor: pointer;">
+                                                <div class="card-body d-flex justify-content-between align-items-start">
+                                                    <!-- Parte sinistra: Informazioni sulla recensione -->
+                                                    <div>
+                                                        <h5 class="card-title small-text">Recensione di <%= recensione.scrittore || "Utente" %> - <%= recensione.titolo || "Recensione" %></h5>
+                                                        <div class="d-flex align-items-center mb-2">
+                                                            <span class="text-warning me-2">
+                                                                <div class="d-flex justify-content-center small text-warning" style="font-size:14px">
+                                                                    <% for (let i = 0; i < Math.round(recensione.valutazione); i++) { %>
+                                                                        <a href="" class="star-link"><i class="bi bi-star-fill"></i></a>
+                                                                    <% } %>
+                                                                    <% for (let i = 0; i < 5 - Math.round(recensione.valutazione); i++) { %>
+                                                                        <a href="" class="star-link"><i class="bi bi-star"></i></a>
+                                                                    <% } %>
+                                                                </div>
+                                                            </span>
+                                                            <span class="text-muted" style="font-size:14px"><%= recensione.valutazione || "N/A" %>.0 su 5</span>
+                                                        </div>
+                                                        <p class="card-text" style="font-size:14px"><%= recensione.testo || "Nessun testo disponibile." %></p>
                                                     </div>
-                                                    <p class="card-text" style="font-size:14px"><%= recensione.testo || "Nessun testo disponibile." %></p>
+                                                    
+                                                    <!-- Parte destra: Pulsante Rispondi (solo se il proprietario è loggato) -->
+                                                    <% if (possiedeRistorante) { %>
+                                                        <div class="ml-auto">
+                                                            <button class="open-reply-modal btn btn-outline-dark" data-scrittore="<%= recensione.scrittore %>" data-bs-toggle="modal" data-bs-target="#replyModal">
+                                                                Rispondi
+                                                            </button>
+                                                        </div>
+                                                    <% } %>
                                                 </div>
                                             </div>
                                         <% }); %>
@@ -231,15 +243,16 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="replyForm" action="/inviaRisposta" method="POST">
                             <div class="mb-3">
                                 <label for="replyMessage" class="form-label">Messaggio</label>
-                                <textarea class="form-control" id="replyMessage" rows="4" placeholder="Scrivi il tuo messaggio qui..."></textarea>
+                                <textarea class="form-control" id="replyMessage" name="testo" rows="4" placeholder="Scrivi il tuo messaggio qui..."></textarea>
+                            </div>
+                            <input type="hidden" id="scrittore" name="scrittore" value=""> <!-- Campo nascosto per lo scrittore -->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary me-auto">Invia Risposta</button>
                             </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary me-auto">Invia Risposta</button>
                     </div>
                 </div>
             </div>
@@ -294,32 +307,48 @@
     
 
     document.getElementById('confirmDeleteButton').addEventListener('click', function() {
-    const username = this.getAttribute('data-username');  // Ottiene l'username dall'attributo data-username
-    const ristoranteId = this.getAttribute('data-ristorante-id'); // Ottiene l'ID del ristorante dall'attributo data-ristorante-id
-    console.log('Eliminazione richiesta per:', username, 'ristorante ID:', ristoranteId);  // Log per controllare l'username e l'ID del ristorante
+        const username = this.getAttribute('data-username');  // Ottiene l'username dall'attributo data-username
+        const ristoranteId = this.getAttribute('data-ristorante-id'); // Ottiene l'ID del ristorante dall'attributo data-ristorante-id
+        console.log('Eliminazione richiesta per:', username, 'ristorante ID:', ristoranteId);  // Log per controllare l'username e l'ID del ristorante
 
-    fetch(`/delete-rec/${username}/${ristoranteId}`, {  // Includi l'ristoranteId nella richiesta
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(data => { throw new Error(data.message); });
-        }
-        return response.json();  // Ottieni il messaggio di successo
-    })
-    .then(data => {
-        console.log('Recensione eliminata con successo:', data.message);  // Log del messaggio di successo
-        location.reload();  // Ricarica la pagina per riflettere la cancellazione
-    })
-    .catch(error => {
-        console.error('Errore durante l\'eliminazione:', error);
-        alert('Errore durante l\'eliminazione: ' + error.message);
+
+       
+
+        fetch(`/delete-rec/${username}/${ristoranteId}`, {  // Includi l'ristoranteId nella richiesta
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => { throw new Error(data.message); });
+            }
+            return response.json();  // Ottieni il messaggio di successo
+        })
+        .then(data => {
+            console.log('Recensione eliminata con successo:', data.message);  // Log del messaggio di successo
+            location.reload();  // Ricarica la pagina per riflettere la cancellazione
+        })
+        .catch(error => {
+            console.error('Errore durante l\'eliminazione:', error);
+            alert('Errore durante l\'eliminazione: ' + error.message);
+        });
     });
-});
 
+
+    // Supponendo che tu abbia un pulsante per aprire il modal
+    document.querySelectorAll('.open-reply-modal').forEach(button => {
+        button.addEventListener('click', function() {
+            // Ottieni il valore di scrittore e proprietario
+            const scrittore = this.getAttribute('data-scrittore'); // Supponendo che tu abbia impostato un attributo data
+
+            // Imposta i valori nei campi nascosti
+            document.getElementById('scrittore').value = scrittore;
+            // Apri il modal
+            $('#replyModal').modal('show');
+        });
+    });
 
 
 
