@@ -11,7 +11,7 @@ router.get('/CronologiaPrenotazioni', async function(req, res, next) {
         const ristorantiTutti = await db.getHomePage();
       
       // Passa 'username' alla vista
-        return res.render('crono', { title: 'Crono', prenotazioni: rows, username: req.session.username, ristoranti: ristorantiTutti });
+        return res.render('crono', { title: 'Le tue Prenotazioni', prenotazioni: rows, username: req.session.username, ristoranti: ristorantiTutti });
     } catch (err) {
       console.log("Errore nel caricamento deile prenotazioni:", err);
       res.status(500).send("Errore interno del server");

@@ -1,0 +1,56 @@
+<!DOCTYPE ejs>
+<html lang="it">
+    <%- include('partials/head'); %>
+    
+    <body>
+        <%- include('partials/navbar'); %>
+        <!-- Header-->
+        <header class="bg-dark pt-5 pb-5">
+            <div class="container px-4 px-lg-5 my-2">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Risposte</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Visualizza le risposte dei ristoratori</p>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <% if (risposte.length > 0) { %>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <% risposte.forEach(function(risposta) { %>
+                                <div class="col">
+                                    <div class="card h-100 shadow-sm border-0">
+                                        <div class="card-body p-4">
+                                            <h5 class="card-title mb-3">Risposta da: <strong><%= ristoranti.find(r => r.id === risposta.ristorante).nome %>
+                                                <hr>
+                                            </strong></h5>
+                                            <div class="card-text">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span><i class="bi bi-person"></i> <strong>Proprietario:</strong></span>
+                                                    <span><%= risposta.proprietario %></span>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <span><i class="bi bi-text"></i> <strong>Testo:</strong></span>
+                                                    <span><%= risposta.testo %></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% } else { %>
+                        <div class="alert alert-info text-center">Non ci sono risposte.</div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+    <%- include('partials/footer') %>
+
+
+    </body>
+</html>
