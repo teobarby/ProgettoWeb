@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "bcrypt": "^5.1.1",
     "buffer-crc32": "^1.0.0",
     "connect-sqlite3": "^0.9.15",

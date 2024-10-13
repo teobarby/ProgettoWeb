@@ -7,7 +7,7 @@
         <!-- Header-->
         <header class="bg-dark pt-5 pb-5">
             <div class="container px-4 px-lg-5 my-2">
-                <div class="text-center text-white">
+                <div class="text-center text-white" data-aos="zoom-in">
                     <h1 class="display-4 fw-bolder">Prenotazioni</h1>
                     <p class="lead fw-normal text-white-50 mb-0">Visualizza e gestisci le prenotazioni del tuo Ristorante</p>
                 </div>
@@ -22,7 +22,7 @@
                     <% if (prenotazioni.length > 0) { %>
                         <div class="row row-cols-1 row-cols-md-2 g-4">
                             <% prenotazioni.forEach(function(prenotazione) { %>
-                                <div class="col">
+                                <div class="col" data-aos="fade-up">
                                     <div class="card h-100 shadow-sm border-0">
                                         <div class="card-body p-4">
                                             <h5 class="card-title mb-3">Prenotazione per <strong><%= ristoranti.find(r => r.id === prenotazione.ristorante).nome %>
@@ -61,10 +61,10 @@
                             <% }); %>
                         </div>
                     <% } else { %>
-                        <div class="alert alert-info text-center">😔 Nessuna prenotazione per il tuo ristorante.</div>
+                        <div class="alert alert-info text-center" data-aos="fade-up">😔 Nessuna prenotazione per il tuo ristorante.</div>
                     <% } %>
                 <% } else { %>
-                    <div class="alert alert-info text-center">Forse è il momento giusto per aggiungere il tuo Ristorante. Vai nella sezione Profilo e aggiungi il tuo ristorante.</div>
+                    <div class="alert alert-info text-center" data-aos="fade-up">Forse è il momento giusto per aggiungere il tuo Ristorante. Vai nella sezione Profilo e aggiungi il tuo ristorante.</div>
                 <% } %>
                 </div>
             </div>
@@ -155,6 +155,9 @@ document.getElementById('confirmDeletePrenRistButton').addEventListener('click',
     </script>
 
 
+<script>
+    AOS.init();
+</script>  
 
 
     </body>

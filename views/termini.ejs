@@ -7,14 +7,14 @@
     <!-- Header-->
     <header class="bg-dark pt-5 pb-5">
         <div class="container px-4 px-lg-5 my-2">
-            <div class="text-center text-white">
+            <div class="text-center text-white" data-aos="zoom-in">
                 <h1 class="display-4 fw-bolder">Termini e Condizioni</h1>
                 <p class="lead fw-normal text-white-50 mb-0">Leggi attentamente i nostri termini e condizioni d'uso.</p>
             </div>
         </div>
     </header>
 
-    <div class="container mt-5 mb-5">
+    <div class="container mt-5 mb-5" data-aos="zoom-in">
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -54,6 +54,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        AOS.init();
+    </script>  
 
     <%- include('partials/footer') %>
 </body>

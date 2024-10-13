@@ -7,15 +7,15 @@
         <!-- Header-->
         <header class="bg-dark pt-5 pb-5">
             <div class="container px-4 px-lg-5 my-2">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">GustoInRete</h1>
+                <div class="text-center text-white" data-aos="zoom-in">
+                    <h1 class="display-4 fw-bolder" >GustoInRete</h1>
                     <p class="lead fw-normal text-white-50 mb-0">Esplora, prenota e gusta: scopri i sapori dei tuoi Ristoranti preferiti online</p>
                 </div>
             </div>
         </header>
 
         <% if (ristoranti.length === 0) { %>
-            <section class="py-5">
+            <section class="py-5" data-aos="zoom-in">
                 <div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
                     <div class="card shadow-lg p-4" style="max-width: 600px; background-color: white; border-radius: 10px;">
                         <div class="text-center">
@@ -34,10 +34,10 @@
         <% } else { %>
         <!-- Section -->
         <section class="py-5">
-            <div class="container px-4 px-lg-4 mt-0">
-                <div class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="container px-4 px-lg-4 mt-0" >
+                <div class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >
                     <% ristoranti.forEach(function(Ristoranti) { %> <!-- Inizio ciclo per i ristoranti -->
-                        <div class="col-9 col-sm-6 col-md-4 col-lg-3 mb-5">
+                        <div class="col-9 col-sm-6 col-md-4 col-lg-3 mb-5" data-aos="fade-up">
                             <div class="card giallino h-100 d-flex flex-column" onclick="location.href='/ristorante/<%= Ristoranti.id %>'" style="cursor: pointer;">
                                 <div class="badge bg-light text-dark position-absolute" style="top: 0.5rem; left: 0.5rem">
                                     <i class="bi bi-geo-alt"></i> <%= Ristoranti.citta %> <!-- Usa i dati dal database -->
@@ -97,5 +97,10 @@
             box-shadow: none;
           }
         </style>
+
+
+<script>
+    AOS.init();
+</script>
     </body>
 </html>
