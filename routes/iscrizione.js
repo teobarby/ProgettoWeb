@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
-const DataBase = require("../db"); // db.js
+const DataBase = require("../db"); 
 const db = new DataBase();
 
-/* GET home page. */
 router.get('/iscrizione', function(req, res, next) {
   res.render('iscrizione', { title: 'Iscrizione', username: req.session.username });
 });
@@ -15,7 +14,7 @@ router.get('/signup', function(req, res, next) {
 });
 
 router.post('/signup', async function(req, res, next) {
-  const saltRounds = 10; // Numero di round per l'hashing
+  const saltRounds = 10;
 
   try {
       // Calcola l'hash della password
@@ -50,16 +49,16 @@ router.post('/signup', async function(req, res, next) {
           req.body.cognome,
           req.body.email,
           req.body.cellulare,
-          hashedPassword // Salva l'hash della password
+          hashedPassword 
       ]);
 
-      // Crea un oggetto utente
+     
       const user = {
           id: this.lastID,
           username: req.body.username
       };
 
-      // Esegui il login
+     
       req.login(user, function(err) {
           if (err) {
               return next(err);

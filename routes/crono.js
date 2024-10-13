@@ -10,7 +10,7 @@ router.get('/CronologiaPrenotazioni', async function(req, res, next) {
         const rows = await db.getPrenotazioniUsername(username);
         const ristorantiTutti = await db.getHomePage();
       
-      // Passa 'username' alla vista
+     
         return res.render('crono', { title: 'Le tue Prenotazioni', prenotazioni: rows, username: req.session.username, ristoranti: ristorantiTutti });
     } catch (err) {
       console.log("Errore nel caricamento deile prenotazioni:", err);

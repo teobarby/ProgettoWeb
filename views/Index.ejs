@@ -4,7 +4,7 @@
     
     <body>
         <%- include('partials/navbar'); %>
-        <!-- Header-->
+       
         <header class="bg-dark pt-5 pb-5">
             <div class="container px-4 px-lg-5 my-2">
                 <div class="text-center text-white" data-aos="zoom-in">
@@ -19,7 +19,7 @@
                 <div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
                     <div class="card shadow-lg p-4" style="max-width: 600px; background-color: white; border-radius: 10px;">
                         <div class="text-center">
-                            <!-- Faccina triste -->
+                           
                             <div class="display-1 text-muted mb-3">
                                 😔
                             </div>
@@ -32,7 +32,7 @@
                 </div>
             </section>
         <% } else { %>
-        <!-- Section -->
+       
         <section class="py-5">
             <div class="container px-4 px-lg-4 mt-0" >
                 <div class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >
@@ -45,13 +45,13 @@
                                 <% if (Ristoranti.promo) { %>
                                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Promo</div>
                                 <% } %> 
-                                <!-- Immagine Ristoranti-->
-                                <img class="card-img-top" src="<%= Ristoranti.copertina %>" alt="..." height="160"/> <!-- Assicurati che ci sia un campo 'copertina' -->
-                                <!-- Dettagli-->
+                              
+                                <img class="card-img-top" src="<%= Ristoranti.copertina %>" alt="..." height="160"/> 
+                              
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <!-- Nome Ristoranti-->
-                                        <h5 class="fw-bolder"><%= Ristoranti.nome %></h5> <!-- Nome Ristoranti -->
+                                        <h5 class="fw-bolder"><%= Ristoranti.nome %></h5> 
                                         <!-- Valutazioni Clienti-->
                                         <div class="d-flex justify-content-center small text-warning mb-2">
                                             <% if (Ristoranti.valutazione_media && Ristoranti.valutazione_media > 0) { %>
@@ -65,17 +65,17 @@
                                                 <% } %>
                                             <% } %>
                                         </div>
-                                        <!-- Parole chiave -->
-                                        <h8 class="Parolechiave"><%= Ristoranti.paroleChiave %></h8> <!-- Parole chiave -->
-                                        <!-- Orari-->
-                                        <h6 class="Orari"><%= Ristoranti.orari %></h6> <!-- Orari -->
+                                        
+                                        <h8 class="Parolechiave"><%= Ristoranti.paroleChiave %></h8>
+                                       
+                                        <h6 class="Orari"><%= Ristoranti.orari %></h6> 
                                         <hr>
-                                        <h7 class="Telefono">Tel: <%= Ristoranti.telefono %></h7> <!-- Telefono -->
+                                        <h7 class="Telefono">Tel: <%= Ristoranti.telefono %></h7> 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <% }); %> <!-- Fine ciclo per i ristoranti -->
+                    <% }); %> 
                 </div>
             </div>
         </section>

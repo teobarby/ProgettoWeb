@@ -2,12 +2,10 @@ const sqlite3 = require('sqlite3').verbose();
 
 class DataBase {
     constructor() {
-        this.db = null; // Inizializza db come null
+        this.db = null;
     }
 
-    /**
-     * Open connection to database.
-     */
+  
     open() {
         this.db = new sqlite3.Database('./database/GustoInRete.db', sqlite3.OPEN_READWRITE, (err) => {
             if (err) {
@@ -16,9 +14,7 @@ class DataBase {
         });
     }
 
-    /**
-     * Close connection to database.
-     */
+    
     close() {
         if (this.db) {
             this.db.close((err) => {
@@ -173,18 +169,18 @@ class DataBase {
                          FROM Preferisce 
                          WHERE ristorante = ?`;
 
-                this.open(); // Apri la connessione al database
+                this.open();
 
                 this.db.all(sql, [ristoranteId], (err, row) => {
                     if (err) {
-                        console.error("Errore nella query:", err); // Stampa l'errore per il debug
+                        console.error("Errore nella query:", err);
                         return reject(err);
                     }
-                    resolve(row); // Restituisce l'intero oggetto, quindi puoi accedere a row.count
+                    resolve(row);
                 });
             });
         } finally {
-            this.close(); // Chiudi il database dopo aver eseguito la query
+            this.close();
         }
     }
 
@@ -288,7 +284,7 @@ class DataBase {
             this.open();
             this.db.get(sql, [username], (err, row) => {
                 if (err) return reject(err);
-                resolve(row); // Restituisce 'row' che dovrebbe contenere i dati del ristorante
+                resolve(row); 
             });
             this.close();
         });
@@ -303,7 +299,7 @@ class DataBase {
             this.open();
             this.db.get(sql, [username, ristoranteId], (err, row) => {
                 if (err) return reject(err);
-                resolve(row); // Restituisce 'row' che dovrebbe contenere i dati del ristorante
+                resolve(row);
             });
             this.close();
         });
@@ -318,7 +314,7 @@ class DataBase {
             this.open();
             this.db.get(sql, [username, id], (err, row) => {
                 if (err) return reject(err);
-                resolve(row); // Restituisce 'row' che dovrebbe contenere i dati del ristorante
+                resolve(row); 
             });
             this.close();
         });
@@ -356,7 +352,7 @@ class DataBase {
     
             // Controlla se la keyword è vuota
             if (keyword.trim() === '') {
-                return resolve([]); // Restituisci un array vuoto se non ci sono parole chiave
+                return resolve([]);
             }
     
             const likeKeyword = `%${keyword}%`;
@@ -392,7 +388,7 @@ class DataBase {
             this.open();
             this.db.run(sql, [nome, indirizzo, orari, descrizione, copertina, menu, proprietario, categoria, paroleChiave, promo, citta, telefono], function (err) {
                 if (err) return reject(err);
-                resolve(this.lastID); // Restituisce l'ID dell'ultimo ristorante inserito
+                resolve(this.lastID);
             });
             this.close();
         });
@@ -408,7 +404,7 @@ class DataBase {
             const sql = `INSERT INTO Recensioni (scrittore, ristorante, testo, valutazione, dataora, immagine, titolo) 
                          VALUES (?, ?, ?, ?, ?, ?, ?)`;
     
-            this.open(); // Assicurati che open() gestisca la connessione correttamente
+            this.open(); 
     
             // Esegui la query
             this.db.run(sql, [scrittore, ristoranteId, testo, valutazione, dataora, immagine, titolo], function (err) {
@@ -416,10 +412,10 @@ class DataBase {
                     return reject(err);
                 }
     
-                resolve(this.lastID); // Restituisce l'ID dell'ultima recensione inserita
+                resolve(this.lastID);
             });
     
-            this.close(); // Chiudi la connessione dopo l'esecuzione della query
+            this.close(); 
         });
     }
 
@@ -431,13 +427,13 @@ class DataBase {
     
             this.open();
             this.db.all(sql, [username], (err, rows) => {
-                this.close(); // Chiudi la connessione qui, dopo la query
+                this.close(); 
     
                 if (err) {
-                    return reject(err); // Rifiuta la promessa se c'è un errore
+                    return reject(err); 
                 }
     
-                resolve(rows); // Restituisce 'rows' che contiene tutti i ristoranti
+                resolve(rows); 
             });
         });
     }
@@ -451,13 +447,13 @@ class DataBase {
     
             this.open();
             this.db.all(sql, [username], (err, rows) => {
-                this.close(); // Chiudi la connessione qui, dopo la query
+                this.close();
     
                 if (err) {
-                    return reject(err); // Rifiuta la promessa se c'è un errore
+                    return reject(err); 
                 }
     
-                resolve(rows); // Restituisce 'rows' che contiene tutti i ristoranti
+                resolve(rows); 
             });
         });
     }
@@ -471,13 +467,13 @@ class DataBase {
     
             this.open();
             this.db.all(sql, [ristoranteVerifica], (err, rows) => {
-                this.close(); // Chiudi la connessione qui, dopo la query
+                this.close();
     
                 if (err) {
-                    return reject(err); // Rifiuta la promessa se c'è un errore
+                    return reject(err); 
                 }
     
-                resolve(rows); // Restituisce 'rows' che contiene tutti i ristoranti
+                resolve(rows);
             });
         });
     }
@@ -511,11 +507,11 @@ class DataBase {
                     return reject(err);
                 }
     
-                // `this` qui fa riferimento alla connessione del database, non all'oggetto padre
-                resolve(this.changes); // Restituisce il numero di righe modificate
+               
+                resolve(this.changes); 
             });
     
-            this.close(); // Chiudi la connessione una volta che il comando è stato eseguito
+            this.close(); 
         });
     }
 
@@ -530,18 +526,18 @@ class DataBase {
             const sql = `INSERT INTO Prenotazioni (cliente, ristorante, data, orario, npersone) 
                          VALUES (?, ?, ?, ?, ?)`;
     
-            this.open(); // Assicurati che open() gestisca la connessione correttamente
+            this.open(); 
     
-            // Esegui la query
+           
             this.db.run(sql, [cliente, ristoranteId, data, orario, npersone], function (err) {
                 if (err) {
                     return reject(err);
                 }
     
-                resolve(this.lastID); // Restituisce l'ID dell'ultima recensione inserita
+                resolve(this.lastID);
             });
     
-            this.close(); // Chiudi la connessione dopo l'esecuzione della query
+            this.close(); 
         });
     }
 

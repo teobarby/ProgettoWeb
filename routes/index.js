@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const DataBase = require("../db"); // db.js
+const DataBase = require("../db");
 const db = new DataBase();
 
-/* GET home page. */
+
 router.get('/', async function(req, res, next) {
   try {
     const rows = await db.getHomePage();
     
-    // Passa 'username' alla vista
+   
     return res.render('index', { title: 'HomePage', ristoranti: rows, username: req.session.username });
   } catch (err) {
     console.log("Errore nel caricamento dei ristoranti:", err);
@@ -18,12 +18,12 @@ router.get('/', async function(req, res, next) {
 
 router.get('/cerca', async (req, res) => {
   const keyword = req.query.keyword || '';
-  console.log(`Keyword di ricerca: ${keyword}`); // Log della keyword
+  console.log(`Keyword di ricerca: ${keyword}`); 
   const title = `Risultati di ricerca per "${keyword}"`;
   const username = req.session.username || null;
   try {
       const ristoranti = await db.searchRestaurants(keyword.trim());
-      console.log(`Ristoranti trovati: ${JSON.stringify(ristoranti)}`); // Log dei ristoranti trovati
+      console.log(`Ristoranti trovati: ${JSON.stringify(ristoranti)}`);
       res.render('index', { ristoranti, title, username });
   } catch (error) {
       console.error('Errore durante la ricerca:', error);
@@ -32,8 +32,8 @@ router.get('/cerca', async (req, res) => {
 });
 
 router.get('/cercaCat', async (req, res) => {
-  const categoria = req.query.category || '';  // Assicurati di usare 'categoria'
-  console.log(`Cerca per categoria: ${categoria}`); // Corretto: usa 'categoria' qui
+  const categoria = req.query.category || '';  
+  console.log(`Cerca per categoria: ${categoria}`);
   const title = `Risultati di ricerca per categoria "${categoria}"`;
   const username = req.session.username || null;
 

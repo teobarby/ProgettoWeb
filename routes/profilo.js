@@ -1,35 +1,34 @@
 var express = require('express');
 var router = express.Router();
 
-const DataBase = require("../db"); // db.js
+const DataBase = require("../db"); 
 const db = new DataBase();
-const path = require('path'); // Importa il modulo 'path'
+const path = require('path'); 
 
 const multer = require('multer');
 const upload = multer({ dest: path.join(__dirname, '../public/uploads') });
 
  const fs = require('fs');
 
-/* GET home page. */
+
 router.get('/profilo', async (req, res, next) => {
-  // Verifica se l'utente è loggato
+  
   if (req.session && req.session.username) {
     try {
-      // Recupera altre informazioni dell'utente dalla sessione (se presenti)
+     
       const username = req.session.username;
-      const email = req.session.email; // esempio
-      const nome = req.session.nome; // esempio
+      const email = req.session.email; 
+      const nome = req.session.nome; 
       const cognome = req.session.cognome;
       const cellulare = req.session.cellulare;
 
-      // Recupera le categorie dal database
+     
       const categorie = await db.getCategorie();
 
       const ristorante = await db.possiedeRistorante(username);
-      const possiedeRistorante = !!ristorante; // true se esiste, false altrimenti
-      const ristoranti = await db.getRistoranteUsername(username); // Assicurati che questa funzione ritorni un array
+      const possiedeRistorante = !!ristorante; 
+      const ristoranti = await db.getRistoranteUsername(username); 
 
-      // Renderizza la pagina del profilo con i dati dell'utente e le categorie
       res.render('profilo', { 
         title: 'Profilo', 
         username: username,
@@ -45,7 +44,7 @@ router.get('/profilo', async (req, res, next) => {
       res.status(500).send('Errore durante il recupero delle categorie');
     }
   } else {
-    // Se l'utente non è loggato, reindirizza alla pagina di login
+    
     res.redirect('/login');
   }
 });
@@ -69,12 +68,10 @@ router.post('/inserisci-ristorante', upload.fields([
   { name: 'menuPDFInput' }
 ]), async (req, res) => {
   
-  // Verifica se l'utente è loggato
   if (!req.session || !req.session.username) {
       return res.status(403).send('Utente non autorizzato');
   }
 
-  // Recupera i dati dal corpo della richiesta
   const {
       nomeRistorante,
       categoria,
@@ -153,7 +150,7 @@ router.post('/inserisci-ristorante', upload.fields([
           citta,
           telefono
       });
-      res.redirect('/'); // Reindirizza a una pagina di successo
+      res.redirect('/'); 
   } catch (err) {
       console.error(err);
       res.status(500).send('Errore durante l\'inserimento del ristorante');
@@ -167,7 +164,6 @@ router.post('/modifica-ristorante', upload.fields([
   { name: 'immagineCopertinaInput' },
   { name: 'menuPDFInput' }
 ]), async (req, res) => {
-  // Verifica se l'utente è loggato
   if (!req.session || !req.session.username) {
       return res.status(403).send('Utente non autorizzato');
   }
@@ -260,7 +256,7 @@ router.post('/modifica-ristorante', upload.fields([
           citta,
           telefono
       });
-      res.redirect('/profilo'); // Modifica la pagina di successo se necessario
+      res.redirect('/profilo');
   } catch (err) {
       console.error('Errore durante l\'inserimento del ristorante:', err);
       res.status(500).send('Errore durante l\'inserimento del ristorante');
@@ -278,13 +274,13 @@ router.delete('/delete-user/:username', async (req, res) => {
   try {
       const ristorante = await db.getRistoranteUsername(username);
       if (ristorante && ristorante.length > 0) {
-          const ristoranteId = ristorante[0].id; // Assicurati che l'ID esista
+          const ristoranteId = ristorante[0].id;
           console.log(`Eliminazione del ristorante con ID: ${ristoranteId}`);
 
-          await db.deleteRistorante(ristoranteId); // Elimina il ristorante
+          await db.deleteRistorante(ristoranteId); 
       }
 
-      await db.deleteUserByUsername(username); // Elimina l'utente
+      await db.deleteUserByUsername(username);
       req.session.destroy(err => {
           if (err) {
               console.error('Errore durante il logout:', err);
@@ -309,12 +305,12 @@ router.delete('/delete-rest/:username', async (req, res) => {
   try {
       const ristorante = await db.getRistoranteUsername(username);
       if (ristorante && ristorante.length > 0) {
-          const ristoranteId = ristorante[0].id; // Assicurati che l'ID esista
+          const ristoranteId = ristorante[0].id;
           console.log(`Eliminazione del ristorante con ID: ${ristoranteId}`);
 
-          await db.deleteRistorante(ristoranteId); // Elimina il ristorante
+          await db.deleteRistorante(ristoranteId);
       }
-      res.status(200).json({ message: 'Utente e ristorante eliminati con successo, logout eseguito.' }); // Risposta di successo
+      res.status(200).json({ message: 'Utente e ristorante eliminati con successo, logout eseguito.' });
 
   } catch (err) {
       console.error('Errore durante l\'eliminazione del ristorante:', err);
@@ -324,25 +320,22 @@ router.delete('/delete-rest/:username', async (req, res) => {
 
 
 router.post('/update-profilo', (req, res) => {
-  // Estrai i dati dal corpo della richiesta
   const { nuovoUsername, nome, cognome, email, cellulare } = req.body;
   const username = req.session.username;
-  console.log(`Username attuale: ${username}`); // Aggiungi questa riga per il debug
+  console.log(`Username attuale: ${username}`);
 
 
-  // Verifica che i dati siano presenti
   if (!nuovoUsername || !nome || !cognome || !email || !cellulare) {
       return res.status(400).send('Tutti i campi sono obbligatori.');
   }
 
 
-  // Chiamata alla funzione per aggiornare il profilo
   db.updateProfilo(username, nome, cognome, email, cellulare, nuovoUsername)
       .then(changes => {
           if (changes > 0) {
-            req.session.username = null; // o req.session.destroy()
+            req.session.username = null; 
 
-             res.redirect('/login'); // Modifica la pagina di successo se necessario
+             res.redirect('/login');
           } else {
               res.status(404).send('Nessun utente trovato con questo username.');
           }

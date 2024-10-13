@@ -3,14 +3,11 @@ var passport = require('passport');
 var router = express.Router();
 
 
-/* GET home page. */
 router.get('/login', function(req, res, next) {
   const errorMessage = req.session.errorMessage;
   
-  // Cancella il messaggio di errore dopo averlo usato
   req.session.errorMessage = null;
   
-  // Passa il messaggio alla view
   res.render('login', { title: 'Auth', message: errorMessage, username: req.session.username });
 });
 
@@ -35,8 +32,7 @@ router.post('/login/password', function (req, res, next) {
         return next(err);
       }
 
-      // Imposta il nome dell'utente nella sessione
-      req.session.username = user.username; // Assicurati che 'username' sia il campo corretto
+      req.session.username = user.username; 
       req.session.nome = user.nome;
       req.session.cognome = user.cognome;
       req.session.email = user.email;

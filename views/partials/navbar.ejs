@@ -1,5 +1,3 @@
-<!-- Navigation-->
- 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(255, 255, 255, 1);">
     <div class="container px-4 px-lg-4">
         <a class="navbar-brand" href="/">GustoInRete</a>
@@ -11,7 +9,6 @@
                 <li class="nav-item more">
                     <a class="nav-link active" aria-current="page" href="/preferiti">Preferiti</a>
                 </li>
-                <!-- Categoria dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorie</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -25,15 +22,14 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ms-lg-4">
-                <!-- Input per la barra di ricerca -->
-                            <!-- Form per la barra di ricerca -->
+              
                 <form class="d-flex mb-0" action="/cerca" method="GET">
-                    <!-- Input per la barra di ricerca -->
+                    
                     <input type="text" name="keyword" class="form-control me-2" placeholder="Cerca ristorante..." required>
-                    <!-- Bottone per avviare la ricerca -->
+                    
                     <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
                 </form>
-                <!-- Pulsante Accedi -->
+               
                 <li class="nav-item dropdown">
                 <% if (username) { %>
                     <a class="btn dropdown-toggle ms-3" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -61,7 +57,7 @@
     </div>
 
     <script>
-        // Se il cursore si sposta fuori dal menu dropdown, chiudilo
+       
         document.querySelectorAll('.dropdown').forEach(function(dropdown) {
             dropdown.addEventListener('mouseleave', function() {
                 var dropdownMenu = this.querySelector('.dropdown-menu');

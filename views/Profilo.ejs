@@ -279,8 +279,8 @@
 
 <script>
     document.getElementById('confirmDeleteButton').addEventListener('click', function() {
-        const username = this.getAttribute('data-username');  // Ottiene l'username dall'attributo data-username
-        console.log('Eliminazione richiesta per:', username);  // Log per controllare l'username
+        const username = this.getAttribute('data-username'); 
+        console.log('Eliminazione richiesta per:', username); 
 
 
 
@@ -292,14 +292,14 @@
         })
         .then(response => {
             if (response.ok) {
-                return response.json();  // Ottieni il messaggio di successo
+                return response.json(); 
             } else {
                 return response.json().then(data => { throw new Error(data.message); });
             }
         })
         .then(data => {
-            console.log(data.message);  // Log del messaggio di successo
-            window.location.href = `/?_=${new Date().getTime()}`;  // Forza il caricamento di una nuova pagina
+            console.log(data.message);  
+            window.location.href = `/?_=${new Date().getTime()}`; 
         })
         .catch(error => {
             console.error('Errore durante l\'eliminazione:', error);
@@ -311,8 +311,8 @@
 
 
     document.getElementById('confirmDeleteRestaurantButton').addEventListener('click', function() {
-        const username = this.getAttribute('data-username');  // Ottiene l'username dall'attributo data-username
-        console.log('Eliminazione richiesta per:', username);  // Log per controllare l'username
+        const username = this.getAttribute('data-username');  
+        console.log('Eliminazione richiesta per:', username); 
 
 
 
@@ -324,14 +324,14 @@
         })
         .then(response => {
             if (response.ok) {
-                return response.json();  // Ottieni il messaggio di successo
+                return response.json(); 
             } else {
                 return response.json().then(data => { throw new Error(data.message); });
             }
         })
         .then(data => {
-            console.log(data.message);  // Log del messaggio di successo
-            location.reload();  // Ricarica la pagina per riflettere la cancellazione
+            console.log(data.message); 
+            location.reload(); 
         })
         .catch(error => {
             console.error('Errore durante l\'eliminazione:', error);

@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const DataBase = require("../db"); // db.js
+const DataBase = require("../db"); 
 const db = new DataBase();
 
 
@@ -30,7 +30,7 @@ router.get('/CronologiaPrenotazioniRistorante', async function(req, res, next) {
         const ristoranteVerifica = ristorante[0].id;
         const rows = await db.getPrenotazioniRistorante(ristoranteVerifica);
 
-      // Passa 'username' alla vista
+     
         return res.render('cronoRist', { title: 'Cronologia Ristorante', prenotazioni: rows, username: req.session.username, ristoranti: ristorante, possiedeRistorante });
     } catch (err) {
       console.log("Errore nel caricamento deile prenotazioni:", err);
@@ -50,7 +50,7 @@ router.get('/CronologiaPrenotazioniRistorante', async function(req, res, next) {
     const db = new DataBase();
   
     try {
-        // Elimina la prenotazione
+       
         await db.deletePrenByUsernameRistorante(username, ristorante, data, orario);
         res.status(200).json({ message: 'Prenotazione eliminata con successo.' });
     } catch (err) {

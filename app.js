@@ -27,7 +27,6 @@ const db = new DataBase();
 const session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -50,23 +49,19 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
 }, async function (username, password, done) {
     try {
-        // Trova l'utente nel database
         const user = await db.trovaUtenteUsername(username);
 
-        // Se l'utente non esiste
         if (!user) {
             console.log("Utente non trovato:", username);
             return done(null, false, { message: 'Username o password errati' });
         }
 
-        // Confronta la password inserita con quella hashata
         bcrypt.compare(password, user.password, function (err, result) {
             if (err) {
                 console.error("Errore durante il confronto delle password:", err);
                 return done(err);
             }
 
-            // Se la password coincide
             if (result) {
                 console.log("Login riuscito per utente:", username);
                 return done(null, user);
@@ -76,7 +71,6 @@ passport.use(new LocalStrategy({
             }
         });
     } catch (err) {
-        // Log errore nel trovare l'utente
         console.error("Errore nel trovare l'utente:", err);
         return done(err);
     }
@@ -117,12 +111,10 @@ app.use('/', cronoRistRouter);
 app.use('/', risposteRouter);
 
 
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
 });
 
-// Avvia il server
 app.listen(3000, () => {
     console.log('Server avviato su http://localhost:${3000}');
 });
