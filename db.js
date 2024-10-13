@@ -135,6 +135,36 @@ class DataBase {
         });
     }
 
+    trovaUtenteEmail(email) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT *
+                         FROM Registrati
+                         WHERE email = ?`;
+
+            this.open();
+            this.db.get(sql, [email], (err, row) => {
+                if (err) return reject(err);
+                resolve(row);
+            });
+            this.close();
+        });
+    }
+
+    trovaUtenteCellulare(cellulare) {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT *
+                         FROM Registrati
+                         WHERE cellulare = ?`;
+
+            this.open();     
+            this.db.get(sql, [cellulare], (err, row) => {
+                if (err) return reject(err);
+                resolve(row);
+            });
+            this.close();
+        });
+    }
+
     async getNPreferiti(ristoranteId) {
         try {
             return await new Promise((resolve, reject) => {
@@ -660,6 +690,8 @@ class DataBase {
             this.close();
         });
     }
+
+
 
 
     salvaRispostaAllaRecensione(scrittore, ristorante, proprietario, testo) {

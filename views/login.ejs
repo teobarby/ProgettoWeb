@@ -19,13 +19,13 @@
                                 <input class="form-control" id="current-password" name="password" type="password" autocomplete="current-password" placeholder="Name" required maxlength="30">
                                 <label for="inputPassword">Password</label>
                             </div>
+                            <% if (message) { %>
+                                <div class="alert alert-danger mb-0 mt-2 mb-3">
+                                  <%= message %>
+                                </div>
+                            <% } %>
                             <div class="d-grid gap-2 center-container">
                                 <button class="btn btn-primary" type="submit">Accedi</button>
-                                <% if (message) { %>
-                                    <div class="alert alert-danger mb-0 mt-2">
-                                      <%= message %>
-                                    </div>
-                                <% } %>
                             </div>
                         </form>
                     </div>

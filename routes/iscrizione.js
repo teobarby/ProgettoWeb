@@ -24,9 +24,23 @@ router.post('/signup', async function(req, res, next) {
       usernameTemp = req.body.username;
       const userExists = await db.trovaUtenteUsername(usernameTemp);
 
+      const mailExists = await db.trovaUtenteEmail(req.body.email);
+
+      const cellExists = await db.trovaUtenteCellulare(req.body.cellulare);
+
       if(userExists) {
         return res.render('iscrizione', {
           errorMessage: 'Questo username è già in uso, scegline un altro.', username: req.session.username, title: 'Iscrizione'});
+      }
+
+      if(mailExists) {
+        return res.render('iscrizione', {
+          errorMessage: 'Questa email è già in uso, scegline un\'altra.', username: req.session.username, title: 'Iscrizione'});
+      }
+
+      if(cellExists) {
+        return res.render('iscrizione', {
+          errorMessage: 'Questo numero è già in uso, scegline un\'altro.', username: req.session.username, title: 'Iscrizione'});
       }
 
       // Esegui la query di inserimento
