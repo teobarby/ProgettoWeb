@@ -116,5 +116,5 @@ app.use(function(req, res, next) {
 });
 
 app.listen(3000, () => {
-    console.log('Server avviato su http://localhost:${3000}');
+    console.log('Server avviato su http://localhost:3000');
 });

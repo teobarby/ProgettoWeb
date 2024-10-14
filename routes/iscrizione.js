@@ -13,6 +13,10 @@ router.get('/signup', function(req, res, next) {
   res.render('signup');
 });
 
+
+
+
+
 router.post('/signup', async function(req, res, next) {
   const saltRounds = 10;
 
@@ -26,6 +30,7 @@ router.post('/signup', async function(req, res, next) {
       const mailExists = await db.trovaUtenteEmail(req.body.email);
 
       const cellExists = await db.trovaUtenteCellulare(req.body.cellulare);
+
 
       if(userExists) {
         return res.render('iscrizione', {

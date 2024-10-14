@@ -12,6 +12,11 @@ class DataBase {
                 console.error('Error during database opening:', err.message);
             }
         });
+        this.db.run('PRAGMA foreign_keys = ON', [], function(err) {
+            if (err) {
+                console.error('Error during foreign_keys setting:', err.message);
+            }
+        });
     }
 
     
@@ -228,6 +233,8 @@ class DataBase {
             this.close();
         });
     }
+
+    
 
     
 
