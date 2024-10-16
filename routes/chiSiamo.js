@@ -7,7 +7,7 @@ router.get('/chiSiamo', async function(req, res, next) {
         
         res.render('chiSiamo', { 
             title: 'Chi Siamo',
-            username: req.session.user 
+            username: req.session.username 
         });
     } catch (err) {
         console.log("Errore nel caricamento della pagina Chi Siamo:", err);

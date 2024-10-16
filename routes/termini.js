@@ -7,7 +7,7 @@ router.get('/termini', async function(req, res, next) {
         
         res.render('termini', { 
             title: 'Termini e Condizioni',
-            username: req.session.user
+            username: req.session.username
         });
     } catch (err) {
         console.log("Errore nel caricamento della pagina Chi Siamo:", err);

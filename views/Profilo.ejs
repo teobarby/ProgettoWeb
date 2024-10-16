@@ -54,14 +54,20 @@
                         <h2 class="section-heading mb-4">Preferenze e Statistiche</h2>
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Preferenze Alimentari</h5>
-                                <p class="card-text">Indica le tue preferenze alimentari</p>
+                                <h5 class="card-title">Prenotazioni</h5>
+                                <p class="card-text">Hai <%= statistiche.prenotazioniCount || 0 %> prenotazioni memorizzate</p>
+                            </div>
+                        </div>
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Preferenze</h5>
+                                <p class="card-text">Hai <%= statistiche.preferitiCount || 0 %> ristoranti preferiti</p>
                             </div>
                         </div>
                         <div class="card mt-4">
                             <div class="card-body">
                                 <h5 class="card-title">Recensioni</h5>
-                                <p class="card-text">Fino ad oggi hai scritto 3 recensioni</p>
+                                <p class="card-text">Fino ad oggi hai scritto <%= statistiche.recensioniCount || 0 %> recensioni</p>
                             </div>
                         </div>
                        

@@ -189,6 +189,22 @@ class DataBase {
         }
     }
 
+    getPreferenzeStatistiche(username) {
+        return new Promise((resolve, reject) => {
+            const sql = `
+                SELECT 
+                    (SELECT COUNT(*) FROM Preferisce WHERE username = ?) as preferitiCount,
+                    (SELECT COUNT(*) FROM Recensioni WHERE scrittore = ?) as recensioniCount,
+                    (SELECT COUNT(*) FROM Prenotazioni WHERE cliente = ?) as prenotazioniCount
+            `;
+            this.open();
+            this.db.all(sql, [username, username, username], (err, rows) => {
+                if (err) return reject(err);
+                resolve(rows[0]); // Restituisci la prima riga con i conteggi
+            });
+            this.close();
+        });
+    }
    
     getCategorie() {
         return new Promise((resolve, reject) => {

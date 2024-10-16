@@ -8,7 +8,7 @@ router.get('/privacyPolicy', async function(req, res, next) {
         
         res.render('privacyPolicy', { 
             title: 'Politiche Privacy',
-            username: req.session.user 
+            username: req.session.username
         });
     } catch (err) {
         console.log("Errore nel caricamento della pagina Chi Siamo:", err);

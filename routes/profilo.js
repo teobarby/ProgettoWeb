@@ -22,6 +22,7 @@ router.get('/profilo', async (req, res, next) => {
       const cognome = req.session.cognome;
       const cellulare = req.session.cellulare;
 
+      const statistiche = await db.getPreferenzeStatistiche(username);
      
       const categorie = await db.getCategorie();
 
@@ -38,7 +39,8 @@ router.get('/profilo', async (req, res, next) => {
         cellulare: cellulare,
         categorie: categorie,
         possiedeRistorante: possiedeRistorante,
-        ristoranti: ristoranti
+        ristoranti: ristoranti,
+        statistiche: statistiche
       });
     } catch (err) {
       res.status(500).send('Errore durante il recupero delle categorie');
