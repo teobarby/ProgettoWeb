@@ -29,7 +29,7 @@ router.get('/ristorante/:id', async function(req, res, next) {
     const nPreferiti = preferiti[0].count;
 
     if (!ristorante || ristorante.length === 0) {
-      return res.status(404).send('Ristorante non trovato');
+      return res.render('error', {title: 'Errore', message: 'Non esiste il ristorante che stai cercando', username: username});
     }
 
 
