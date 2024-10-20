@@ -49,7 +49,7 @@ router.post('/inserisci-recensione', upload.fields([
 ]), async (req, res) => {
 
  
-  if (!req.session || !req.session.username) {
+  if (!req.isAuthenticated()) {
       return res.status(403).send('Utente non autorizzato');
   }
 
@@ -164,7 +164,7 @@ router.post('/aggiungiPreferiti/:ristoranteId', async (req, res) => {
   const ristoranteId = req.params.ristoranteId;
   const userId = req.session.username;
 
-  if (!userId) {
+  if (!req.isAuthenticated()) {
     return res.redirect('/login'); 
   }
 

@@ -58,7 +58,7 @@ router.get('/cercaCat', async (req, res) => {
 
 router.get('/preferiti', async (req, res) => {
   const username = req.session.username;
-  if (!username) {
+  if (!req.isAuthenticated()) {
     return res.redirect('/login');
   }
 

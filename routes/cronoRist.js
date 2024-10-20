@@ -13,7 +13,7 @@ router.get('/CronologiaPrenotazioniRistorante', async function(req, res, next) {
 
     
     
-    if (!req.session.username) {
+    if (!req.isAuthenticated()) {
         return res.redirect('/login');
     }
     try {
