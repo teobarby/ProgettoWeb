@@ -29,8 +29,8 @@
 }
 
 .img-custom {
-  max-width: 300px; /* Imposta la larghezza massima desiderata */
-  height: auto; /* Mantiene le proporzioni */
+  max-width: 300px; 
+  height: auto;
 }
 
 #confirmDeletePrenButtonModal:hover {
@@ -40,19 +40,18 @@
 }
 
 .dropdown-item {
-  color: #000000; /* Grigio scuro di base */
-  transition: color 0.3s ease, background-color 0.3s ease; /* Animazione fluida */
+  color: #000000; 
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .dropdown-item:hover, 
-.dropdown-item:focus { /*rgba(248, 249, 250, 0.41) più chiaro quando hover o focus */
-  background-color: #e9ecef; /* Sfondo leggero */
-  text-decoration: none;
+.dropdown-item:focus {
+  background-color: #e9ecef;
 }
 
 .dropdown-item:active {
-  color: #343a40; /* Grigio scuro quando viene cliccato */
-  background-color: #b6b8b9; /* Cambia lo sfondo leggermente quando attivo */
+  color: #343a40;
+  background-color: #b6b8b9;
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
@@ -87,27 +86,27 @@
 }
 
  .restaurant-info p {
-  color: #333; /* Colore del testo per renderlo più leggibile */
-  font-size: 18px; /* Dimensione del testo */
-  line-height: 1.6; /* Spaziatura tra le righe */
-  padding: 10px; /* Aggiunge spazio intorno al testo */
-  background-color: rgba(255, 255, 255, 0.8); /* Sfondo leggermente trasparente per evidenziare il testo */
-  border-radius: 10px; /* Arrotonda gli angoli */
+  color: #333; 
+  font-size: 18px; 
+  line-height: 1.6; 
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8); 
+  border-radius: 10px; 
 }
 
 #favoriteButton:hover {
   background-color: red;
   color: white;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Ombreggiatura più intensa */
-  transform: scale(1.05); /* Leggero ingrandimento al passaggio del mouse */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+  transform: scale(1.05); 
 }
 #favoriteButton:active {
-  transform: scale(0.98); /* Rimpicciolisce leggermente al clic */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Riduce l'ombreggiatura */
+  transform: scale(0.98);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 .stretto {
-  width: 200px; /* o un valore più piccolo */
+  width: 200px; 
 }
 
 .overlay {
@@ -160,7 +159,7 @@
 }
 
 .small-text {
-  font-size: 1.2rem; /* Riduci la dimensione del testo a 0.9rem */
+  font-size: 1.2rem;
 }
 
 .nav-item.dropdown:hover .dropdown-menu {
@@ -177,7 +176,7 @@
 }
 
 .btn-danger:hover {
-  background-color: #FF4343; /* Cambia il colore di sfondo al passaggio del mouse */
+  background-color: #FF4343; 
   transform: scale(1.1); 
   box-shadow: 0px 8px 12px rgba(0,0,0,0.2);
 }
@@ -207,11 +206,10 @@
 }
 
 .star-link {
-  text-decoration: none; /* Rimuove il sottolineato dei link */
-  color: inherit; /* Utilizza il colore di default del testo */
+  text-decoration: none; 
+  color: inherit;
 }
 
-/* Stile per il passaggio del mouse sul link delle stelline */
 .star-link:hover {
   color: gold; 
 }
@@ -266,9 +264,9 @@
 }
 
 body {
-  background-image: url("/images/photo-1506968430777-bf7784a87f23.jpeg"); /* Percorso dell'immagine */
-  background-size: cover; /* L'immagine copre l'intera pagina */
-  background-position: center; /* Centra l'immagine */
-  background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+  background-image: url("/images/photo-1506968430777-bf7784a87f23.jpeg"); 
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
 }
