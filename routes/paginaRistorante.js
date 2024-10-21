@@ -180,8 +180,7 @@ router.post('/aggiungiPreferiti/:ristoranteId', async (req, res) => {
       await db.aggiungiAiPreferiti(userId, ristoranteId);
       console.log(`Ristorante ${ristoranteId} aggiunto ai preferiti per l'utente ${userId}`);
     }
-    
-   
+     
     res.redirect('/ristorante/' + ristoranteId);
 
   } catch (error) {
