@@ -214,9 +214,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="paroleChiaveInput" class="form-label">Parole chiave</label>
-                            <input type="text" class="form-control shadow-sm" id="paroleChiaveInput" name="paroleChiave" value="<%= (ristoranti.length > 0 ? ristoranti[0].paroleChiave : '') %>" required maxlength="40" pattern=".*\S+.*" title="Il campo Parole chiave non può essere vuoto o contenere solo spazi.">
-                            <small class="text-muted">Separare le parole da una virgola</small>
-
+                            <input type="text" class="form-control shadow-sm" id="paroleChiaveInput" name="paroleChiave" value="<%= (ristoranti.length > 0 ? ristoranti[0].paroleChiave : '') %>" required maxlength="40" title="Il campo Parole chiave non può essere vuoto o contenere solo spazi.">
+                            <small class="text-muted">Premi invio dopo aver scritto ogni categoria, puoi inserirne 3 al massimo</small>
                         </div>
                         <div class="mb-3">
                             <label for="descrizioneRistoranteInput" class="form-label">Descrizione</label>
@@ -279,9 +278,11 @@
     </div>
 
     
-    <script>
-        AOS.init();
-    </script>
+<script>
+    AOS.init();
+</script>
+
+<script  src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
 
 <script>
     document.getElementById('confirmDeleteButton').addEventListener('click', function() {
@@ -346,6 +347,17 @@
     });
 
 
+    let input = document.querySelector('input[name="paroleChiave"]');
+
+    new Tagify(input, {
+        maxTags: 3  // Imposta il limite a 3 tag/parole
+    });
+
+    document.querySelector('#paroleChiaveInput').addEventListener('keydown', function(e) {
+        if(e.key === 'Enter') {
+            e.preventDefault();
+        }
+    });
    
 </script>
     

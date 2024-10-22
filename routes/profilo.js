@@ -137,6 +137,10 @@ router.post('/inserisci-ristorante', upload.fields([
   }
   const orariString = orari.length > 0 ? orari.join(', ') : '';
 
+  const paroleChiaveArray = (JSON.parse(paroleChiave).map((word) => word['value'])).join(', ');
+
+
+
   try {
       await db.addRistorante({
           nome: nomeRistorante,
@@ -147,7 +151,7 @@ router.post('/inserisci-ristorante', upload.fields([
           menu: percorsoMenuRelativo,
           proprietario,
           categoria,
-          paroleChiave,
+          paroleChiave: paroleChiaveArray,
           promo,
           citta,
           telefono
@@ -242,6 +246,9 @@ router.post('/modifica-ristorante', upload.fields([
   }
   const orariString = orari.length > 0 ? orari.join(', ') : '';
 
+  const paroleChiaveArray = (JSON.parse(paroleChiave).map((word) => word['value'])).join(', ');
+
+
   try {
       await db.modRistorante({
           id,
@@ -253,7 +260,7 @@ router.post('/modifica-ristorante', upload.fields([
           menu: percorsoMenuRelativo,
           proprietario,
           categoria,
-          paroleChiave,
+          paroleChiave: paroleChiaveArray,
           promo,
           citta,
           telefono
