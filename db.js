@@ -744,7 +744,7 @@ class DataBase {
 
     getRisposteUsername(username) {
         return new Promise((resolve, reject) => {
-            const sql = `SELECT * FROM Risposte WHERE scrittorerecensione = ?`;
+            const sql = `SELECT * FROM Risposte JOIN Ristoranti ON ristorante = id WHERE scrittorerecensione = ? `;
             this.open();
             this.db.all(sql, [username], (err, rows) => {
                 if (err) {
