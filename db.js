@@ -274,7 +274,7 @@ class DataBase {
                 Recensioni.dataora,
                 Recensioni.immagine,
                 Recensioni.titolo,
-                (SELECT AVG(valutazione) FROM Recensioni WHERE Recensioni.ristorante = Ristoranti.id) AS valutazione_media
+                (SELECT ROUND(AVG(valutazione), 1) FROM Recensioni WHERE Recensioni.ristorante = Ristoranti.id) AS valutazione_media
             FROM 
                 Ristoranti
             LEFT JOIN 
