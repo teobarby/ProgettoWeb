@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-
+// Rotta per la pagina di chi siamo
 router.get('/termini', async function(req, res, next) {
     try {
         

@@ -1,16 +1,13 @@
 var express = require('express');
 var router = express.Router();
-
 const DataBase = require("../db"); 
 const db = new DataBase();
 const path = require('path'); 
-
 const multer = require('multer');
 const upload = multer({ dest: path.join(__dirname, '../public/uploads') });
+const fs = require('fs');
 
- const fs = require('fs');
-
-
+// Rotta per la pagina del profilo
 router.get('/profilo', async (req, res, next) => {
   
   if (req.session && req.session.username) {
@@ -52,7 +49,7 @@ router.get('/profilo', async (req, res, next) => {
 });
 
 
-
+// Rotta per la pagina di inserimento di un nuovo ristorante
 router.get('/inserisci-ristorante', (req, res) => {
   db.getCategorie((err, categorie) => {
       if (err) {
@@ -64,7 +61,7 @@ router.get('/inserisci-ristorante', (req, res) => {
 
  
 
-
+// Rotta per l'inserimento di un nuovo ristorante
 router.post('/inserisci-ristorante', upload.fields([
   { name: 'immagineCopertinaInput' },
   { name: 'menuPDFInput' }
@@ -165,7 +162,7 @@ router.post('/inserisci-ristorante', upload.fields([
 
 
 
-
+// Rotta per la modifica di un ristorante
 router.post('/modifica-ristorante', upload.fields([
   { name: 'immagineCopertinaInput' },
   { name: 'menuPDFInput' }
@@ -273,7 +270,7 @@ router.post('/modifica-ristorante', upload.fields([
 });
 
 
-
+// Rotta per eliminare un utente
 router.delete('/delete-user/:username', async (req, res) => {
   const username = req.params.username;
   console.log('Eliminazione richiesta per utente:', username);
@@ -304,7 +301,7 @@ router.delete('/delete-user/:username', async (req, res) => {
 });
 
 
-
+// Rotta per eliminare un ristorante
 router.delete('/delete-rest/:username', async (req, res) => {
   const username = req.params.username;
   console.log('Eliminazione richiesta per utente:', username);
@@ -327,7 +324,7 @@ router.delete('/delete-rest/:username', async (req, res) => {
   }
 });
 
-
+// Rotta per aggiornare il profilo
 router.post('/update-profilo', (req, res) => {
   const { nuovoUsername, nome, cognome, email, cellulare } = req.body;
   const username = req.session.username;

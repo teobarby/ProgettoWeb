@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
-const saltRounds = 10; // Puoi modificare il numero di round di salatura, 10 è una buona pratica
-const plainPassword = 'prova'; // Sostituisci con la password da hashare
+const saltRounds = 10; 
+const plainPassword = 'prova';
 
+//funzione per testare l'hashing delle password, non utilizzata nel sito web
 bcrypt.hash(plainPassword, saltRounds, function(err, hashedPassword) {
     if (err) {
         console.error("Errore durante l'hashing:", err);

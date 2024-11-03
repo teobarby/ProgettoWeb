@@ -8,7 +8,7 @@ const upload = multer({ dest: path.join(__dirname, '../public/uploads') });
 const fs = require('fs'); 
 
 
-
+// Rotta per la pagina di un ristorante
 router.get('/ristorante/:id', async function(req, res, next) {
   const ristoranteId = req.params.id;
   const username = req.session.username;
@@ -43,7 +43,7 @@ router.get('/ristorante/:id', async function(req, res, next) {
 
 
 
-
+// Rotta per l'inserimento di una recensione
 router.post('/inserisci-recensione', upload.fields([
   { name: 'immagine' },
 ]), async (req, res) => {
@@ -115,7 +115,7 @@ router.post('/inserisci-recensione', upload.fields([
 
 
 
-
+// Rotta per eliminare una recensione
 router.delete('/delete-rec/:username/:ristoranteId', async (req, res) => {
   const username = req.params.username;
   const ristoranteId = req.params.ristoranteId; 
@@ -132,6 +132,7 @@ router.delete('/delete-rec/:username/:ristoranteId', async (req, res) => {
   }
 });
 
+// Rotta per l'inserimento di una prenotazione
 router.post('/prenota', async (req, res) => {
   const ristoranteId = req.body.ristoranteId;
   const dataPrenotazione = req.body.dataPrenotazione;
@@ -159,7 +160,7 @@ router.post('/prenota', async (req, res) => {
 });
   
 
-
+// Rotta per aggiungere o rimuovere un ristorante dai preferiti
 router.post('/aggiungiPreferiti/:ristoranteId', async (req, res) => {
   const ristoranteId = req.params.ristoranteId;
   const userId = req.session.username;
@@ -191,7 +192,7 @@ router.post('/aggiungiPreferiti/:ristoranteId', async (req, res) => {
 
 
 
-
+// Rotta per inviare una risposta
 router.post('/inviaRisposta', async (req, res) => {
   const scrittore = req.body.scrittore;
   const proprietario = req.session.username; 

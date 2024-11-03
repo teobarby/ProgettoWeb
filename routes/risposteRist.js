@@ -3,7 +3,7 @@ const router = express.Router();
 const DataBase = require("../db");
 const db = new DataBase();
 
-
+// Rotta per la pagina di prenotazioni
 router.get('/risposte', async function(req, res, next) {
     try {
         const username = req.session.username;

@@ -3,7 +3,7 @@ const router = express.Router();
 const DataBase = require("../db");
 const db = new DataBase();
 
-
+// Rotta per la homepage
 router.get('/', async function(req, res, next) {
   try {
     const rows = await db.getHomePage();
@@ -16,6 +16,7 @@ router.get('/', async function(req, res, next) {
   }
 });
 
+// Rotta per la ricerca
 router.get('/cerca', async (req, res) => {
   const keyword = req.query.keyword || '';
   console.log(`Keyword di ricerca: ${keyword}`); 
@@ -31,6 +32,7 @@ router.get('/cerca', async (req, res) => {
   }
 });
 
+// Rotta per la ricerca per categoria
 router.get('/cercaCat', async (req, res) => {
   const categoria = req.query.category || '';  
   console.log(`Cerca per categoria: ${categoria}`);
@@ -56,6 +58,7 @@ router.get('/cercaCat', async (req, res) => {
   }
 });
 
+// Rotta per la gestione dei preferiti
 router.get('/preferiti', async (req, res) => {
   const username = req.session.username;
   if (!req.isAuthenticated()) {
@@ -72,6 +75,7 @@ router.get('/preferiti', async (req, res) => {
   }
 });
 
+// Rotta per la gestione dei preferiti
 router.get('/topPreferiti', async (req, res) => {
   const username = req.session.username || null;
   

@@ -4,11 +4,12 @@ const bcrypt = require('bcrypt');
 const DataBase = require("../db"); 
 const db = new DataBase();
 
+// Rotta per la pagina di iscrizione
 router.get('/iscrizione', function(req, res, next) {
   res.render('iscrizione', { title: 'Iscrizione', username: req.session.username });
 });
 
-
+// Rotta per la pagina di signup
 router.get('/signup', function(req, res, next) {
   res.render('signup');
 });
@@ -16,7 +17,7 @@ router.get('/signup', function(req, res, next) {
 
 
 
-
+// Rotta per la registrazione
 router.post('/signup', async function(req, res, next) {
   const saltRounds = 10;
 
@@ -47,7 +48,6 @@ router.post('/signup', async function(req, res, next) {
           errorMessage: 'Questo numero è già in uso, scegline un\'altro.', username: req.session.username, title: 'Iscrizione'});
       }
 
-      // Esegui la query di inserimento
       await db.run('INSERT INTO Registrati (username, nome, cognome, email, cellulare, password) VALUES (?, ?, ?, ?, ?, ?)', [
           req.body.username,
           req.body.nome,

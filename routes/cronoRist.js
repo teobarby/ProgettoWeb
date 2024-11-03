@@ -8,7 +8,7 @@ const db = new DataBase();
 
 
 
-
+// Rotta per la pagina di prenotazioni
 router.get('/CronologiaPrenotazioniRistorante', async function(req, res, next) {
 
     
@@ -39,7 +39,7 @@ router.get('/CronologiaPrenotazioniRistorante', async function(req, res, next) {
 
   });
 
-
+// Rotta per eliminare una prenotazione
   router.delete('/delete-preRist/:username/:ristorante/:data/:orario', async (req, res) => {
     const username = req.params.username;
     const ristorante = req.params.ristorante;

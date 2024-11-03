@@ -2,7 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
-
+// Rotta per la pagina di login
 router.get('/login', function(req, res, next) {
   const errorMessage = req.session.errorMessage;
   
@@ -12,7 +12,7 @@ router.get('/login', function(req, res, next) {
 });
 
 
-
+// Rotta per la verifica della password
 router.post('/login/password', function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err) {

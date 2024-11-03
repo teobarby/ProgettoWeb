@@ -3,7 +3,7 @@ const router = express.Router();
 const DataBase = require("../db"); // db.js
 const db = new DataBase();
 
-
+// Rotta per la pagina di prenotazioni
 router.get('/CronologiaPrenotazioni', async function(req, res, next) {
     try {
         const username = req.session.username;
@@ -19,7 +19,7 @@ router.get('/CronologiaPrenotazioni', async function(req, res, next) {
   });
 
 
-
+// Rotta per eliminare una prenotazione
   router.delete('/delete-pren/:username/:ristorante/:data/:orario', async (req, res) => {
     const username = req.params.username;
     const ristorante = req.params.ristorante;

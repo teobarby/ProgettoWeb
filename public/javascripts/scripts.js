@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
 
 
-
+    // Carica più recensioni
     const loadMoreButton = document.getElementById('loadMoreReviews');
     let visibleCount = 4; 
     const increment = 2;

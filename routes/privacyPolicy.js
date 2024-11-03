@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const DataBase = require("../db"); // db.js
 
-
+// Rotta per la pagina di privacy
 router.get('/privacyPolicy', async function(req, res, next) {
     try {
         
