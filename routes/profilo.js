@@ -390,7 +390,11 @@ router.post('/update-profilo', async (req, res) => {
             req.session.username = null;
             res.redirect('/login');
         } else {
-            res.status(404).send('Nessun utente trovato con questo username.');
+            return res.status(500).render('error', {
+                title: 'Errore',
+                message: 'C\'è stato un errore durante l\'operazione',
+                username: username
+            });
         }
     } catch (err) {
         console.error('Errore durante l\'aggiornamento del profilo:', err);
