@@ -72,7 +72,7 @@ router.post('/inserisci-ristorante', upload.fields([
 ]), async (req, res) => {
   
   if (!req.session || !req.session.username) {
-      return res.status(403).send('Utente non autorizzato');
+    return res.redirect('/login');
   }
 
   const {
@@ -184,7 +184,7 @@ router.post('/modifica-ristorante', upload.fields([
   { name: 'menuPDFInput' }
 ]), async (req, res) => {
   if (!req.session || !req.session.username) {
-      return res.status(403).send('Utente non autorizzato');
+    return res.redirect('/login');
   }
 
 
@@ -345,13 +345,13 @@ router.delete('/delete-rest/:username', async (req, res) => {
   const db = new DataBase();
 
   try {
-      const ristorante = await db.getRistoranteUsername(username);
-      if (ristorante && ristorante.length > 0) {
-          const ristoranteId = ristorante[0].id;
-          console.log(`Eliminazione del ristorante con ID: ${ristoranteId}`);
+    const ristorante = await db.getRistoranteUsername(username);
+    if (ristorante && ristorante.length > 0) {
+        const ristoranteId = ristorante[0].id;
+        console.log(`Eliminazione del ristorante con ID: ${ristoranteId}`);
 
-          await db.deleteRistorante(ristoranteId);
-      }
+        await db.deleteRistorante(ristoranteId);
+    }
       res.status(200).json({ message: 'Utente e ristorante eliminati con successo, logout eseguito.' });
 
   } catch (err) {
