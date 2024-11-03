@@ -387,7 +387,7 @@ router.post('/update-profilo', async (req, res) => {
         const changes = await db.updateProfilo(username, nome, cognome, email, cellulare, nuovoUsername);
 
         if (changes > 0) {
-            req.session.username = nuovoUsername; // Aggiorna la sessione
+            req.session.username = null;
             res.redirect('/login');
         } else {
             res.status(404).send('Nessun utente trovato con questo username.');
