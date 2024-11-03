@@ -37,7 +37,11 @@ router.get('/ristorante/:id', async function(req, res, next) {
 
   } catch (err) {
     console.log("Errore nel caricamento del ristorante:", err);
-    return res.status(500).send('Errore durante il recupero dei dati');
+    return res.status(500).render('error', {
+      title: 'Errore',
+      message: 'C\'è stato un errore durante l\'operazione',
+      username: username
+    });  
   }
 });
 
@@ -85,8 +89,12 @@ router.post('/inserisci-recensione', upload.fields([
       }
   } catch (err) {
       console.error('Errore nel rinominare l\'immagine:', err);
-      return res.status(500).send('Errore durante il caricamento dell\'immagine');
-  }
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      }); 
+    }
 
   
   const percorsoImmagineRelativo = `uploads/${nomeImmagine}`;
@@ -108,8 +116,12 @@ router.post('/inserisci-recensione', upload.fields([
       res.redirect(`/ristorante/${ristoranteId}`);
   } catch (err) {
       console.error('Errore durante l\'inserimento della recensione:', err);
-      res.status(500).send('Errore durante l\'inserimento della recensione');
-  }
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      }); 
+    }
 });
 
 
@@ -128,8 +140,12 @@ router.delete('/delete-rec/:username/:ristoranteId', async (req, res) => {
       return res.json({ message: 'Recensione eliminata con successo.' }); 
   } catch (err) {
       console.error('Errore durante l\'eliminazione:', err);
-      return res.status(500).json({ message: 'Errore durante l\'eliminazione.' });
-  }
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
+    }
 });
 
 // Rotta per l'inserimento di una prenotazione
@@ -155,8 +171,12 @@ router.post('/prenota', async (req, res) => {
       res.redirect(`/ristorante/${ristoranteId}`);
   } catch (err) {
       console.error('Errore durante l\'inserimento della prenotazione:', err);
-      res.status(500).send('Errore durante l\'inserimento della prenotazione');
-  }
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
+    }
 });
   
 
@@ -186,7 +206,11 @@ router.post('/aggiungiPreferiti/:ristoranteId', async (req, res) => {
 
   } catch (error) {
     console.error('Errore durante la gestione dei preferiti:', error);
-    res.status(500).send('Errore durante la gestione dei preferiti');
+    return res.status(500).render('error', {
+      title: 'Errore',
+      message: 'C\'è stato un errore durante l\'operazione',
+      username: username
+    });
   }
 });
 
@@ -229,8 +253,12 @@ router.post('/inviaRisposta', async (req, res) => {
 
     } catch (err) {
       console.error('Errore durante l\'invio della risposta:', err);
-      res.status(500).json({ message: 'Errore durante l\'invio della risposta.' });
-  }
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });    
+    }
 });
 
 

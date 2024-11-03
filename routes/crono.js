@@ -14,7 +14,11 @@ router.get('/CronologiaPrenotazioni', async function(req, res, next) {
         return res.render('crono', { title: 'Le tue Prenotazioni', prenotazioni: rows, username: req.session.username, ristoranti: ristorantiTutti });
     } catch (err) {
       console.log("Errore nel caricamento deile prenotazioni:", err);
-      res.status(500).send("Errore interno del server");
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });      
     }
   });
 
@@ -35,7 +39,11 @@ router.get('/CronologiaPrenotazioni', async function(req, res, next) {
         res.status(200).json({ message: 'Prenotazione eliminata con successo.' });
     } catch (err) {
         console.error('Errore durante l\'eliminazione della prenotazione:', err);
-        res.status(500).json({ message: 'Errore durante l\'eliminazione della prenotazione.' });
+        return res.status(500).render('error', {
+          title: 'Errore',
+          message: 'C\'è stato un errore durante l\'operazione',
+          username: username
+        });      
     }
 });
 

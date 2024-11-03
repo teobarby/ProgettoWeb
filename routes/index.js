@@ -12,8 +12,12 @@ router.get('/', async function(req, res, next) {
     return res.render('index', { title: 'HomePage', ristoranti: rows, username: req.session.username });
   } catch (err) {
     console.log("Errore nel caricamento dei ristoranti:", err);
-    res.status(500).send("Errore interno del server");
-  }
+    return res.status(500).render('error', {
+      title: 'Errore',
+      message: 'C\'è stato un errore durante l\'operazione',
+      username: username
+    });
+}
 });
 
 // Rotta per la ricerca
@@ -28,7 +32,11 @@ router.get('/cerca', async (req, res) => {
       res.render('index', { ristoranti, title, username });
   } catch (error) {
       console.error('Errore durante la ricerca:', error);
-      res.status(500).send('Errore durante la ricerca');
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
   }
 });
 
@@ -54,7 +62,11 @@ router.get('/cercaCat', async (req, res) => {
       res.render('index', { ristoranti, title, username });
   } catch (error) {
       console.error('Errore durante la ricerca:', error);
-      res.status(500).send('Errore durante la ricerca');
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
   }
 });
 
@@ -71,7 +83,11 @@ router.get('/preferiti', async (req, res) => {
       res.render('index', { ristoranti, title, username });
   } catch (error) {
       console.error('Errore durante la gestione dei preferiti:', error);
-      res.status(500).send('Errore durante la gestione dei preferiti');
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
   }
 });
 
@@ -85,7 +101,11 @@ router.get('/topPreferiti', async (req, res) => {
       res.render('index', { ristoranti, title, username });
   } catch (error) {
       console.error('Errore durante la gestione dei preferiti:', error);
-      res.status(500).send('Errore durante la gestione dei preferiti');
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
   }
 });
 

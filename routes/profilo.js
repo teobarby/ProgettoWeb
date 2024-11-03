@@ -40,8 +40,12 @@ router.get('/profilo', async (req, res, next) => {
         statistiche: statistiche
       });
     } catch (err) {
-      res.status(500).send('Errore durante il recupero delle categorie');
-    }
+        return res.status(500).render('error', {
+            title: 'Errore',
+            message: 'C\'è stato un errore durante l\'operazione',
+            username: username
+          });
+        }
   } else {
     
     res.redirect('/login');
@@ -103,7 +107,11 @@ router.post('/inserisci-ristorante', upload.fields([
       }
   } catch (err) {
       console.error('Errore nel rinominare l\'immagine:', err);
-      return res.status(500).send('Errore durante il caricamento dell\'immagine');
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
   }
 
   let percorsoMenuRelativo = null;
@@ -118,8 +126,12 @@ router.post('/inserisci-ristorante', upload.fields([
           }
       } catch (err) {
           console.error('Errore nel rinominare il menu:', err);
-          return res.status(500).send('Errore durante il caricamento del menu');
-      }
+          return res.status(500).render('error', {
+            title: 'Errore',
+            message: 'C\'è stato un errore durante l\'operazione',
+            username: username
+          });
+          }
   }
 
   const percorsoImmagineRelativo = `/uploads/${nomeImmagine}`;
@@ -156,7 +168,11 @@ router.post('/inserisci-ristorante', upload.fields([
       res.redirect('/'); 
   } catch (err) {
       console.error(err);
-      res.status(500).send('Errore durante l\'inserimento del ristorante');
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
   }
 });
 
@@ -212,8 +228,12 @@ router.post('/modifica-ristorante', upload.fields([
           }
       } catch (err) {
           console.error('Errore nel rinominare l\'immagine:', err);
-          return res.status(500).send('Errore durante il caricamento dell\'immagine');
-      }
+          return res.status(500).render('error', {
+            title: 'Errore',
+            message: 'C\'è stato un errore durante l\'operazione',
+            username: username
+          });
+          }
   }
 
   let percorsoMenuRelativo = null;
@@ -229,8 +249,12 @@ router.post('/modifica-ristorante', upload.fields([
           }
       } catch (err) {
           console.error('Errore nel rinominare il menu:', err);
-          return res.status(500).send('Errore durante il caricamento del menu');
-      }
+          return res.status(500).render('error', {
+            title: 'Errore',
+            message: 'C\'è stato un errore durante l\'operazione',
+            username: username
+          });
+          }
   }
 
   const proprietario = req.session.username;
@@ -265,7 +289,11 @@ router.post('/modifica-ristorante', upload.fields([
       res.redirect('/profilo');
   } catch (err) {
       console.error('Errore durante l\'inserimento del ristorante:', err);
-      res.status(500).send('Errore durante l\'inserimento del ristorante');
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
   }
 });
 
@@ -290,13 +318,21 @@ router.delete('/delete-user/:username', async (req, res) => {
       req.session.destroy(err => {
           if (err) {
               console.error('Errore durante il logout:', err);
-              return res.status(500).json({ message: 'Errore durante il logout.' });
-          }
+              return res.status(500).render('error', {
+                title: 'Errore',
+                message: 'C\'è stato un errore durante l\'operazione',
+                username: username
+              });
+                  }
           res.status(200).json({ message: 'Utente e ristorante eliminati con successo, logout eseguito.' }); // Risposta di successo
       });
   } catch (err) {
       console.error('Errore durante l\'eliminazione dell\'utente:', err);
-      res.status(500).json({ message: 'Errore durante l\'eliminazione dell\'utente.' });
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
   }
 });
 
@@ -320,7 +356,11 @@ router.delete('/delete-rest/:username', async (req, res) => {
 
   } catch (err) {
       console.error('Errore durante l\'eliminazione del ristorante:', err);
-      res.status(500).json({ message: 'Errore durante l\'eliminazione del ristorante.' });
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
   }
 });
 
@@ -348,8 +388,12 @@ router.post('/update-profilo', (req, res) => {
       })
       .catch(err => {
           console.error('Errore durante l\'aggiornamento del profilo:', err);
-          res.status(500).send('Errore interno del server.');
-      });
+          return res.status(500).render('error', {
+            title: 'Errore',
+            message: 'C\'è stato un errore durante l\'operazione',
+            username: username
+          });
+          });
 });
 
 

@@ -11,8 +11,12 @@ router.get('/termini', async function(req, res, next) {
         });
     } catch (err) {
         console.log("Errore nel caricamento della pagina Chi Siamo:", err);
-        res.status(500).send("Errore interno del server");
-    }
+        return res.status(500).render('error', {
+            title: 'Errore',
+            message: 'C\'è stato un errore durante l\'operazione',
+            username: username
+          });
+        }
 });
 
 module.exports = router

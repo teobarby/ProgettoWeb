@@ -13,7 +13,11 @@ router.get('/risposte', async function(req, res, next) {
         return res.render('risposte', { title: 'Risposte dai Proprietari', risposte: rows, username: req.session.username, ristoranti: ristorantiTutti });
     } catch (err) {
       console.log("Errore nel caricamento deile prenotazioni:", err);
-      res.status(500).send("Errore interno del server");
+      return res.status(500).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante l\'operazione',
+        username: username
+      });
     }
   });
 
