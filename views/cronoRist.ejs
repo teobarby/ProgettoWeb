@@ -104,61 +104,62 @@
     <script>
 
 
+        // MODALE ELIMINAZIONE PRENOTAZIONE
+        document.getElementById('eliminaPrenotazioneRistModal').addEventListener('show.bs.modal', function(event) {
+            
+            const button = event.relatedTarget;
+            const ristorante = button.getAttribute('data-ristorante');
+            const data = button.getAttribute('data-data');
+            const ora = button.getAttribute('data-ora');
+            const username = button.getAttribute('data-username');
 
-document.getElementById('eliminaPrenotazioneRistModal').addEventListener('show.bs.modal', function(event) {
-    
-    const button = event.relatedTarget;
-    const ristorante = button.getAttribute('data-ristorante');
-    const data = button.getAttribute('data-data');
-    const ora = button.getAttribute('data-ora');
-    const username = button.getAttribute('data-username');
+            
+            document.getElementById('confirmDeletePrenRistButton').setAttribute('data-username', username);
+            document.getElementById('confirmDeletePrenRistButton').setAttribute('data-ristorante', ristorante);
+            document.getElementById('confirmDeletePrenRistButton').setAttribute('data-data', data);
+            document.getElementById('confirmDeletePrenRistButton').setAttribute('data-ora', ora);
+        });
 
-    
-    document.getElementById('confirmDeletePrenRistButton').setAttribute('data-username', username);
-    document.getElementById('confirmDeletePrenRistButton').setAttribute('data-ristorante', ristorante);
-    document.getElementById('confirmDeletePrenRistButton').setAttribute('data-data', data);
-    document.getElementById('confirmDeletePrenRistButton').setAttribute('data-ora', ora);
-});
-
-document.getElementById('confirmDeletePrenRistButton').addEventListener('click', function() {
-    const username = this.getAttribute('data-username'); 
-    const ristorante = this.getAttribute('data-ristorante');
-    const data = this.getAttribute('data-data');
-    const ora = this.getAttribute('data-ora');
-    
-    console.log('Eliminazione richiesta per:', username, ristorante, data, ora);  
-    
-    fetch(`/delete-preRist/${username}/${ristorante}/${data}/${ora}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json();  
-        } else {
-            return response.json().then(data => { throw new Error(data.message); });
-        }
-    })
-    .then(data => {
-        console.log(data.message);  
-        location.reload(); 
-    })
-    .catch(error => {
-        console.error('Errore durante l\'eliminazione:', error);
-        alert('Errore durante l\'eliminazione: ' + error.message);
-    });
-});
+        // BOTTONI ELIMINAZIONE
+        document.getElementById('confirmDeletePrenRistButton').addEventListener('click', function() {
+            const username = this.getAttribute('data-username'); 
+            const ristorante = this.getAttribute('data-ristorante');
+            const data = this.getAttribute('data-data');
+            const ora = this.getAttribute('data-ora');
+            
+            console.log('Eliminazione richiesta per:', username, ristorante, data, ora);  
+            
+            fetch(`/delete-preRist/${username}/${ristorante}/${data}/${ora}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();  
+                } else {
+                    return response.json().then(data => { throw new Error(data.message); });
+                }
+            })
+            .then(data => {
+                console.log(data.message);  
+                location.reload(); 
+            })
+            .catch(error => {
+                console.error('Errore durante l\'eliminazione:', error);
+                alert('Errore durante l\'eliminazione: ' + error.message);
+            });
+        });
 
 
 
     </script>
 
 
-<script>
-    AOS.init();
-</script>  
+    <script>
+        AOS.init();
+    </script>  
 
 
     </body>
