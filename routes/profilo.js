@@ -365,35 +365,41 @@ router.delete('/delete-rest/:username', async (req, res) => {
 });
 
 // Rotta per aggiornare il profilo
-router.post('/update-profilo', (req, res) => {
-  const { nuovoUsername, nome, cognome, email, cellulare } = req.body;
-  const username = req.session.username;
-  console.log(`Username attuale: ${username}`);
+router.post('/update-profilo', async (req, res) => {
+    const { nuovoUsername, nome, cognome, email, cellulare } = req.body;
+    const username = req.session.username;
 
+    if (!nuovoUsername || !nome || !cognome || !email || !cellulare) {
+        return res.status(400).send('Tutti i campi sono obbligatori.');
+    }
 
-  if (!nuovoUsername || !nome || !cognome || !email || !cellulare) {
-      return res.status(400).send('Tutti i campi sono obbligatori.');
-  }
+    try {
+        const usernameExists = await db.trovaUtenteUsername(nuovoUsername);
+  
+        if (usernameExists) {
+            return res.status(500).render('error', {
+                title: 'Errore',
+                message: 'C\'è stato un errore durante l\'operazione',
+                username: username
+            });       
+        }
 
+        const changes = await db.updateProfilo(username, nome, cognome, email, cellulare, nuovoUsername);
 
-  db.updateProfilo(username, nome, cognome, email, cellulare, nuovoUsername)
-      .then(changes => {
-          if (changes > 0) {
-            req.session.username = null; 
-
-             res.redirect('/login');
-          } else {
-              res.status(404).send('Nessun utente trovato con questo username.');
-          }
-      })
-      .catch(err => {
-          console.error('Errore durante l\'aggiornamento del profilo:', err);
-          return res.status(500).render('error', {
+        if (changes > 0) {
+            req.session.username = nuovoUsername; // Aggiorna la sessione
+            res.redirect('/login');
+        } else {
+            res.status(404).send('Nessun utente trovato con questo username.');
+        }
+    } catch (err) {
+        console.error('Errore durante l\'aggiornamento del profilo:', err);
+        return res.status(500).render('error', {
             title: 'Errore',
             message: 'C\'è stato un errore durante l\'operazione',
             username: username
-          });
-          });
+        });
+    }
 });
 
 

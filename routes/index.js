@@ -17,7 +17,7 @@ router.get('/', async function(req, res, next) {
       message: 'C\'è stato un errore durante l\'operazione',
       username: username
     });
-}
+  } 
 });
 
 // Rotta per la ricerca
