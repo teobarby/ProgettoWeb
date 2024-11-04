@@ -42,7 +42,7 @@ app.use(session({
     cookie: { path: '/',
         httpOnly: true, maxAge: 1209600}
     },
-    store: 
+    
 ));
 app.use(passport.session());
 
