@@ -1170,7 +1170,21 @@ class DataBase {
         });
     }
 
-
+/*
+    getMedias(ristoranteId){
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT menu, copertina, nome, immagine FROM Ristoranti JOIN Recensioni ON id = ristorante  WHERE id = ? `;
+            this.open();
+            this.db.all(sql, [ristoranteId], (err, rows) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(rows);
+            });
+            this.close();
+        });
+    }
+*/
     
 }
 

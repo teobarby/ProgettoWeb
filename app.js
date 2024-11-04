@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const SqliteStore = sqliteStoreFactory.default(session)
 app.use(session({
     secret: config.secret,
-    resave: true,
+    resave: true,       
     saveUninitialized: false,
     cookie: { path: '/',
         httpOnly: true, maxAge: 1209600000},
