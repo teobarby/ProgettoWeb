@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sqlite3 = require('sqlite3').verbose();
+const sqliteStoreFactory = require('express-session-sqlite');
 const app = express();
 const config = require('./config.json');
 const indexRouter = require('./routes/index');
@@ -23,7 +24,6 @@ const bcrypt = require('bcrypt');
 const DataBase = require("./db"); // db.js
 const db = new DataBase();
 const session = require('express-session');
-var SQLiteStore = require('connect-sqlite3')(session);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,14 +35,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+const SqliteStore = sqliteStoreFactory.default(session)
 app.use(session({
     secret: config.secret,
     resave: true,
     saveUninitialized: false,
     cookie: { path: '/',
-        httpOnly: true, maxAge: 1209600}
-    },
-    
+        httpOnly: true, maxAge: 1209600000},
+    store: new SqliteStore({driver: sqlite3.Database,
+        path: 'database/sqliteSessions.db',
+        ttl: 1209600000,
+        prefix: 'sess:',
+        cleanupInterval: 300000
+      }),
+    }
 ));
 app.use(passport.session());
 

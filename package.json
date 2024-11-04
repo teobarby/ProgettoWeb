@@ -17,6 +17,7 @@
     "ejs": "^3.1.10",
     "express": "^4.21.0",
     "express-session": "^1.0.0",
+    "express-session-sqlite": "^2.1.1",
     "express-validator": "^7.2.0",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^9.0.2",
