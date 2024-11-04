@@ -2,8 +2,9 @@
 
 Indice:
 - [Installazione](#inst)
-- [Funzionalità](#func)
+- [Accesso al sito](#access)
 - [Struttura del progetto](#prog)
+- [Funzionalità](#func)
 - [Video](#vid)
 
 
@@ -20,19 +21,28 @@ per scaricare tutte le dipendenze e librerie: `npm install`
 Per avviare il server, esegui il comando seguente nel terminale: `node app.js`
 Per spegnere il server premi i tasti: `CTRL + C` sul terminale.
 
-### Librerie
-Le seguenti librerie trattate nel corso sono state utilizzate:
-- [Express](https://expressjs.com/)
-- [EJS](https://ejs.co/)
-- [SQLite3](https://www.sqlite.org/)
-- [Passport](https://www.passportjs.org/)
-- [Bycrypt](https://www.npmjs.com/package/bcrypt)
+<a id='access'></a>
 
-### Librerie aggiuntive
-In aggiunta sono state utilizzate queste librerie:
-- [Multer](https://www.npmjs.com/package/multer)
-- [Tagify](https://yaireo.github.io/tagify/)
-- [AOS](https://michalsnik.github.io/aos/)
+### Accesso al sito
+Per accedere al sito puoi utilizzare le seguenti credenziali:
+
+Cliente:
+- Username: `matteobarbieri@gmail.com`
+- Password: `Prova.Pass`
+
+Cliente:    
+- Username: `BarbiPao`
+- Password: `BarbiPao.11`
+------------
+
+Ristoratore:    
+- Username: `Vale93`
+- Password: `Vale93..`
+
+Ristoratore:
+- Username: `Violetta`
+- Password: `HollyID23!`
+
 
 <a id='prog'></a>
 
@@ -53,8 +63,6 @@ permette di mantenere le informazioni riguardo l'utente durante la sessione anch
 viene riavviato, o il browser viene chiuso.
 
 
-<a id='func'></a>
-
 ### Routes
 Le routes sono situate all'interno della cartella '***routes.js***' 
 - ***auth.js:*** Gestisce l’autenticazione degli utenti.
@@ -73,6 +81,22 @@ Le routes sono situate all'interno della cartella '***routes.js***'
 Le viste del progetto sono memorizzate nella cartella views 
 in formato EJS. Questi file vengono elaborati dal server e inviati ai client. 
 La cartella partials contiene componenti di visualizzazione riutilizzabili, per evitare la ripetizione di codice.
+
+### Librerie
+Le seguenti librerie trattate nel corso sono state utilizzate:
+- [Express](https://expressjs.com/)
+- [EJS](https://ejs.co/)
+- [SQLite3](https://www.sqlite.org/)
+- [Passport](https://www.passportjs.org/)
+- [Bycrypt](https://www.npmjs.com/package/bcrypt)
+
+### Librerie aggiuntive
+In aggiunta sono state utilizzate queste librerie:
+- [Multer](https://www.npmjs.com/package/multer)
+- [Tagify](https://yaireo.github.io/tagify/)
+- [AOS](https://michalsnik.github.io/aos/)
+
+<a id='func'></a>
 
 ## Funzionalità
 Il sito permette agli utenti di svolgere diverse attività, suddivise in base al tipo di utente:
