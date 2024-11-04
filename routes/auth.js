@@ -1,6 +1,6 @@
-var express = require('express');
-var passport = require('passport');
-var router = express.Router();
+const express = require('express');
+const passport = require('passport');
+const router = express.Router();
 
 // Rotta per la pagina di login
 router.get('/login', function(req, res, next) {

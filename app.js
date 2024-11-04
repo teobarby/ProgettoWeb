@@ -1,9 +1,9 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var sqlite3 = require('sqlite3').verbose();
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const sqlite3 = require('sqlite3').verbose();
 const sqliteStoreFactory = require('express-session-sqlite');
 const app = express();
 const config = require('./config.json');
@@ -21,7 +21,7 @@ const risposteRouter = require('./routes/risposteRist');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const DataBase = require("./db"); // db.js
+const DataBase = require("./db"); 
 const db = new DataBase();
 const session = require('express-session');
 
