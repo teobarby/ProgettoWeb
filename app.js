@@ -38,8 +38,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: config.secret,
     resave: true,
-    saveUninitialized: false
-}));
+    saveUninitialized: false,
+    cookie: { path: '/',
+        httpOnly: true, maxAge: 1209600}
+    },
+    store: 
+));
 app.use(passport.session());
 
 // Login passport
