@@ -2,6 +2,7 @@
 
 Indice:
 - [Installazione](#inst)
+- [Start](#start)
 - [Accesso al sito](#access)
 - [Struttura del progetto](#prog)
 - [Funzionalità](#func)
@@ -17,7 +18,9 @@ Puoi farlo eseguendo il comando: `npm install -g node`
 Dopo aver installato Node.js, esegui il comando seguente nel terminale 
 per scaricare tutte le dipendenze e librerie: `npm install`
 
-### Start
+<a id='start'></a>
+
+## Start
 Per avviare il server, esegui il comando seguente nel terminale: `node app.js`
 Per spegnere il server premi i tasti: `CTRL + C` sul terminale.
 
@@ -83,15 +86,15 @@ in formato EJS. Questi file vengono elaborati dal server e inviati ai client.
 La cartella partials contiene componenti di visualizzazione riutilizzabili, per evitare la ripetizione di codice.
 
 ### Librerie
-Le seguenti librerie trattate nel corso sono state utilizzate:
+Per lo sviluppo del progetto sono state utilizzate le librerie trattate nel corso:
 - [Express](https://expressjs.com/)
 - [EJS](https://ejs.co/)
 - [SQLite3](https://www.sqlite.org/)
 - [Passport](https://www.passportjs.org/)
 - [Bycrypt](https://www.npmjs.com/package/bcrypt)
 
-### Librerie aggiuntive
-In aggiunta sono state utilizzate queste librerie:
+Inoltre sono state utilizzate delle librerie extra per implementare ulteriori funzionalità, come ad esempio la gestione dei caricamenti di file, animazioni ed altro. Di seguito le librerie:
+
 - [Multer](https://www.npmjs.com/package/multer)
 - [Tagify](https://yaireo.github.io/tagify/)
 - [AOS](https://michalsnik.github.io/aos/)
