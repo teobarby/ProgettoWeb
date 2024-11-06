@@ -12,8 +12,7 @@ Indice:
 <a id='inst'></a>
 
 ## Installazione
-Per avviare il server è necessario prima di tutto installare Node.js. 
-Puoi farlo eseguendo il comando: `npm install -g node`
+Per avviare il server è necessario prima di tutto installare Node.js. Per ulterori informazioni clicca [qui](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs).
 
 Dopo aver installato Node.js, esegui il comando seguente nel terminale 
 per scaricare tutte le dipendenze e librerie: `npm install`
