@@ -123,7 +123,11 @@ app.use('/', risposteRouter);
 
 // Errore
 app.use(function(req, res, next) {
-    next(createError(404));
+    res.status(404).render('error', {
+        title: 'Errore',
+        message: 'C\'è stato un errore durante il caricamento della pagina',
+        username: req.session ? req.session.username : null
+      });
 });
 
 // Server avviato
