@@ -15,72 +15,75 @@
             </div>
         </header>
 
-        <% if (ristoranti.length === 0) { %>
-            <section class="py-5" data-aos="fade-up">
-                <div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
-                    <div class="card shadow-lg p-4" style="max-width: 600px; background-color: white; border-radius: 10px;">
-                        <div class="text-center">
-                           
-                            <div class="display-1 text-muted mb-3">
-                                😔
+        <main>
+            <% if (ristoranti.length === 0) { %>
+                <section class="py-5" data-aos="fade-up">
+                    <div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+                        <div class="card shadow-lg p-4" style="max-width: 600px; background-color: white; border-radius: 10px;">
+                            <div class="text-center">
+                            
+                                <div class="display-1 text-muted mb-3">
+                                    😔
+                                </div>
+                                <h2 class="display-6 fw-bold text-black mb-3">Nessun ristorante trovato</h2>
+                                <p class="lead text-muted mb-1">Siamo spiacenti, ma non ci sono ristoranti che corrispondono alla tua ricerca.</p>
+                                <p class="lead text-muted">Prova a cercare con altre parole chiave o esplora altre categorie.</p>
+                                <a href="/" class="btn btn-outline-dark btn-lg mt-4">Torna alla home</a>
                             </div>
-                            <h2 class="display-6 fw-bold text-black mb-3">Nessun ristorante trovato</h2>
-                            <p class="lead text-muted mb-1">Siamo spiacenti, ma non ci sono ristoranti che corrispondono alla tua ricerca.</p>
-                            <p class="lead text-muted">Prova a cercare con altre parole chiave o esplora altre categorie.</p>
-                            <a href="/" class="btn btn-outline-dark btn-lg mt-4">Torna alla home</a>
                         </div>
                     </div>
-                </div>
-            </section>
-        <% } else { %>
-       
-        <section class="py-5">
-            <div class="container px-4 px-lg-4 mt-0" >
-                <div class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >
-                    <% ristoranti.forEach(function(Ristoranti) { %> <!-- Inizio ciclo per i ristoranti -->
-                        <div class="col-9 col-sm-6 col-md-4 col-lg-3 mb-5" data-aos="fade-up">
-                            <div class="card giallino h-100 d-flex flex-column" onclick="location.href='/ristorante/<%= Ristoranti.id %>'" style="cursor: pointer;">
-                                <div class="badge bg-light text-dark position-absolute" style="top: 0.5rem; left: 0.5rem">
-                                    <i class="bi bi-geo-alt"></i> <%= Ristoranti.citta %> <!-- Usa i dati dal database -->
-                                </div>
-                                <% if (Ristoranti.promo) { %>
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Promo</div>
-                                <% } %> 
-                              
-                                <img class="card-img-top" src="<%= Ristoranti.copertina %>" alt="..." height="160"/> 
-                              
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <!-- Nome Ristoranti-->
-                                        <h5 class="fw-bolder"><%= Ristoranti.nome %></h5> 
-                                        <!-- Valutazioni Clienti-->
-                                        <div class="d-flex justify-content-center small text-warning mb-2">
-                                            <% if (Ristoranti.valutazione_media && Ristoranti.valutazione_media > 0) { %>
-                                                <!-- Stelle piene -->
-                                                <% for (let i = 0; i < Math.round(Ristoranti.valutazione_media); i++) { %>
-                                                    <a href="#" class="star-link"><i class="bi bi-star-fill"></i></a>
+                </section>
+            <% } else { %>
+        
+            
+            <section class="py-5">
+                <div class="container px-4 px-lg-4 mt-0" >
+                    <div class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >
+                        <% ristoranti.forEach(function(Ristoranti) { %> <!-- Inizio ciclo per i ristoranti -->
+                            <div class="col-9 col-sm-6 col-md-4 col-lg-3 mb-5" data-aos="fade-up">
+                                <div class="card giallino h-100 d-flex flex-column" onclick="location.href='/ristorante/<%= Ristoranti.id %>'" style="cursor: pointer;">
+                                    <div class="badge bg-light text-dark position-absolute" style="top: 0.5rem; left: 0.5rem">
+                                        <i class="bi bi-geo-alt"></i> <%= Ristoranti.citta %> <!-- Usa i dati dal database -->
+                                    </div>
+                                    <% if (Ristoranti.promo) { %>
+                                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Promo</div>
+                                    <% } %> 
+                                
+                                    <img class="card-img-top" src="<%= Ristoranti.copertina %>" alt="..." height="160"/> 
+                                
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!-- Nome Ristoranti-->
+                                            <h5 class="fw-bolder"><%= Ristoranti.nome %></h5> 
+                                            <!-- Valutazioni Clienti-->
+                                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                                <% if (Ristoranti.valutazione_media && Ristoranti.valutazione_media > 0) { %>
+                                                    <!-- Stelle piene -->
+                                                    <% for (let i = 0; i < Math.round(Ristoranti.valutazione_media); i++) { %>
+                                                        <a href="#" class="star-link"><i class="bi bi-star-fill"></i></a>
+                                                    <% } %>
+                                                    <!-- Stelle vuote per completare a 5 -->
+                                                    <% for (let i = 0; i < 5 - Math.round(Ristoranti.valutazione_media); i++) { %>
+                                                        <a href="#" class="star-link"><i class="bi bi-star"></i></a>
+                                                    <% } %>
                                                 <% } %>
-                                                <!-- Stelle vuote per completare a 5 -->
-                                                <% for (let i = 0; i < 5 - Math.round(Ristoranti.valutazione_media); i++) { %>
-                                                    <a href="#" class="star-link"><i class="bi bi-star"></i></a>
-                                                <% } %>
-                                            <% } %>
-                                        </div>
+                                            </div>
+                                            
+                                            <h8 class="Parolechiave"><%= Ristoranti.paroleChiave %></h8>
                                         
-                                        <h8 class="Parolechiave"><%= Ristoranti.paroleChiave %></h8>
-                                       
-                                        <h6 class="Orari"><%= Ristoranti.orari %></h6> 
-                                        <hr>
-                                        <h7 class="Telefono">Tel: <%= Ristoranti.telefono %></h7> 
+                                            <h6 class="Orari"><%= Ristoranti.orari %></h6> 
+                                            <hr>
+                                            <h7 class="Telefono">Tel: <%= Ristoranti.telefono %></h7> 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <% }); %> 
+                        <% }); %> 
+                    </div>
                 </div>
-            </div>
-        </section>
-        <% } %>
+            </section>
+            <% } %>
+        </main>
         <%- include('partials/footer') %>
 
 

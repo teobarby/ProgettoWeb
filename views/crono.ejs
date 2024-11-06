@@ -15,55 +15,56 @@
             </div>
         </header>
 
-
-        <div class="container mt-5 mb-5">
-            <div class="row">
-                <div class="col-12">
-                    <% if (prenotazioni.length > 0) { %>
-                        <div class="row row-cols-1 row-cols-md-2 g-4">
-                            <% prenotazioni.forEach(function(prenotazione) { %>
-                                <div class="col" data-aos="fade-up">
-                                    <div class="card h-100 shadow-sm border-0">
-                                        <div class="card-body p-4">
-                                            <h5 class="card-title mb-3">Prenotazione per <strong><%= ristoranti.find(r => r.id === prenotazione.ristorante).nome %>
-                                                <hr>
-                                            </strong></h5>
-                                            <div class="card-text">
-                                                <div class="d-flex justify-content-between mb-2">
-                                                    <span><i class="bi bi-person"></i> <strong>Cliente:</strong></span>
-                                                    <span><%= prenotazione.cliente %></span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-2">
-                                                    <span><i class="bi bi-calendar"></i> <strong>Data:</strong></span>
-                                                    <span><%= prenotazione.data %></span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-2">
-                                                    <span><i class="bi bi-clock"></i> <strong>Ora:</strong></span>
-                                                    <span><%= prenotazione.orario %></span>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <span><i class="bi bi-people"></i> <strong>Numero di persone:</strong></span>
-                                                    <span><%= prenotazione.npersone %></span>
+        <main>
+            <div class="container mt-5 mb-5">
+                <div class="row">
+                    <div class="col-12">
+                        <% if (prenotazioni.length > 0) { %>
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                <% prenotazioni.forEach(function(prenotazione) { %>
+                                    <div class="col" data-aos="fade-up">
+                                        <div class="card h-100 shadow-sm border-0">
+                                            <div class="card-body p-4">
+                                                <h5 class="card-title mb-3">Prenotazione per <strong><%= ristoranti.find(r => r.id === prenotazione.ristorante).nome %>
+                                                    <hr>
+                                                </strong></h5>
+                                                <div class="card-text">
+                                                    <div class="d-flex justify-content-between mb-2">
+                                                        <span><i class="bi bi-person"></i> <strong>Cliente:</strong></span>
+                                                        <span><%= prenotazione.cliente %></span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between mb-2">
+                                                        <span><i class="bi bi-calendar"></i> <strong>Data:</strong></span>
+                                                        <span><%= prenotazione.data %></span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between mb-2">
+                                                        <span><i class="bi bi-clock"></i> <strong>Ora:</strong></span>
+                                                        <span><%= prenotazione.orario %></span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <span><i class="bi bi-people"></i> <strong>Numero di persone:</strong></span>
+                                                        <span><%= prenotazione.npersone %></span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="card-footer bg-transparent text-center border-0">
-                                            <button class="btn btn-outline-danger" id="confirmDeletePrenButtonModal" data-bs-toggle="modal" data-bs-target="#eliminaPrenotazioneModal"
-                                            data-ristorante="<%= prenotazione.ristorante %>"
-                                            data-data="<%= prenotazione.data %>"
-                                            data-ora="<%= prenotazione.orario %>"
-                                            data-id="<%= prenotazione.id %>">Annulla Prenotazione</button>          
+                                            <div class="card-footer bg-transparent text-center border-0">
+                                                <button class="btn btn-outline-danger" id="confirmDeletePrenButtonModal" data-bs-toggle="modal" data-bs-target="#eliminaPrenotazioneModal"
+                                                data-ristorante="<%= prenotazione.ristorante %>"
+                                                data-data="<%= prenotazione.data %>"
+                                                data-ora="<%= prenotazione.orario %>"
+                                                data-id="<%= prenotazione.id %>">Annulla Prenotazione</button>          
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <% }); %>
-                        </div>
-                    <% } else { %>
-                        <div class="alert alert-info text-center" data-aos="fade-up">Non hai effettuato prenotazioni.</div>
-                    <% } %>
+                                <% }); %>
+                            </div>
+                        <% } else { %>
+                            <div class="alert alert-info text-center" data-aos="fade-up">Non hai effettuato prenotazioni.</div>
+                        <% } %>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
 
 
 

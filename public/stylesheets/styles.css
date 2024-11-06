@@ -1,3 +1,7 @@
+main {
+  flex: 1 0 auto;
+}
+
 .Orari {
   padding-top: 10px;
   opacity: 0.7;
