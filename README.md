@@ -128,4 +128,4 @@ Il sito permette agli utenti di svolgere diverse attività, suddivise in base al
 <a id='vid'></a>
 
 ## Video
-***Video di presentazione*** -> 
+***Video di presentazione*** -> https://www.youtube.com/watch?v=DmPnaVOWEhI
