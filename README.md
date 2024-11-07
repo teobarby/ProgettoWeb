@@ -12,7 +12,7 @@ Indice:
 <a id='inst'></a>
 
 ## Installazione
-Per avviare il server è necessario prima di tutto installare Node.js. Per ulterori informazioni clicca [qui](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs).
+Per avviare il server è necessario prima di tutto installare Node.js. Per la guida clicca [qui](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs).
 
 Dopo aver installato Node.js, esegui il comando seguente nel terminale 
 per scaricare tutte le dipendenze e librerie: `npm install`
@@ -20,7 +20,7 @@ per scaricare tutte le dipendenze e librerie: `npm install`
 <a id='start'></a>
 
 ## Start
-Per avviare il server, esegui il comando seguente nel terminale: `node app.js`
+Per avviare il server, esegui il comando seguente nel terminale: `node app.js`.
 Per spegnere il server premi i tasti: `CTRL + C` sul terminale.
 
 <a id='access'></a>
