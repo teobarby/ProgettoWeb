@@ -5,15 +5,26 @@ const router = express.Router();
 // Rotta per la pagina di login
 router.get('/login', function(req, res, next) {
   const errorMessage = req.session.errorMessage;
-  
-  req.session.errorMessage = null;
-  
-  res.render('login', { title: 'Auth', message: errorMessage, username: req.session.username });
+
+  if(req.session.username) {
+    res.status(500).render('error', {
+      title: 'Errore',
+      message: 'C\'è stato un errore durante il caricamento della pagina',
+      username: req.session ? req.session.username : null
+    });
+  } else {
+    
+    req.session.errorMessage = null;
+    
+    res.render('login', { title: 'Auth', message: errorMessage, username: req.session.username });
+
+  }
 });
 
 
 // Rotta per la verifica della password
 router.post('/login/password', function (req, res, next) {
+
   passport.authenticate('local', function (err, user, info) {
     if (err) {
       console.error("Error during authentication:", err);
